@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>经验分享详情 - 校园护萌神</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind 配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#99CC99',
+            secondary: '#FFB6C1',
+            accent: '#FFCC99',
+            light: '#F8FFF8',
+            dark: '#336666'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .btn-hover {
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+      }
+      .card-shadow {
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+      }
+      .card-shadow:hover {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      }
+      .btn-gradient {
+        background-image: linear-gradient(to right, var(--primary), var(--secondary));
+      }
+      .card-gradient {
+        background-image: linear-gradient(to bottom right, var(--primary), #66BB99);
+      }
+      .card-shadow {
+        box-shadow: 0 8px 16px rgba(153, 204, 153, 0.2);
+      }
+      .btn-hover {
+        transition: all 0.3s ease;
+      }
+      .btn-hover:hover {
+        transform: scale(1.05);
+      }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-secondary/10 via-light to-secondary/5 font-sans text-dark">
+  <!-- 页面顶部导航 -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-lg">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <!-- 校园护萌神专属Logo -->
+        <div class="w-12 h-12 flex items-center justify-center transition-all duration-300 hover:scale-110">
+          <i class="fa fa-paw text-4xl text-primary"></i>
+        </div>
+        <h1 class="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-pink-500">校园护萌神</h1>
+      </div>
+      <nav class="hidden md:flex space-x-6">
+          <a href="index.html" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">首页</a>
+          <a href="index.html#workshop" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">手作坊</a>
+          <a href="index.html?active=volunteer#volunteer" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">志愿者社区</a>
+          <a href="index.html#pet-archive" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">动物档案</a>
+          <a href="index.html#user" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">用户中心</a>
+        </nav>
+      <!-- 移动端菜单按钮 -->
+      <button class="md:hidden text-primary text-2xl">
+        <i class="fa fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- 主体内容 -->
+  <main class="container mx-auto px--6 lg:4 sm:pxpx-8 py-8">
+    <!-- 返回按钮 -->
+    <div class="mb-6">
+      <a href="index.html?active=volunteer#volunteer" class="inline-flex items-center text-gray-600 hover:text-primary transition-colors">
+        <i class="fa fa-arrow-left mr-2"></i>
+        返回志愿者社区
+      </a>
+    </div>
+    
+    <!-- 论坛头部 -->
+    <div class="bg-white rounded-2xl p-6 card-shadow mb-8">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center">
+          <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+            <i class="fa fa-comments text-2xl text-primary"></i>
+          </div>
+          <div>
+            <h1 class="text-2xl font-bold text-gray-800">经验分享论坛</h1>
+            <p class="text-gray-500 text-sm">分享你的养宠心得，交流救助经验</p>
+          </div>
+        </div>
+        <button class="inline-flex items-center px-4 py-2 bg-primary text-white rounded-full text-sm font-medium btn-hover">
+          <i class="fa fa-plus mr-2"></i>
+          发起分享
+        </button>
+      </div>
+      
+      <!-- 论坛统计 -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="text-center">
+          <p class="text-2xl font-bold text-primary">128</p>
+          <p class="text-gray-500 text-sm">总分享</p>
+        </div>
+        <div class="text-center">
+          <p class="text-2xl font-bold text-primary">1,256</p>
+          <p class="text-gray-500 text-sm">总评论</p>
+        </div>
+        <div class="text-center">
+          <p class="text-2xl font-bold text-primary">856</p>
+          <p class="text-gray-500 text-sm">活跃用户</p>
+        </div>
+        <div class="text-center">
+          <p class="text-2xl font-bold text-primary">24</p>
+          <p class="text-gray-500 text-sm">今日新增</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 论坛帖子列表 -->
+    <div class="space-y-4">
+      <!-- 置顶帖子 -->
+      <div class="bg-white rounded-xl p-6 card-shadow border-l-4 border-primary">
+        <div class="flex items-start justify-between mb-3">
+          <div class="flex items-center">
+            <span class="inline-block px-2 py-1 bg-primary text-white text-xs font-bold rounded-full mr-3">置顶</span>
+            <span class="inline-block px-2 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">公告</span>
+          </div>
+          <span class="text-gray-400 text-xs">置顶</span>
+        </div>
+        
+        <div class="flex items-start space-x-4">
+          <div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+            <img src="https://picsum.photos/id/1001/100/100" alt="版主头像" class="w-full h-full object-cover">
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-lg font-bold text-gray-800 hover:text-primary cursor-pointer">版规公告：经验分享板块发帖指南</h3>
+            </div>
+            <p class="text-gray-600 text-sm mb-3">欢迎大家来到经验分享板块！为了营造良好的交流环境，请大家发帖时遵循以下规则...</p>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-4 text-xs text-gray-500">
+                <span>版主 · 小王</span>
+                <span>2024-01-15 10:30</span>
+                <span>阅读 2,156</span>
+              </div>
+              <div class="flex items-center space-x-3">
+                <button class="flex items-center text-gray-500 hover:text-primary transition-colors">
+                  <i class="fa fa-thumbs-up mr-1"></i>
+                  <span>45</span>
+                </button>
+                <button class="flex items-center text-gray-500 hover:text-primary transition-colors">
+                  <i class="fa fa-comment mr-1"></i>
+                  <span>12</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 帖子1：冬季养护知识 -->
+      <div class="bg-white rounded-xl p-6 card-shadow forum-post">
+        <div class="flex items-start justify-between mb-3">
+          <div class="flex items-center">
+            <span class="inline-block px-2 py-1 bg-orange-100 text-orange-600 text-xs font-medium rounded-full mr-3">热门</span>
+            <span class="inline-block px-2 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">养护知识</span>
+          </div>
+          <span class="text-gray-400 text-xs">2小时前</span>
+        </div>
+        
+        <div class="flex items-start space-x-4">
+          <div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+            <img src="https://picsum.photos/id/1005/100/100" alt="用户头像" class="w-full h-full object-cover">
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-lg font-bold text-gray-800 hover:text-primary cursor-pointer">流浪猫冬季养护知识分享</h3>
+            </div>
+            <p class="text-gray-600 text-sm mb-3">冬季气温低，流浪猫的生存面临很大挑战。我总结了一些冬季养护的要点：1. 提供温暖的猫窝，最好放置在避风的地方；2. 增加食物的供应量，尤其是高热量的食物；3. 注意观察猫咪的健康状况，及时发现和处理疾病...</p>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-4 text-xs text-gray-500">
+                <span>张同学</span>
+                <span>2024-01-20 14:30</span>
+                <span>阅读 520</span>
+              </div>
+              <div class="flex items-center space-x-3">
+                <button class="flex items-center text-gray-500 hover:text-primary transition-colors like-btn" data-liked="false">
+                  <i class="fa fa-thumbs-up mr-1"></i>
+                  <span class="like-count">18</span>
+                </button>
+                <button class="flex items-center text-gray-500 hover:text-primary transition-colors comment-btn">
+                  <i class="fa fa-comment mr-1"></i>
+                  <span>5</span>
+                </button>
+                <button class="flex items-center text-gray-500 hover:text-primary transition-colors">
+                  <i class="fa fa-share-alt mr-1"></i>
+                  <span>分享</span>
+                </button>
+              </div>
+            </div>
+            
+            <!-- 评论区（可折叠） -->
+            <div class="mt-4 p-4 bg-gray-50 rounded-lg hidden comment-section">
+              <div class="space-y-3 mb-4">
+                <!-- 评论1 -->
+                <div class="flex items-start space-x-3">
+                  <div class="w-8 h-8 rounded-full overflow-hidden">
+                    <img src="https://picsum.photos/id/1012/100/100" alt="用户头像" class="w-full h-full object-cover">
+                  </div>
+                  <div class="flex-1">
+                    <div class="bg-white rounded-lg p-3">
+                      <div class="flex justify-between items-start mb-1">
+                        <p class="text-sm font-medium text-gray-800">李同学</p>
+                        <p class="text-xs text-gray-500">1小时前</p>
+                      </div>
+                      <p class="text-gray-600 text-sm">非常实用的知识！我在宿舍楼下feed了几只流浪猫，这个冬天一定会按照这些方法来照顾它们。</p>
+                      <div class="flex items-center mt-2">
+                        <button class="flex items-center text-gray-500 hover:text-primary transition-colors text-xs">
+                          <i class="fa fa-thumbs-up mr-1"></i>
+                          <span>8</span>
+                        </button>
+                        <button class="flex items-center text-gray-500 hover:text-primary transition-colors text-xs ml-3">
+                          <i class="fa fa-reply mr-1"></i>
+                          <span>回复</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- 评论2 -->
+                <div class="flex items-start space-x-3">
+                  <div class="w-8 h-8 rounded-full overflow-hidden">
+                    <img src="https://picsum.photos/id/1027/100/100" alt="用户头像" class="w-full h-full object-cover">
+                  </div>
+                  <div class="flex-1">
+                    <div class="bg-white rounded-lg p-3">
+                      <div class="flex justify-between items-start mb-1">
+                        <p class="text-sm font-medium text-gray-800">王同学</p>
+                        <p class="text-xs text-gray-500">3小时前</p>
+                      </div>
+                      <p class="text-gray-600 text-sm">请问可以用哪些材料制作猫窝呢？我想周末做几个放在校园里。</p>
+                      <div class="flex items-center mt-2">
+                        <button class="flex items-center text-gray-500 hover:text-primary transition-colors text-xs">
+                          <i class="fa fa-thumbs-up mr-1"></i>
+                          <span>3</span>
+                        </button>
+                        <button class="flex items-center text-gray-500 hover:text-primary transition-colors text-xs ml-3">
+                          <i class="fa fa-reply mr-1"></i>
+                          <span>回复</span>
+                        </button>
+                      </div>
+                      
+                      <!-- 回复 -->
+                      <div class="mt-3 pl-4 border-l-2 border-gray-200">
+                        <div class="flex items-start space-x-2">
+                          <div class="w-6 h-6 rounded-full overflow-hidden">
+                            <img src="https://picsum.photos/id/1005/100/100" alt="用户头像" class="w-full h-full object-cover">
+                          </div>
+                          <div class="flex-1">
+                            <div class="bg-gray-50 rounded-lg p-2">
+                              <div class="flex justify-between items-start mb-1">
+                                <p class="text-xs font-medium text-gray-800">张同学（发布者）</p>
+                                <p class="text-xs text-gray-500">2小时前</p>
+                              </div>
+                              <p class="text-gray-600 text-xs">可以使用纸箱、塑料箱、泡沫箱等，内部填充旧衣物、毛毯、棉花等保暖材料。记得在箱子侧面开个小门，方便猫咪进出。</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 发表评论 -->
+              <div class="flex items-start space-x-3">
+                <div class="w-8 h-8 rounded-full overflow-hidden">
+                  <img src="https://picsum.photos/id/1005/100/100" alt="用户头像" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-1">
+                  <textarea class="w-full p-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary resize-none text-sm" rows="2" placeholder="写下你的评论..."></textarea>
+                  <div class="flex justify-end mt-2">
+                    <button class="inline-block px-3 py-1 bg-primary text-white rounded-full text-xs font-medium btn-hover">
+                      发表评论
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 帖子2：救助经历 -->
+      <div class="bg-white rounded-xl p-6 card-shadow forum-post">
+        <div class="flex items-start justify-between mb-3">
+          <div class="flex items-center">
+            <span class="inline-block px-2 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">救助经历</span>
+          </div>
+          <span class="text-gray-400 text-xs">昨天</span>
+        </div>
+        
+        <div class="flex items-start space-x-4">
+          <div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+            <img src="https://picsum.photos/id/1012/100/100" alt="用户头像" class="w-full h-full object-cover">
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-lg font-bold text-gray-800 hover:text-primary cursor-pointer">分享一次成功的流浪动物救助经历</h3>
+            </div>
+            <p class="text-gray-600 text-sm mb-3">上周三，我在图书馆后面发现一只受伤的小奶猫，它的后腿好像被什么东西夹过，无法正常行走。我立即联系了救助站的老师，我们一起将小猫送到了医院进行治疗。经过医生的精心治疗，小猫的伤势已经稳定，现在正在康复中...</p>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-4 text-xs text-gray-500">
+                <span>李同学</span>
+                <span>2024-01-19 16:45</span>
+                <span>阅读 342</span>
+              </div>
+              <div class="flex items-center space-x-3">
+                <button class="flex items-center text-gray-500 hover:text-primary transition-colors like-btn" data-liked="false">
+                  <i class="fa fa-thumbs-up mr-1"></i>
+                  <span class="like-count">32</span>
+                </button>
+                <button class="flex items-center text-gray-500 hover:text-primary transition-colors comment-btn">
+                  <i class="fa fa-comment mr-1"></i>
+                  <span>12</span>
+                </button>
+                <button class="flex items-center text-gray-500 hover:text-primary transition-colors">
+                  <i class="fa fa-share-alt mr-1"></i>
+                  <span>分享</span>
+                </button>
+              </div>
+            </div>
+            
+            <!-- 评论区（可折叠） -->
+            <div class="mt-4 p-4 bg-gray-50 rounded-lg hidden comment-section">
+              <div class="space-y-3 mb-4">
+                <!-- 评论1 -->
+                <div class="flex items-start space-x-3">
+                  <div class="w-8 h-8 rounded-full overflow-hidden">
+                    <img src="https://picsum.photos/id/1025/100/100" alt="用户头像" class="w-full h-full object-cover">
+                  </div>
+                  <div class="flex-1">
+                    <div class="bg-white rounded-lg p-3">
+                      <div class="flex justify-between items-start mb-1">
+                        <p class="text-sm font-medium text-gray-800">王同学</p>
+                        <p class="text-xs text-gray-500">23小时前</p>
+                      </div>
+                      <p class="text-gray-600 text-sm">太暖心了！为你的善举点赞。小猫咪遇到你真的很幸运。</p>
+                      <div class="flex items-center mt-2">
+                        <button class="flex items-center text-gray-500 hover:text-primary transition-colors text-xs">
+                          <i class="fa fa-thumbs-up mr-1"></i>
+                          <span>15</span>
+                        </button>
+                        <button class="flex items-center text-gray-500 hover:text-primary transition-colors text-xs ml-3">
+                          <i class="fa fa-reply mr-1"></i>
+                          <span>回复</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 发表评论 -->
+              <div class="flex items-start space-x-3">
+                <div class="w-8 h-8 rounded-full overflow-hidden">
+                  <img src="https://picsum.photos/id/1005/100/100" alt="用户头像" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-1">
+                  <textarea class="w-full p-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary resize-none text-sm" rows="2" placeholder="写下你的评论..."></textarea>
+                  <div class="flex justify-end mt-2">
+                    <button class="inline-block px-3 py-1 bg-primary text-white rounded-full text-xs font-medium btn-hover">
+                      发表评论
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 帖子3：领养感悟 -->
+      <div class="bg-white rounded-xl p-6 card-shadow forum-post">
+        <div class="flex items-start justify-between mb-3">
+          <div class="flex items-center">
+            <span class="inline-block px-2 py-1 bg-purple-100 text-purple-600 text-xs font-medium rounded-full">精华</span>
+            <span class="inline-block px-2 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full ml-2">领养感悟</span>
+          </div>
+          <span class="text-gray-400 text-xs">3天前</span>
+        </div>
+        
+        <div class="flex items-start space-x-4">
+          <div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+            <img src="https://picsum.photos/id/1025/100/100" alt="用户头像" class="w-full h-full object-cover">
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-lg font-bold text-gray-800 hover:text-primary cursor-pointer">领养流浪猫三个月的感悟</h3>
+            </div>
+            <p class="text-gray-600 text-sm mb-3">三个月前，我领养了一只流浪猫，给它取名叫"球球"。刚开始的时候，球球对我很防备，总是躲着我，也不愿意和我亲近。但是经过我三个月的精心照顾和耐心陪伴，球球现在已经完全信任我了，每天都会主动跳到我腿上让我抚摸它...</p>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-4 text-xs text-gray-500">
+                <span>王同学</span>
+                <span>2024-01-17 09:20</span>
+                <span>阅读 678</span>
+              </div>
+              <div class="flex items-center space-x-3">
+                <button class="flex items-center text-gray-500 hover:text-primary transition-colors like-btn" data-liked="false">
+                  <i class="fa fa-thumbs-up mr-1"></i>
+                  <span class="like-count">25</span>
+                </button>
+                <button class="flex items-center text-gray-500 hover:text-primary transition-colors comment-btn">
+                  <i class="fa fa-comment mr-1"></i>
+                  <span>8</span>
+                </button>
+                <button class="flex items-center text-gray-500 hover:text-primary transition-colors">
+                  <i class="fa fa-share-alt mr-1"></i>
+                  <span>分享</span>
+                </button>
+              </div>
+            </div>
+            
+            <!-- 评论区（可折叠） -->
+            <div class="mt-4 p-4 bg-gray-50 rounded-lg hidden comment-section">
+              <div class="space-y-3 mb-4">
+                <!-- 评论1 -->
+                <div class="flex items-start space-x-3">
+                  <div class="w-8 h-8 rounded-full overflow-hidden">
+                    <img src="https://picsum.photos/id/1035/100/100" alt="用户头像" class="w-full h-full object-cover">
+                  </div>
+                  <div class="flex-1">
+                    <div class="bg-white rounded-lg p-3">
+                      <div class="flex justify-between items-start mb-1">
+                        <p class="text-sm font-medium text-gray-800">赵同学</p>
+                        <p class="text-xs text-gray-500">2天前</p>
+                      </div>
+                      <p class="text-gray-600 text-sm">看得我都要哭了！领养真的需要很大的耐心，但收获的感动也是巨大的。</p>
+                      <div class="flex items-center mt-2">
+                        <button class="flex items-center text-gray-500 hover:text-primary transition-colors text-xs">
+                          <i class="fa fa-thumbs-up mr-1"></i>
+                          <span>12</span>
+                        </button>
+                        <button class="flex items-center text-gray-500 hover:text-primary transition-colors text-xs ml-3">
+                          <i class="fa fa-reply mr-1"></i>
+                          <span>回复</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 发表评论 -->
+              <div class="flex items-start space-x-3">
+                <div class="w-8 h-8 rounded-full overflow-hidden">
+                  <img src="https://picsum.photos/id/1005/100/100" alt="用户头像" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-1">
+                  <textarea class="w-full p-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary resize-none text-sm" rows="2" placeholder="写下你的评论..."></textarea>
+                  <div class="flex justify-end mt-2">
+                    <button class="inline-block px-3 py-1 bg-primary text-white rounded-full text-xs font-medium btn-hover">
+                      发表评论
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 帖子4：喂养技巧 -->
+      <div class="bg-white rounded-xl p-6 card-shadow forum-post">
+        <div class="flex items-start justify-between mb-3">
+          <div class="flex items-center">
+            <span class="inline-block px-2 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">喂养技巧</span>
+          </div>
+          <span class="text-gray-400 text-xs">5天前</span>
+        </div>
+        
+        <div class="flex items-start space-x-4">
+          <div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+            <img src="https://picsum.photos/id/1035/100/100" alt="用户头像" class="w-full h-full object-cover">
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-lg font-bold text-gray-800 hover:text-primary cursor-pointer">流浪猫科学喂养技巧分享</h3>
+            </div>
+            <p class="text-gray-600 text-sm mb-3">很多同学都喜欢喂流浪猫，但不正确的喂养方式可能会对猫咪的健康造成伤害。今天我就来分享一些科学喂养的技巧...</p>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-4 text-xs text-gray-500">
+                <span>刘同学</span>
+                <span>2024-01-15 14:10</span>
+                <span>阅读 445</span>
+              </div>
+              <div class="flex items-center space-x-3">
+                <button class="flex items-center text-gray-500 hover:text-primary transition-colors like-btn" data-liked="false">
+                  <i class="fa fa-thumbs-up mr-1"></i>
+                  <span class="like-count">19</span>
+                </button>
+                <button class="flex items-center text-gray-500 hover:text-primary transition-colors comment-btn">
+                  <i class="fa fa-comment mr-1"></i>
+                  <span>7</span>
+                </button>
+                <button class="flex items-center text-gray-500 hover:text-primary transition-colors">
+                  <i class="fa fa-share-alt mr-1"></i>
+                  <span>分享</span>
+                </button>
+              </div>
+            </div>
+            
+            <!-- 评论区（可折叠） -->
+            <div class="mt-4 p-4 bg-gray-50 rounded-lg hidden comment-section">
+              <div class="space-y-3 mb-4">
+                <!-- 评论1 -->
+                <div class="flex items-start space-x-3">
+                  <div class="w-8 h-8 rounded-full overflow-hidden">
+                    <img src="https://picsum.photos/id/1040/100/100" alt="用户头像" class="w-full h-full object-cover">
+                  </div>
+                  <div class="flex-1">
+                    <div class="bg-white rounded-lg p-3">
+                      <div class="flex justify-between items-start mb-1">
+                        <p class="text-sm font-medium text-gray-800">陈同学</p>
+                        <p class="text-xs text-gray-500">4天前</p>
+                      </div>
+                      <p class="text-gray-600 text-sm">非常专业的分享！特别是关于定时定点的建议，我之前都不知道。</p>
+                      <div class="flex items-center mt-2">
+                        <button class="flex items-center text-gray-500 hover:text-primary transition-colors text-xs">
+                          <i class="fa fa-thumbs-up mr-1"></i>
+                          <span>6</span>
+                        </button>
+                        <button class="flex items-center text-gray-500 hover:text-primary transition-colors text-xs ml-3">
+                          <i class="fa fa-reply mr-1"></i>
+                          <span>回复</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 发表评论 -->
+              <div class="flex items-start space-x-3">
+                <div class="w-8 h-8 rounded-full overflow-hidden">
+                  <img src="https://picsum.photos/id/1005/100/100" alt="用户头像" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-1">
+                  <textarea class="w-full p-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary resize-none text-sm" rows="2" placeholder="写下你的评论..."></textarea>
+                  <div class="flex justify-end mt-2">
+                    <button class="inline-block px-3 py-1 bg-primary text-white rounded-full text-xs font-medium btn-hover">
+                      发表评论
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 自动加载提示 -->
+    <div id="loading-indicator" class="text-center mt-8 hidden">
+      <div class="inline-flex items-center text-primary">
+        <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-primary mr-3"></div>
+        <span>正在加载更多分享...</span>
+      </div>
+    </div>
+    
+    <!-- 滚动触发区域 -->
+    <div id="scroll-trigger" class="h-1"></div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-gray-800 text-white py-12 mt-16">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <!-- Logo和简介 -->
+        <div>
+          <div class="flex items-center mb-4">
+            <i class="fa fa-paw text-2xl text-primary mr-2"></i>
+            <span class="text-xl font-bold text-primary">校园护萌神</span>
+          </div>
+          <p class="text-gray-400 text-sm mb-4">
+            致力于校园流浪动物的救助、领养和保护工作，
+            让每一只动物都能拥有温暖的家。
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+              <i class="fa fa-weixin text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+              <i class="fa fa-weibo text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+              <i class="fa fa-instagram text-xl"></i>
+            </a>
+          </div>
+        </div>
+        
+        <!-- 快速链接 -->
+        <div>
+          <h3 class="text-lg font-bold mb-4">快速链接</h3>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="text-gray-400 hover:text-primary transition-colors text-sm">首页</a></li>
+            <li><a href="index.html#about" class="text-gray-400 hover:text-primary transition-colors text-sm">关于我们</a></li>
+            <li><a href="index.html#services" class="text-gray-400 hover:text-primary transition-colors text-sm">服务项目</a></li>
+            <li><a href="index.html?active=volunteer#volunteer" class="text-gray-400 hover:text-primary transition-colors text-sm">志愿者社区</a></li>
+            <li><a href="index.html#adopt" class="text-gray-400 hover:text-primary transition-colors text-sm">宠物领养</a></li>
+          </ul>
+        </div>
+        
+        <!-- 服务项目 -->
+        <div>
+          <h3 class="text-lg font-bold mb-4">服务项目</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">宠物领养</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">宠物寄养</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">宠物医疗</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">宠物培训</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">志愿者招募</a></li>
+          </ul>
+        </div>
+        
+        <!-- 联系我们 -->
+        <div>
+          <h3 class="text-lg font-bold mb-4">联系我们</h3>
+          <ul class="space-y-2">
+            <li class="flex items-center text-gray-400 text-sm">
+              <i class="fa fa-map-marker mr-3"></i>
+              校园宠物之家办公室
+            </li>
+            <li class="flex items-center text-gray-400 text-sm">
+              <i class="fa fa-phone mr-3"></i>
+              188-8888-8888
+            </li>
+            <li class="flex items-center text-gray-400 text-sm">
+              <i class="fa fa-envelope mr-3"></i>
+              pet@campus.com
+            </li>
+            <li class="flex items-center text-gray-400 text-sm">
+              <i class="fa fa-clock-o mr-3"></i>
+              周一至周日 9:00-18:00
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+        <p class="text-gray-400 text-sm">
+          © 2025 校园护萌神. 保留所有权利.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 点赞功能
+    document.querySelectorAll('.like-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const isLiked = this.getAttribute('data-liked') === 'true';
+        const likeCount = this.querySelector('.like-count');
+        const icon = this.querySelector('i');
+        
+        if (isLiked) {
+          // 取消点赞
+          this.setAttribute('data-liked', 'false');
+          likeCount.textContent = parseInt(likeCount.textContent) - 1;
+          icon.className = 'fa fa-thumbs-up mr-1';
+          this.classList.remove('text-primary');
+          this.classList.add('text-gray-500');
+        } else {
+          // 点赞
+          this.setAttribute('data-liked', 'true');
+          likeCount.textContent = parseInt(likeCount.textContent) + 1;
+          icon.className = 'fa fa-thumbs-up mr-1 text-primary';
+          this.classList.remove('text-gray-500');
+          this.classList.add('text-primary');
+        }
+      });
+    });
+
+    // 评论区展开/收起
+    document.querySelectorAll('.comment-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const commentSection = this.closest('.forum-post').querySelector('.comment-section');
+        if (commentSection.classList.contains('hidden')) {
+          commentSection.classList.remove('hidden');
+          this.querySelector('i').className = 'fa fa-comment mr-1 text-primary';
+        } else {
+          commentSection.classList.add('hidden');
+          this.querySelector('i').className = 'fa fa-comment mr-1';
+        }
+      });
+    });
+
+    // 发帖按钮点击事件
+    document.querySelector('button').addEventListener('click', function() {
+      if (this.textContent.includes('发起分享')) {
+        alert('发帖功能开发中，敬请期待！');
+      }
+    });
+
+    // 自动滚动加载功能
+    let isLoading = false;
+    let hasMoreData = true;
+    let loadedCount = 0;
+
+    // 模拟数据
+    const additionalPosts = [
+      {
+        id: 5,
+        type: 'normal',
+        title: '新生猫咪社会化训练经验',
+        author: '李同学',
+        avatar: 'https://picsum.photos/id/1027/100/100',
+        time: '6天前',
+        content: '刚收养了一只3个月大的小猫，通过一系列社会化训练，现在已经能很好地与人互动了...',
+        likes: 12,
+        comments: 3,
+        tags: ['猫咪训练', '社会化']
+      },
+      {
+        id: 6,
+        type: 'hot',
+        title: '校园流浪猫冬季保暖指南',
+        author: '王同学',
+        avatar: 'https://picsum.photos/id/1035/100/100',
+        time: '1周前',
+        content: '随着天气转冷，如何帮助校园里的流浪猫度过寒冬成了重要问题。分享一些保暖经验...',
+        likes: 28,
+        comments: 8,
+        tags: ['冬季护理', '流浪猫']
+      },
+      {
+        id: 7,
+        type: 'essence',
+        title: 'TNR项目志愿者招募心得',
+        author: '张同学',
+        avatar: 'https://picsum.photos/id/1043/100/100',
+        time: '2周前',
+        content: '参与TNR项目已经3个月了，从最初的紧张到现在能够熟练操作，这个过程让我收获很多...',
+        likes: 45,
+        comments: 12,
+        tags: ['TNR', '志愿者', '经验分享']
+      }
+    ];
+
+    // 检查是否滚动到底部
+    function checkScroll() {
+      if (isLoading || !hasMoreData) return;
+      
+      const scrollTrigger = document.getElementById('scroll-trigger');
+      const rect = scrollTrigger.getBoundingClientRect();
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+      
+      // 当触发区域距离底部100px时开始加载
+      if (rect.top <= windowHeight - 100) {
+        loadMorePosts();
+      }
+    }
+
+    // 加载更多帖子
+    function loadMorePosts() {
+      if (isLoading || !hasMoreData || loadedCount >= additionalPosts.length) return;
+      
+      isLoading = true;
+      showLoadingIndicator();
+      
+      // 模拟加载延迟
+      setTimeout(() => {
+        const post = additionalPosts[loadedCount];
+        const postsContainer = document.querySelector('.space-y-6');
+        
+        // 创建新帖子HTML
+        const postElement = createPostElement(post);
+        
+        // 插入新帖子
+        postsContainer.appendChild(postElement);
+        
+        loadedCount++;
+        
+        // 检查是否还有更多数据
+        if (loadedCount >= additionalPosts.length) {
+          hasMoreData = false;
+          showNoMoreIndicator();
+        }
+        
+        hideLoadingIndicator();
+        isLoading = false;
+        
+        // 为新添加的帖子绑定事件
+        bindEventsToNewPost(postElement);
+      }, 1000);
+    }
+
+    // 创建帖子元素
+    function createPostElement(post) {
+      const postDiv = document.createElement('div');
+      postDiv.className = 'forum-post';
+      postDiv.innerHTML = `
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
+          <!-- 帖子头部 -->
+          <div class="flex items-start justify-between mb-4">
+            <div class="flex items-center space-x-3">
+              <div class="w-10 h-10 rounded-full overflow-hidden">
+                <img src="${post.avatar}" alt="${post.author}" class="w-full h-full object-cover">
+              </div>
+              <div>
+                <h4 class="font-medium text-gray-800">${post.author}</h4>
+                <div class="flex items-center space-x-2 text-sm text-gray-500">
+                  <span>${post.time}</span>
+                  <span>•</span>
+                  <span class="px-2 py-1 text-xs font-medium rounded-full ${getTypeClass(post.type)}">
+                    ${getTypeText(post.type)}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 帖子内容 -->
+          <div class="mb-4">
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">${post.title}</h3>
+            <p class="text-gray-600">${post.content}</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              ${post.tags.map(tag => `<span class="px-2 py-1 bg-secondary/20 text-primary text-xs rounded-full">${tag}</span>`).join('')}
+            </div>
+          </div>
+          
+          <!-- 互动按钮 -->
+          <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+            <div class="flex items-center space-x-4">
+              <button class="flex items-center text-gray-500 hover:text-primary transition-colors like-btn" data-liked="false">
+                <i class="fa fa-thumbs-up mr-1"></i>
+                <span class="like-count">${post.likes}</span>
+              </button>
+              <button class="flex items-center text-gray-500 hover:text-primary transition-colors comment-btn">
+                <i class="fa fa-comment mr-1"></i>
+                <span>${post.comments}</span>
+              </button>
+              <button class="flex items-center text-gray-500 hover:text-primary transition-colors">
+                <i class="fa fa-share-alt mr-1"></i>
+                <span>分享</span>
+              </button>
+            </div>
+          </div>
+          
+          <!-- 评论区（可折叠） -->
+          <div class="mt-4 p-4 bg-gray-50 rounded-lg hidden comment-section">
+            <div class="space-y-3 mb-4">
+              <div class="flex items-start space-x-3">
+                <div class="w-8 h-8 rounded-full overflow-hidden">
+                  <img src="https://picsum.photos/id/1005/100/100" alt="用户头像" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-1">
+                  <div class="bg-white rounded-lg p-3">
+                    <div class="flex justify-between items-start mb-1">
+                      <p class="text-sm font-medium text-gray-800">新用户</p>
+                      <p class="text-xs text-gray-500">刚刚</p>
+                    </div>
+                    <p class="text-gray-600 text-sm">非常实用的分享，谢谢！</p>
+                    <div class="flex items-center mt-2">
+                      <button class="flex items-center text-gray-500 hover:text-primary transition-colors text-xs">
+                        <i class="fa fa-thumbs-up mr-1"></i>
+                        <span>0</span>
+                      </button>
+                      <button class="flex items-center text-gray-500 hover:text-primary transition-colors text-xs ml-3">
+                        <i class="fa fa-reply mr-1"></i>
+                        <span>回复</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 发表评论 -->
+            <div class="flex items-start space-x-3">
+              <div class="w-8 h-8 rounded-full overflow-hidden">
+                <img src="https://picsum.photos/id/1005/100/100" alt="用户头像" class="w-full h-full object-cover">
+              </div>
+              <div class="flex-1">
+                <textarea class="w-full p-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary resize-none text-sm" rows="2" placeholder="写下你的评论..."></textarea>
+                <div class="flex justify-end mt-2">
+                  <button class="inline-block px-3 py-1 bg-primary text-white rounded-full text-xs font-medium btn-hover">
+                    发表评论
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      return postDiv;
+    }
+
+    // 获取帖子类型样式
+    function getTypeClass(type) {
+      switch(type) {
+        case 'sticky': return 'bg-red-100 text-red-700';
+        case 'hot': return 'bg-orange-100 text-orange-700';
+        case 'essence': return 'bg-purple-100 text-purple-700';
+        default: return 'bg-secondary/20 text-primary';
+      }
+    }
+
+    // 获取帖子类型文本
+    function getTypeText(type) {
+      switch(type) {
+        case 'sticky': return '置顶';
+        case 'hot': return '热门';
+        case 'essence': return '精华';
+        default: return '分享';
+      }
+    }
+
+    // 显示加载指示器
+    function showLoadingIndicator() {
+      document.getElementById('loading-indicator').classList.remove('hidden');
+    }
+
+    // 隐藏加载指示器
+    function hideLoadingIndicator() {
+      document.getElementById('loading-indicator').classList.add('hidden');
+    }
+
+    // 显示无更多数据提示
+    function showNoMoreIndicator() {
+      const loadingIndicator = document.getElementById('loading-indicator');
+      loadingIndicator.classList.remove('hidden');
+      loadingIndicator.innerHTML = '<span class="text-gray-500">没有更多分享了</span>';
+    }
+
+    // 为新帖子绑定事件
+    function bindEventsToNewPost(postElement) {
+      // 点赞功能
+      const likeBtn = postElement.querySelector('.like-btn');
+      likeBtn.addEventListener('click', function() {
+        const isLiked = this.getAttribute('data-liked') === 'true';
+        const likeCount = this.querySelector('.like-count');
+        const icon = this.querySelector('i');
+        
+        if (isLiked) {
+          this.setAttribute('data-liked', 'false');
+          likeCount.textContent = parseInt(likeCount.textContent) - 1;
+          icon.className = 'fa fa-thumbs-up mr-1';
+          this.classList.remove('text-primary');
+          this.classList.add('text-gray-500');
+        } else {
+          this.setAttribute('data-liked', 'true');
+          likeCount.textContent = parseInt(likeCount.textContent) + 1;
+          icon.className = 'fa fa-thumbs-up mr-1 text-primary';
+          this.classList.remove('text-gray-500');
+          this.classList.add('text-primary');
+        }
+      });
+
+      // 评论区展开/收起
+      const commentBtn = postElement.querySelector('.comment-btn');
+      commentBtn.addEventListener('click', function() {
+        const commentSection = this.closest('.forum-post').querySelector('.comment-section');
+        if (commentSection.classList.contains('hidden')) {
+          commentSection.classList.remove('hidden');
+          this.querySelector('i').className = 'fa fa-comment mr-1 text-primary';
+        } else {
+          commentSection.classList.add('hidden');
+          this.querySelector('i').className = 'fa fa-comment mr-1';
+        }
+      });
+    }
+
+    // 监听滚动事件
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(checkScroll, 100);
+    });
+
+    // 页面加载完成后检查一次
+    window.addEventListener('load', function() {
+      checkScroll();
+    });
+  </script>
+</body>
+</html>

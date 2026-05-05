@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>萌宠日常 - 校园护萌神</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- 自定义样式 -->
+    <style>
+        /* 自定义颜色变量 */
+        :root {
+            --primary: #99CC99;
+            --secondary: #FFB6C1;
+            --light: #F5F3FF;
+            --dark: #1F2937;
+        }
+        
+        /* 基础样式 */
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        
+        /* 渐变背景 */
+        .bg-gradient-to-br {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        
+        /* 页面背景 */
+        body {
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(245, 243, 255, 0.8));
+            background-attachment: fixed;
+        }
+        
+        /* 标题样式 */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--primary);
+        }
+        
+        /* 按钮样式 */
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border-radius: 25px;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #88bb88;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 卡片阴影 */
+        .card-shadow {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 卡片悬停效果 */
+        .btn-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(139, 92, 246, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        /* 按钮渐变 */
+        .btn-gradient {
+            background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+        }
+        
+        /* 卡片渐变 */
+        .card-gradient {
+            background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+        }
+    </style>
+    <!-- 动态内容脚本 -->
+    <script>
+        // 新闻数据
+        const newsData = [
+            {
+                id: 1,
+                title: "校园里的小白狗：从流浪到团宠",
+                date: "2025-11-13",
+                image: "https://picsum.photos/id/1025/1200/600",
+                content: [
+                    "在我们的校园里，有一只可爱的小白狗，它曾经是一只流浪狗，每天在校园里四处觅食，过着居无定所的生活。",
+                    "直到有一天，一群热心的学生发现了它，开始给它喂食，给它搭建了一个简单的小窝。随着时间的推移，小白狗越来越信任人类，逐渐成为了校园里的团宠。",
+                    "现在，小白狗每天都会在校园里四处游荡，和同学们玩耍，接受大家的抚摸和关爱。它的故事感动了很多人，也让更多人开始关注和关爱校园里的流浪动物。",
+                    "我们希望通过小白狗的故事，让更多人了解校园流浪动物的生活状况，呼吁大家一起行动起来，为这些可爱的生命提供帮助和关爱。"
+                ]
+            },
+            {
+                id: 2,
+                title: "校园狗狗运动会：谁是最棒的运动员？",
+                date: "2025-11-10",
+                image: "https://picsum.photos/id/40/1200/600",
+                content: [
+                    "近日，我校举办了一场别开生面的校园狗狗运动会，吸引了众多师生和狗狗爱好者的参与。",
+                    "运动会设有短跑、跳远、接飞盘等多个项目，参赛的狗狗们在主人的带领下，展现出了出色的运动天赋和默契的配合。",
+                    "最终，一只名叫“小黑”的拉布拉多犬获得了本次运动会的冠军，它在各个项目中都表现出色，成为了当之无愧的“运动健将”。",
+                    "本次运动会不仅为校园里的狗狗们提供了一个展示才华的平台，也增进了同学们之间的交流和友谊，同时也呼吁大家更多地关注和关爱校园里的流浪动物。"
+                ]
+            },
+            {
+                id: 3,
+                title: "暖心时刻：学生们为流浪猫建造温馨小窝",
+                date: "2025-11-05",
+                image: "https://picsum.photos/id/1059/1200/600",
+                content: [
+                    "随着天气逐渐转冷，校园里的流浪猫们面临着寒冷天气的挑战。为了让这些可爱的毛孩子们能够度过一个温暖的冬天，我校学生自发组织了\"温暖小窝\"活动。",
+                    "学生们利用课余时间，收集了各种材料，为校园里的流浪猫建造了一批温馨舒适的小窝。这些小窝不仅能够遮风挡雨，还铺有柔软的垫子，让猫咪们能够温暖地度过冬天。",
+                    "活动得到了全校师生的积极响应和支持，很多同学都参与到了小窝的建造和放置工作中。现在，校园里的流浪猫们已经有了自己温暖的家，它们的生活状况得到了很大的改善。",
+                    "我们希望通过这样的活动，让更多人了解和关注校园流浪动物的生活状况，呼吁大家一起行动起来，为这些可爱的生命提供帮助和关爱。"
+                ]
+            }
+        ];
+        
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取URL参数
+            const urlParams = new URLSearchParams(window.location.search);
+            const newsId = parseInt(urlParams.get('news')) || 1;
+            
+            // 查找对应的新闻
+            const currentNews = newsData.find(news => news.id === newsId) || newsData[0];
+            
+            // 更新页面标题
+            document.title = `${currentNews.title} - 萌宠日常 - 校园护萌神`;
+            
+            // 更新新闻标题
+            const newsTitleElement = document.getElementById('newsTitle');
+            if (newsTitleElement) {
+                newsTitleElement.textContent = currentNews.title;
+            }
+            
+            // 更新新闻日期
+            const newsDateElement = document.getElementById('newsDate');
+            if (newsDateElement) {
+                newsDateElement.textContent = currentNews.date;
+            }
+            
+            // 更新新闻图片
+            const newsImageElement = document.getElementById('newsImage');
+            if (newsImageElement) {
+                newsImageElement.src = currentNews.image;
+                newsImageElement.alt = currentNews.title;
+            }
+            
+            // 更新新闻正文
+            const newsContentElement = document.getElementById('newsContent');
+            if (newsContentElement) {
+                newsContentElement.innerHTML = '';
+                currentNews.content.forEach(paragraph => {
+                    const pElement = document.createElement('p');
+                    pElement.className = 'mb-6';
+                    pElement.textContent = paragraph;
+                    newsContentElement.appendChild(pElement);
+                });
+            }
+            
+            // 更新相关新闻
+            const relatedNewsElement = document.getElementById('relatedNews');
+            if (relatedNewsElement) {
+                relatedNewsElement.innerHTML = '';
+                newsData.filter(news => news.id !== newsId).forEach(news => {
+                    const newsItemElement = document.createElement('div');
+                    newsItemElement.className = 'bg-secondary/5 rounded-xl p-4 shadow-md';
+                    newsItemElement.innerHTML = `
+                        <h4 class="text-lg font-bold mb-2">
+                            <a href="carousel_detail.html?news=${news.id}" class="text-dark hover:text-primary transition-colors">${news.title}</a>
+                        </h4>
+                        <p class="text-gray-500 text-sm">${news.date}</p>
+                    `;
+                    relatedNewsElement.appendChild(newsItemElement);
+                });
+            }
+        });
+    </script>
+</head>
+<body class="bg-gradient-to-br from-secondary/10 via-light to-secondary/5 font-sans text-dark">
+    <!-- 导航栏 -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <!-- 校园护萌神专属Logo -->
+                <div class="w-12 h-12 flex items-center justify-center transition-all duration-300 hover:scale-110">
+                    <i class="fa fa-paw text-4xl text-primary"></i>
+                </div>
+                <h1 class="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-pink-500">校园护萌神</h1>
+            </div>
+            <nav class="hidden md:flex space-x-6">
+          <a href="#home" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">首页</a>
+          <a href="#workshop" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">手作坊</a>
+          <a href="#volunteer" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">志愿者社区</a>
+          <a href="#pet-archive" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">动物档案</a>
+          <a href="#user" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">用户中心</a>
+        </nav>
+            <!-- 移动端菜单按钮 -->
+            <button class="md:hidden text-primary text-2xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="py-12">
+        <div class="container mx-auto px-4">
+            <!-- 返回按钮 -->
+            <div class="mb-8">
+                <a href="index.html?active=home#home" class="inline-flex items-center text-gray-600 hover:text-primary transition-colors">
+                    <i class="fa fa-arrow-left mr-2"></i>返回首页
+                </a>
+            </div>
+            
+            <!-- 新闻详情内容 -->
+            <section class="bg-white rounded-2xl shadow-xl p-8 mb-12">
+                <h2 class="text-3xl font-bold text-center mb-8 text-primary">
+                    <i class="fa fa-paw mr-3"></i>萌宠日常
+                </h2>
+                
+                <!-- 新闻标题 -->
+                <div class="mb-8">
+                    <h3 id="newsTitle" class="text-2xl md:text-3xl font-bold mb-4 text-center">校园里的小白狗：从流浪到团宠</h3>
+                    <div class="flex justify-center items-center text-gray-500 text-sm">
+                        <i class="fa fa-calendar mr-2"></i>
+                        <span id="newsDate">2025-11-13</span>
+                    </div>
+                </div>
+                
+                <!-- 新闻图片 -->
+                <div class="mb-8">
+                    <img id="newsImage" src="https://picsum.photos/id/1025/1200/600" alt="校园小白狗" class="w-full h-auto rounded-xl shadow-lg">
+                </div>
+                
+                <!-- 新闻正文 -->
+                <div id="newsContent" class="mb-12 text-gray-600 leading-relaxed">
+                    <p class="mb-6">
+                        在我们的校园里，有一只可爱的小橘猫，它曾经是一只流浪猫，每天在校园里四处觅食，过着居无定所的生活。
+                    </p>
+                    <p class="mb-6">
+                        直到有一天，一群热心的学生发现了它，开始给它喂食，给它搭建了一个简单的小窝。随着时间的推移，小橘猫越来越信任人类，逐渐成为了校园里的团宠。
+                    </p>
+                    <p class="mb-6">
+                        现在，小橘猫每天都会在校园里四处游荡，和同学们玩耍，接受大家的抚摸和关爱。它的故事感动了很多人，也让更多人开始关注和关爱校园里的流浪动物。
+                    </p>
+                    <p class="mb-6">
+                        我们希望通过小橘猫的故事，让更多人了解校园流浪动物的生活状况，呼吁大家一起行动起来，为这些可爱的生命提供帮助和关爱。
+                    </p>
+                </div>
+                
+                <!-- 新闻相关 -->
+                <div class="mb-12">
+                    <h3 class="text-2xl font-bold mb-6">
+                        <i class="fa fa-link mr-2"></i>相关新闻
+                    </h3>
+                    <div id="relatedNews" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-secondary/5 rounded-xl p-4 shadow-md">
+                            <h4 class="text-lg font-bold mb-2">
+                                <a href="carousel_detail.html?news=2" class="text-dark hover:text-primary transition-colors">校园狗狗运动会：谁是最棒的运动员？</a>
+                            </h4>
+                            <p class="text-gray-500 text-sm">2025-11-10</p>
+                        </div>
+                        <div class="bg-secondary/5 rounded-xl p-4 shadow-md">
+                            <h4 class="text-lg font-bold mb-2">
+                                <a href="carousel_detail.html?news=3" class="text-dark hover:text-primary transition-colors">暖心时刻：学生们为流浪猫建造温馨小窝</a>
+                            </h4>
+                            <p class="text-gray-500 text-sm">2025-11-05</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 时政要闻 -->
+            <section class="bg-white rounded-2xl shadow-xl p-8">
+                <h3 class="text-2xl font-bold text-center mb-8">时政要闻</h3>
+                <div class="space-y-6">
+                    <div class="border-b border-gray-200 pb-4">
+                        <div class="flex items-center text-gray-500 text-sm mb-2">
+                            <span>2025-11-27</span>
+                        </div>
+                        <h4 class="text-lg font-bold">
+                            <a href="carousel_detail.html" class="text-dark hover:text-primary transition-colors">中国共产党四川省第十二届委员会第八次全体会议公报</a>
+                        </h4>
+                    </div>
+                    <div class="border-b border-gray-200 pb-4">
+                        <div class="flex items-center text-gray-500 text-sm mb-2">
+                            <span>2025-10-28</span>
+                        </div>
+                        <h4 class="text-lg font-bold">
+                            <a href="carousel_detail.html" class="text-dark hover:text-primary transition-colors">习近平：关于《中共中央关于制定国民经济和社会发展第十五个五年规划的建议》的说明</a>
+                        </h4>
+                    </div>
+                    <div class="border-b border-gray-200 pb-4">
+                        <div class="flex items-center text-gray-500 text-sm mb-2">
+                            <span>2025-10-24</span>
+                        </div>
+                        <h4 class="text-lg font-bold">
+                            <a href="carousel_detail.html" class="text-dark hover:text-primary transition-colors">一图速览：党的二十届四中全会公报</a>
+                        </h4>
+                    </div>
+                    <div class="text-right">
+                        <a href="carousel_detail.html" class="text-primary hover:underline font-medium">更多</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">校园护萌神</h3>
+                    <p class="text-gray-400">
+                        致力于校园流浪动物的保护和关爱，让每一个生命都能得到尊重和温暖。
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">快速链接</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#home" class="text-gray-400 hover:text-white transition-colors">首页</a></li>
+                        <li><a href="index.html#workshop" class="text-gray-400 hover:text-white transition-colors">手作坊</a></li>
+                        <li><a href="index.html#volunteer" class="text-gray-400 hover:text-white transition-colors">志愿者社区</a></li>
+                        <li><a href="index.html#pet-archive" class="text-gray-400 hover:text-white transition-colors">动物档案</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">联系我们</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fa fa-envelope mr-2"></i>
+                            <span class="text-gray-400">contact@campuspet.org</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-phone mr-2"></i>
+                            <span class="text-gray-400">123-456-7890</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-map-marker mr-2"></i>
+                            <span class="text-gray-400">XX大学动物保护协会</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">关注我们</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-wechat text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-weibo text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-instagram text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-qq text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-center text-gray-500">
+                <p>2025 校园护萌神 版权所有 | 网站备案号：35626270号</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱心商城 - 校园护萌神</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind 配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#99CC99',
+                        secondary: '#FFB6C1',
+                        accent: '#FFCC99',
+                        light: '#F8FFF8',
+                        dark: '#336666'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                },
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .btn-hover {
+                transition: all 0.3s ease;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+            .card-shadow {
+                box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+                transition: all 0.3s ease;
+            }
+            .card-shadow:hover {
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            }
+            .btn-gradient {
+                background-image: linear-gradient(to right, var(--primary), var(--secondary));
+            }
+            .btn-hover:hover {
+                transform: scale(1.05);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-pink-50 via-light to-purple-100 font-sans text-dark">
+    <!-- 页面顶部导航 -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <!-- 校园护萌神专属Logo -->
+                <div class="w-12 h-12 flex items-center justify-center transition-all duration-300 hover:scale-110">
+                    <i class="fa fa-paw text-4xl text-primary"></i>
+                </div>
+                <h1 class="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-pink-500">校园护萌神</h1>
+            </div>
+            <nav class="hidden md:flex space-x-6">
+                <a href="index.html" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">首页</a>
+                <a href="#workshop" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">手作坊</a>
+                <a href="#volunteer" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">志愿者社区</a>
+                <a href="#pet-archive" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">动物档案</a>
+                <a href="#user" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">用户中心</a>
+            </nav>
+            <!-- 移动端菜单按钮 -->
+            <button class="md:hidden text-primary text-2xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 主体内容 -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- 返回按钮 -->
+        <div class="mb-6">
+            <a href="index.html?active=volunteer#volunteer" class="inline-flex items-center text-primary hover:text-primary/80 transition-colors duration-300">
+                <i class="fa fa-arrow-left mr-2"></i>返回志愿者社区
+            </a>
+        </div>
+        
+        <!-- 页面标题 -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">💝 爱心商城</h1>
+            <p class="text-gray-600 text-lg">用积分或现金为校园动物兑换爱心物资</p>
+        </div>
+
+        <!-- 商品列表 -->
+        <div class="space-y-6">
+            <!-- 商品1：高级猫粮 -->
+            <div class="bg-white rounded-2xl p-6 card-shadow hover:shadow-lg transition-all duration-300">
+                <div class="flex flex-col md:flex-row md:items-center gap-6">
+                    <!-- 商品图片 -->
+                    <div class="md:w-48 md:h-32 w-full h-48 rounded-xl overflow-hidden flex-shrink-0">
+                        <img src="https://picsum.photos/id/1080/400/300" alt="高级猫粮" class="w-full h-full object-cover">
+                    </div>
+                    
+                    <!-- 商品信息 -->
+                    <div class="flex-1">
+                        <div class="flex items-start justify-between mb-3">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">🌾 高级天然猫粮</h3>
+                                <div class="flex items-center gap-3 mb-3">
+                                    <span class="inline-block px-3 py-1 rounded-full bg-orange-100 text-orange-600 text-sm font-medium">宠物食品</span>
+                                    <span class="inline-block px-3 py-1 rounded-full bg-green-100 text-green-600 text-sm font-medium">现货充足</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-600 mb-3">选用优质鸡肉和鱼肉制作，富含蛋白质和维生素，无添加剂配方，呵护猫咪健康成长。</p>
+                        
+                        <div class="flex items-center gap-4 text-sm text-gray-500 mb-3">
+                            <span><i class="fa fa-star mr-1"></i>4.8分</span>
+                            <span><i class="fa fa-shopping-cart mr-1"></i>已售286袋</span>
+                            <span><i class="fa fa-gift mr-1"></i>积分兑换</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 购买按钮区域 -->
+                    <div class="flex flex-col gap-3 md:w-32 flex-shrink-0">
+                        <!-- 价格信息 -->
+                        <div class="text-center">
+                            <div class="text-lg font-bold text-primary mb-1">800积分</div>
+                            <div class="text-sm text-gray-500">或 ¥68 现金</div>
+                        </div>
+                        
+                        <!-- 购买选项 -->
+                        <a href="#" onclick="redeemWithPoints('高级天然猫粮', 800)" class="block w-full px-4 py-3 bg-gradient-to-r from-primary to-green-500 text-white rounded-xl font-bold text-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 btn-hover text-center">
+                            <i class="fa fa-gift mr-2"></i>积分兑换
+                        </a>
+                        <a href="#" onclick="purchaseNow('高级天然猫粮', 68)" class="block w-full px-4 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-bold text-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 btn-hover text-center">
+                            <i class="fa fa-credit-card mr-2"></i>立即购买
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 商品2：智能自动喂食器 -->
+            <div class="bg-white rounded-2xl p-6 card-shadow hover:shadow-lg transition-all duration-300">
+                <div class="flex flex-col md:flex-row md:items-center gap-6">
+                    <!-- 商品图片 -->
+                    <div class="md:w-48 md:h-32 w-full h-48 rounded-xl overflow-hidden flex-shrink-0">
+                        <img src="https://picsum.photos/id/1062/400/300" alt="智能自动喂食器" class="w-full h-full object-cover">
+                    </div>
+                    
+                    <!-- 商品信息 -->
+                    <div class="flex-1">
+                        <div class="flex items-start justify-between mb-3">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">🤖 智能自动喂食器</h3>
+                                <div class="flex items-center gap-3 mb-3">
+                                    <span class="inline-block px-3 py-1 rounded-full bg-blue-100 text-blue-600 text-sm font-medium">智能设备</span>
+                                    <span class="inline-block px-3 py-1 rounded-full bg-red-100 text-red-600 text-sm font-medium">限量特惠</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-600 mb-3">支持定时定量喂食，手机APP远程控制，大容量食物储存，防卡粮设计。适合多只宠物家庭使用。</p>
+                        
+                        <div class="flex items-center gap-4 text-sm text-gray-500 mb-3">
+                            <span><i class="fa fa-star mr-1"></i>4.9分</span>
+                            <span><i class="fa fa-shopping-cart mr-1"></i>已售89台</span>
+                            <span><i class="fa fa-mobile mr-1"></i>APP控制</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 购买按钮区域 -->
+                    <div class="flex flex-col gap-3 md:w-32 flex-shrink-0">
+                        <!-- 价格信息 -->
+                        <div class="text-center">
+                            <div class="text-lg font-bold text-primary mb-1">2000积分</div>
+                            <div class="text-sm text-gray-500">或 ¥168 现金</div>
+                        </div>
+                        
+                        <!-- 购买选项 -->
+                        <a href="#" onclick="redeemWithPoints('智能自动喂食器', 2000)" class="block w-full px-4 py-3 bg-gradient-to-r from-primary to-green-500 text-white rounded-xl font-bold text-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 btn-hover text-center">
+                            <i class="fa fa-gift mr-2"></i>积分兑换
+                        </a>
+                        <a href="#" onclick="purchaseNow('智能自动喂食器', 168)" class="block w-full px-4 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-bold text-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 btn-hover text-center">
+                            <i class="fa fa-credit-card mr-2"></i>立即购买
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 商品3：冬季保暖宠物窝 -->
+            <div class="bg-white rounded-2xl p-6 card-shadow hover:shadow-lg transition-all duration-300">
+                <div class="flex flex-col md:flex-row md:items-center gap-6">
+                    <!-- 商品图片 -->
+                    <div class="md:w-48 md:h-32 w-full h-48 rounded-xl overflow-hidden flex-shrink-0">
+                        <img src="https://picsum.photos/id/1074/400/300" alt="冬季保暖宠物窝" class="w-full h-full object-cover">
+                    </div>
+                    
+                    <!-- 商品信息 -->
+                    <div class="flex-1">
+                        <div class="flex items-start justify-between mb-3">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">🏠 冬季保暖宠物窝</h3>
+                                <div class="flex items-center gap-3 mb-3">
+                                    <span class="inline-block px-3 py-1 rounded-full bg-purple-100 text-purple-600 text-sm font-medium">宠物窝垫</span>
+                                    <span class="inline-block px-3 py-1 rounded-full bg-yellow-100 text-yellow-600 text-sm font-medium">冬季热销</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-600 mb-3">加厚保暖材质，可拆洗外罩，防滑底部设计。多种尺寸可选，为您的爱宠提供温暖舒适的休息环境。</p>
+                        
+                        <div class="flex items-center gap-4 text-sm text-gray-500 mb-3">
+                            <span><i class="fa fa-star mr-1"></i>4.7分</span>
+                            <span><i class="fa fa-shopping-cart mr-1"></i>已售156个</span>
+                            <span><i class="fa fa-paw mr-1"></i>多尺寸</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 购买按钮区域 -->
+                    <div class="flex flex-col gap-3 md:w-32 flex-shrink-0">
+                        <!-- 价格信息 -->
+                        <div class="text-center">
+                            <div class="text-lg font-bold text-primary mb-1">1200积分</div>
+                            <div class="text-sm text-gray-500">或 ¥98 现金</div>
+                        </div>
+                        
+                        <!-- 购买选项 -->
+                        <a href="#" onclick="redeemWithPoints('冬季保暖宠物窝', 1200)" class="block w-full px-4 py-3 bg-gradient-to-r from-primary to-green-500 text-white rounded-xl font-bold text-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 btn-hover text-center">
+                            <i class="fa fa-gift mr-2"></i>积分兑换
+                        </a>
+                        <a href="#" onclick="purchaseNow('冬季保暖宠物窝', 98)" class="block w-full px-4 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-bold text-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 btn-hover text-center">
+                            <i class="fa fa-credit-card mr-2"></i>立即购买
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 商品4：宠物洗浴套装 -->
+            <div class="bg-white rounded-2xl p-6 card-shadow hover:shadow-lg transition-all duration-300">
+                <div class="flex flex-col md:flex-row md:items-center gap-6">
+                    <!-- 商品图片 -->
+                    <div class="md:w-48 md:h-32 w-full h-48 rounded-xl overflow-hidden flex-shrink-0">
+                        <img src="https://picsum.photos/id/1025/400/300" alt="宠物洗浴套装" class="w-full h-full object-cover">
+                    </div>
+                    
+                    <!-- 商品信息 -->
+                    <div class="flex-1">
+                        <div class="flex items-start justify-between mb-3">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">🧴 宠物洗浴套装</h3>
+                                <div class="flex items-center gap-3 mb-3">
+                                    <span class="inline-block px-3 py-1 rounded-full bg-pink-100 text-pink-600 text-sm font-medium">洗护用品</span>
+                                    <span class="inline-block px-3 py-1 rounded-full bg-green-100 text-green-600 text-sm font-medium">温和配方</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-600 mb-3">温和无刺激配方，适合猫咪和狗狗使用。包含洗发水、护发素和沐浴露，让宠物毛发柔顺亮丽。</p>
+                        
+                        <div class="flex items-center gap-4 text-sm text-gray-500 mb-3">
+                            <span><i class="fa fa-star mr-1"></i>4.6分</span>
+                            <span><i class="fa fa-shopping-cart mr-1"></i>已售203套</span>
+                            <span><i class="fa fa-leaf mr-1"></i>天然成分</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 购买按钮区域 -->
+                    <div class="flex flex-col gap-3 md:w-32 flex-shrink-0">
+                        <!-- 价格信息 -->
+                        <div class="text-center">
+                            <div class="text-lg font-bold text-primary mb-1">600积分</div>
+                            <div class="text-sm text-gray-500">或 ¥48 现金</div>
+                        </div>
+                        
+                        <!-- 购买选项 -->
+                        <a href="#" onclick="redeemWithPoints('宠物洗浴套装', 600)" class="block w-full px-4 py-3 bg-gradient-to-r from-primary to-green-500 text-white rounded-xl font-bold text-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 btn-hover text-center">
+                            <i class="fa fa-gift mr-2"></i>积分兑换
+                        </a>
+                        <a href="#" onclick="purchaseNow('宠物洗浴套装', 48)" class="block w-full px-4 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-bold text-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 btn-hover text-center">
+                            <i class="fa fa-credit-card mr-2"></i>立即购买
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 商品5：猫砂盆套装 -->
+            <div class="bg-white rounded-2xl p-6 card-shadow hover:shadow-lg transition-all duration-300">
+                <div class="flex flex-col md:flex-row md:items-center gap-6">
+                    <!-- 商品图片 -->
+                    <div class="md:w-48 md:h-32 w-full h-48 rounded-xl overflow-hidden flex-shrink-0">
+                        <img src="https://picsum.photos/id/1050/400/300" alt="猫砂盆套装" class="w-full h-full object-cover">
+                    </div>
+                    
+                    <!-- 商品信息 -->
+                    <div class="flex-1">
+                        <div class="flex items-start justify-between mb-3">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">🚽 猫砂盆套装</h3>
+                                <div class="flex items-center gap-3 mb-3">
+                                    <span class="inline-block px-3 py-1 rounded-full bg-indigo-100 text-indigo-600 text-sm font-medium">清洁用品</span>
+                                    <span class="inline-block px-3 py-1 rounded-full bg-blue-100 text-blue-600 text-sm font-medium">防溅设计</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-600 mb-3">大尺寸猫砂盆配防溅边缘，配备专用铲子和垃圾袋。易于清洁，保持环境整洁。</p>
+                        
+                        <div class="flex items-center gap-4 text-sm text-gray-500 mb-3">
+                            <span><i class="fa fa-star mr-1"></i>4.5分</span>
+                            <span><i class="fa fa-shopping-cart mr-1"></i>已售134套</span>
+                            <span><i class="fa fa-shield mr-1"></i>环保材质</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 购买按钮区域 -->
+                    <div class="flex flex-col gap-3 md:w-32 flex-shrink-0">
+                        <!-- 价格信息 -->
+                        <div class="text-center">
+                            <div class="text-lg font-bold text-primary mb-1">400积分</div>
+                            <div class="text-sm text-gray-500">或 ¥35 现金</div>
+                        </div>
+                        
+                        <!-- 购买选项 -->
+                        <a href="#" onclick="redeemWithPoints('猫砂盆套装', 400)" class="block w-full px-4 py-3 bg-gradient-to-r from-primary to-green-500 text-white rounded-xl font-bold text-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 btn-hover text-center">
+                            <i class="fa fa-gift mr-2"></i>积分兑换
+                        </a>
+                        <a href="#" onclick="purchaseNow('猫砂盆套装', 35)" class="block w-full px-4 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-bold text-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 btn-hover text-center">
+                            <i class="fa fa-credit-card mr-2"></i>立即购买
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 商品6：宠物玩具套装 -->
+            <div class="bg-white rounded-2xl p-6 card-shadow hover:shadow-lg transition-all duration-300">
+                <div class="flex flex-col md:flex-row md:items-center gap-6">
+                    <!-- 商品图片 -->
+                    <div class="md:w-48 md:h-32 w-full h-48 rounded-xl overflow-hidden flex-shrink-0">
+                        <img src="https://picsum.photos/id/1040/400/300" alt="宠物玩具套装" class="w-full h-full object-cover">
+                    </div>
+                    
+                    <!-- 商品信息 -->
+                    <div class="flex-1">
+                        <div class="flex items-start justify-between mb-3">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">🎾 宠物玩具套装</h3>
+                                <div class="flex items-center gap-3 mb-3">
+                                    <span class="inline-block px-3 py-1 rounded-full bg-yellow-100 text-yellow-600 text-sm font-medium">娱乐玩具</span>
+                                    <span class="inline-block px-3 py-1 rounded-full bg-red-100 text-red-600 text-sm font-medium">耐咬设计</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-600 mb-3">包含多种材质的玩具球、绳结玩具和磨牙棒。帮助宠物锻炼身体，满足玩耍天性，缓解无聊。</p>
+                        
+                        <div class="flex items-center gap-4 text-sm text-gray-500 mb-3">
+                            <span><i class="fa fa-star mr-1"></i>4.8分</span>
+                            <span><i class="fa fa-shopping-cart mr-1"></i>已售178套</span>
+                            <span><i class="fa fa-heart mr-1"></i>互动玩具</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 购买按钮区域 -->
+                    <div class="flex flex-col gap-3 md:w-32 flex-shrink-0">
+                        <!-- 价格信息 -->
+                        <div class="text-center">
+                            <div class="text-lg font-bold text-primary mb-1">350积分</div>
+                            <div class="text-sm text-gray-500">或 ¥28 现金</div>
+                        </div>
+                        
+                        <!-- 购买选项 -->
+                        <a href="#" onclick="redeemWithPoints('宠物玩具套装', 350)" class="block w-full px-4 py-3 bg-gradient-to-r from-primary to-green-500 text-white rounded-xl font-bold text-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 btn-hover text-center">
+                            <i class="fa fa-gift mr-2"></i>积分兑换
+                        </a>
+                        <a href="#" onclick="purchaseNow('宠物玩具套装', 28)" class="block w-full px-4 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-bold text-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 btn-hover text-center">
+                            <i class="fa fa-credit-card mr-2"></i>立即购买
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 加载更多 -->
+        <div class="text-center mt-12">
+            <button class="px-8 py-3 border border-primary text-primary rounded-xl font-medium hover:bg-primary hover:text-white transition-colors">
+                <i class="fa fa-refresh mr-2"></i>加载更多商品
+            </button>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-white mt-16 border-t border-gray-100">
+        <div class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 flex items-center justify-center">
+                            <i class="fa fa-paw text-2xl text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-pink-500">校园护萌神</h3>
+                    </div>
+                    <p class="text-gray-600 text-sm">关爱校园流浪动物，传递爱心与温暖</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-4">快速链接</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="text-gray-600 hover:text-primary transition-colors">首页</a></li>
+                        <li><a href="#workshop" class="text-gray-600 hover:text-primary transition-colors">手作坊</a></li>
+                        <li><a href="#volunteer" class="text-gray-600 hover:text-primary transition-colors">志愿者社区</a></li>
+                        <li><a href="#pet-archive" class="text-gray-600 hover:text-primary transition-colors">动物档案</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-4">爱心行动</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="task_list.html" class="text-gray-600 hover:text-primary transition-colors">志愿者任务</a></li>
+                        <li><a href="donation_detail.html" class="text-gray-600 hover:text-primary transition-colors">在线捐赠</a></li>
+                        <li><a href="crowdfunding_detail.html" class="text-gray-600 hover:text-primary transition-colors">众筹项目</a></li>
+                        <li><a href="tnr_detail.html" class="text-gray-600 hover:text-primary transition-colors">TNR计划</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-4">联系我们</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li class="text-gray-600"><i class="fa fa-phone mr-2"></i>400-123-4567</li>
+                        <li class="text-gray-600"><i class="fa fa-envelope mr-2"></i>campus@petcare.com</li>
+                        <li class="text-gray-600"><i class="fa fa-map-marker mr-2"></i>XX大学动物保护协会</li>
+                    </ul>
+                    <div class="flex space-x-3 mt-4">
+                        <a href="#" class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center hover:bg-primary/80 transition-colors">
+                            <i class="fa fa-weixin text-sm"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center hover:bg-primary/80 transition-colors">
+                            <i class="fa fa-weibo text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-200 mt-8 pt-8 text-center">
+                <p class="text-gray-500 text-sm">2025 校园护萌神 版权所有 | 网站备案号：35626270号 | 用爱心守护每一个生命</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript 功能实现 -->
+    <script>
+        // 积分兑换功能
+        function redeemWithPoints(productName, pointsRequired) {
+            // 检查用户积分（这里使用模拟数据，实际应用中需要从后端获取）
+            const userPoints = 1500; // 假设用户当前有1500积分
+            
+            if (userPoints >= pointsRequired) {
+                if (confirm(`确认使用 ${pointsRequired} 积分兑换"${productName}"吗？`)) {
+                    // 模拟兑换成功
+                    alert(`兑换成功！您已使用 ${pointsRequired} 积分兑换"${productName}"。\n\n物品将很快送到您的地址，请注意查收。`);
+                    // 这里可以添加实际的兑换逻辑，如调用API、更新用户积分等
+                }
+            } else {
+                const neededPoints = pointsRequired - userPoints;
+                alert(`积分不足！\n\n当前积分：${userPoints}\n所需积分：${pointsRequired}\n还差：${neededPoints} 积分\n\n快去完成任务赚取积分吧！`);
+                // 可以引导用户去赚取积分的页面
+            }
+        }
+
+        // 立即购买功能
+        function purchaseNow(productName, price) {
+            if (confirm(`确认购买"${productName}"吗？\n价格：¥${price}`)) {
+                // 这里可以跳转到支付页面或显示支付选项
+                alert(`即将跳转到支付页面...\n\n商品：${productName}\n价格：¥${price}\n\n请选择支付方式完成购买。`);
+                // 这里可以添加实际的购买逻辑，如跳转到支付页面
+                // window.location.href = `payment.html?product=${encodeURIComponent(productName)}&price=${price}`;
+            }
+        }
+
+        // 页面加载完成后的初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 添加页面加载动画
+            const products = document.querySelectorAll('.bg-white');
+            products.forEach((product, index) => {
+                product.style.opacity = '0';
+                product.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    product.style.transition = 'all 0.5s ease';
+                    product.style.opacity = '1';
+                    product.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // 添加加载更多按钮功能
+            const loadMoreBtn = document.querySelector('button');
+            if (loadMoreBtn && loadMoreBtn.textContent.includes('加载更多')) {
+                loadMoreBtn.addEventListener('click', function() {
+                    this.innerHTML = '<i class="fa fa-spinner fa-spin mr-2"></i>加载中...';
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fa fa-check mr-2"></i>已加载所有商品';
+                        this.disabled = true;
+                        this.style.backgroundColor = '#ccc';
+                    }, 1500);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

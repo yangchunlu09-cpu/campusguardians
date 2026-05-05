@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教程投稿 - 校园护萌神</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B6B',
+                        secondary: '#4ECDC4',
+                        dark: '#2C3E50',
+                        light: '#F8F9FA'
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans SC', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'card': '0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1)',
+                        'card-hover': '0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .btn-hover {
+                transition: all 300ms ease;
+                transform: scale(1.05);
+            }
+            .form-input {
+                width: 100%;
+                padding: 0.75rem 1rem;
+                border-radius: 0.75rem;
+                border: 1px solid #d1d5db;
+                outline: none;
+                transition: all 0.2s ease-in-out;
+                &:focus {
+                    box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.5);
+                }
+
+            }
+            .section-bg {
+                background: linear-gradient(to bottom right, #F8F9FA, #ffffff);
+                border-radius: 1.5rem;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="index.html" class="flex items-center">
+                            <i class="fa fa-paw text-primary text-3xl mr-2"></i>
+                            <span class="text-xl font-bold text-dark">校园护萌神</span>
+                        </a>
+                    </div>
+                    <div class="hidden md:block ml-10">
+                        <div class="flex items-center space-x-6">
+                            <a href="index.html" class="text-gray-600 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">首页</a>
+                            <a href="adopt.html" class="text-gray-600 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">宠物领养</a>
+                            <a href="donation.html" class="text-gray-600 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">爱心捐赠</a>
+                            <a href="knowledge.html" class="text-gray-600 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">养宠知识</a>
+                            <a href="community.html" class="text-gray-600 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">萌宠社区</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="login.html" class="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors">
+                            <i class="fa fa-user mr-1"></i>
+                            登录
+                        </a>
+                    </div>
+                    <div class="md:hidden ml-3">
+                        <button type="button" class="bg-gray-100 inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-dark hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                            <span class="sr-only">打开菜单</span>
+                            <i class="fa fa-bars text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 移动端菜单 -->
+        <div class="md:hidden">
+            <div class="pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-100">首页</a>
+                <a href="adopt.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-100">宠物领养</a>
+                <a href="donation.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-100">爱心捐赠</a>
+                <a href="knowledge.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-100">养宠知识</a>
+                <a href="community.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-100">萌宠社区</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主内容 -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <!-- 返回按钮 -->
+        <div class="mb-6">
+            <a href="video_detail.html" class="inline-flex items-center text-gray-600 hover:text-primary transition-colors">
+                <i class="fa fa-arrow-left mr-2"></i>
+                返回视频详情页
+            </a>
+        </div>
+
+        <!-- 页面标题 -->
+        <div class="text-center mb-10">
+            <h1 class="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-dark mb-3">
+                <i class="fa fa-upload mr-3"></i>
+                教程视频投稿
+            </h1>
+            <p class="text-gray-600 max-w-2xl mx-auto">分享您的旧物改造宠物用品教程，让更多人参与环保养宠！</p>
+        </div>
+
+        <!-- 投稿表单 -->
+        <section class="section-bg p-8 mb-10">
+            <form class="max-w-3xl mx-auto space-y-6">
+                <!-- 教程标题 -->
+                <div>
+                    <label for="tutorial-title" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fa fa-pencil-square-o mr-2"></i>
+                        教程标题
+                    </label>
+                    <input type="text" id="tutorial-title" name="tutorial-title" placeholder="请输入教程标题，例如：旧毛衣改造猫窝教程" class="form-input">
+                </div>
+
+                <!-- 教程分类 -->
+                <div>
+                    <label for="tutorial-category" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fa fa-folder-open-o mr-2"></i>
+                        教程分类
+                    </label>
+                    <select id="tutorial-category" name="tutorial-category" class="form-input">
+                        <option value="">请选择分类</option>
+                        <option value="pet-bed">旧物爆改宠物窝</option>
+                        <option value="feeder">环保喂食器制作</option>
+                        <option value="clothes">萌宠衣服制作</option>
+                        <option value="toys">宠物玩具制作</option>
+                        <option value="other">其他宠物用品</option>
+                    </select>
+                </div>
+
+                <!-- 教程描述 -->
+                <div>
+                    <label for="tutorial-description" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fa fa-align-left mr-2"></i>
+                        教程描述
+                    </label>
+                    <textarea id="tutorial-description" name="tutorial-description" rows="4" placeholder="请详细描述教程内容、所需材料和步骤，让其他用户更好地了解您的教程" class="form-input resize-none"></textarea>
+                </div>
+
+                <!-- 视频文件上传 -->
+                <div>
+                    <label for="video-file" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fa fa-file-video-o mr-2"></i>
+                        视频文件
+                    </label>
+                    <div class="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-primary transition-colors">
+                        <i class="fa fa-cloud-upload text-4xl text-gray-400 mb-3"></i>
+                        <p class="text-gray-600 mb-3">点击或拖拽视频文件到此处上传</p>
+                        <p class="text-sm text-gray-500">支持 MP4、MOV、AVI 格式，文件大小不超过 1GB</p>
+                        <input type="file" id="video-file" name="video-file" accept="video/*" class="hidden">
+                        <button type="button" class="mt-4 inline-flex items-center px-5 py-2.5 rounded-full bg-primary text-white font-medium btn-hover hover:shadow-lg transition-all">
+                            <i class="fa fa-folder-open mr-2"></i>
+                            选择文件
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 封面图片上传 -->
+                <div>
+                    <label for="cover-image" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fa fa-image mr-2"></i>
+                        封面图片
+                    </label>
+                    <div class="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-primary transition-colors">
+                        <i class="fa fa-cloud-upload text-4xl text-gray-400 mb-3"></i>
+                        <p class="text-gray-600 mb-3">点击或拖拽封面图片到此处上传</p>
+                        <p class="text-sm text-gray-500">支持 JPG、PNG 格式，建议尺寸 16:9</p>
+                        <input type="file" id="cover-image" name="cover-image" accept="image/*" class="hidden">
+                        <button type="button" class="mt-4 inline-flex items-center px-5 py-2.5 rounded-full bg-primary text-white font-medium btn-hover hover:shadow-lg transition-all">
+                            <i class="fa fa-folder-open mr-2"></i>
+                            选择图片
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 材料清单 -->
+                <div>
+                    <label for="materials" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fa fa-list-ul mr-2"></i>
+                        材料清单
+                    </label>
+                    <textarea id="materials" name="materials" rows="3" placeholder="请列出教程所需的材料，每行一个，例如：旧毛衣1件、棉花适量、针线" class="form-input resize-none"></textarea>
+                </div>
+
+                <!-- 视频时长 -->
+                <div>
+                    <label for="video-duration" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fa fa-clock-o mr-2"></i>
+                        视频时长（分钟）
+                    </label>
+                    <input type="number" id="video-duration" name="video-duration" min="1" max="60" placeholder="请输入视频时长" class="form-input w-32">
+                </div>
+
+                <!-- 投稿协议 -->
+                <div class="flex items-start">
+                    <div class="flex items-center h-5">
+                        <input id="terms" name="terms" type="checkbox" class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded">
+                    </div>
+                    <div class="ml-3 text-sm">
+                        <label for="terms" class="text-gray-600">
+                            我已阅读并同意 <a href="#" class="text-primary hover:underline">《教程投稿协议》</a> 和 <a href="#" class="text-primary hover:underline">《隐私政策》</a>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 提交按钮 -->
+                <div class="flex justify-center gap-4">
+                    <button type="button" class="inline-flex items-center px-6 py-3 rounded-full bg-gray-200 text-gray-700 font-medium btn-hover hover:shadow-md transition-all">
+                        <i class="fa fa-times mr-2"></i>
+                        取消
+                    </button>
+                    <button type="submit" class="inline-flex items-center px-6 py-3 rounded-full bg-primary text-white font-medium btn-hover hover:shadow-lg transition-all">
+                        <i class="fa fa-paper-plane mr-2"></i>
+                        提交审核
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- 投稿说明 -->
+        <section class="section-bg p-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                <i class="fa fa-info-circle text-primary mr-3"></i>
+                投稿须知
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">
+                        <i class="fa fa-check-circle text-primary mr-2"></i>
+                        内容要求
+                    </h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fa fa-circle text-primary mt-1.5 mr-2 text-xs"></i>
+                            <span>教程内容必须与宠物用品制作相关</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-circle text-primary mt-1.5 mr-2 text-xs"></i>
+                            <span>必须使用环保材料或旧物进行改造</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-circle text-primary mt-1.5 mr-2 text-xs"></i>
+                            <span>视频画质清晰，声音清楚，光线充足</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-circle text-primary mt-1.5 mr-2 text-xs"></i>
+                            <span>教程步骤详细，便于其他用户学习模仿</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-circle text-primary mt-1.5 mr-2 text-xs"></i>
+                            <span>不得包含任何商业推广、低俗或违法内容</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">
+                        <i class="fa fa-clock-o text-primary mr-2"></i>
+                        审核流程
+                    </h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fa fa-circle text-primary mt-1.5 mr-2 text-xs"></i>
+                            <span>提交后，我们将在 3 个工作日内完成审核</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-circle text-primary mt-1.5 mr-2 text-xs"></i>
+                            <span>审核通过后，教程将在网站上展示</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-circle text-primary mt-1.5 mr-2 text-xs"></i>
+                            <span>如果审核未通过，我们会通过站内信告知原因</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-circle text-primary mt-1.5 mr-2 text-xs"></i>
+                            <span>您可以在 "我的投稿" 中查看审核状态</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-circle text-primary mt-1.5 mr-2 text-xs"></i>
+                            <span>优质教程作者将获得社区奖励和推荐机会</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-10 mt-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fa fa-paw text-primary text-3xl mr-2"></i>
+                        <span class="text-xl font-bold">校园护萌神</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">关爱校园流浪动物，传递温暖与爱心，让每一个生命都能被温柔以待。</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-weibo text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-wechat text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-youtube-play text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">快速链接</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">首页</a></li>
+                        <li><a href="adopt.html" class="text-gray-400 hover:text-white transition-colors">宠物领养</a></li>
+                        <li><a href="donation.html" class="text-gray-400 hover:text-white transition-colors">爱心捐赠</a></li>
+                        <li><a href="knowledge.html" class="text-gray-400 hover:text-white transition-colors">养宠知识</a></li>
+                        <li><a href="community.html" class="text-gray-400 hover:text-white transition-colors">萌宠社区</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white transition-colors">关于我们</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">联系我们</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center">
+                            <i class="fa fa-envelope-o mr-3"></i>
+                            <span>contact@campuspets.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-phone mr-3"></i>
+                            <span>188-8888-8888</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-map-marker mr-3"></i>
+                            <span>北京市海淀区中关村大街1号</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-500 text-sm">
+                <p>2025 校园护萌神 版权所有 | 网站备案号：35626270号</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 文件上传点击事件
+        document.querySelectorAll('.border-dashed').forEach(area => {
+            const input = area.querySelector('input[type="file"]');
+            const button = area.querySelector('button');
+
+            // 点击上传区域打开文件选择
+            area.addEventListener('click', () => {
+                input.click();
+            });
+
+            // 点击按钮打开文件选择
+            if (button) {
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    input.click();
+                });
+            }
+
+            // 拖拽功能
+            area.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                area.classList.add('border-primary');
+            });
+
+            area.addEventListener('dragleave', () => {
+                area.classList.remove('border-primary');
+            });
+
+            area.addEventListener('drop', (e) => {
+                e.preventDefault();
+                area.classList.remove('border-primary');
+                // 可以在这里处理拖拽的文件
+            });
+        });
+
+        // 表单提交处理
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            // 这里可以添加表单验证和提交逻辑
+            alert('投稿已提交！我们将在3个工作日内进行审核。');
+        });
+    </script>
+</body>
+</html>

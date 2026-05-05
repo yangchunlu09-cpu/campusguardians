@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>狗窝搭建计划详情 - 校园护萌神</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind 配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#99CC99',
+                        secondary: '#FFB6C1',
+                        accent: '#FFCC99',
+                        light: '#F8FFF8',
+                        dark: '#336666'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                },
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .btn-hover {
+                transition: all 0.3s ease;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+            .card-shadow {
+                box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+                transition: all 0.3s ease;
+            }
+            .card-shadow:hover {
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            }
+            .btn-gradient {
+                background-image: linear-gradient(to right, var(--primary), var(--secondary));
+            }
+            .btn-hover:hover {
+                transform: scale(1.05);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-orange-50 via-light to-orange-100 font-sans text-dark">
+    <!-- 页面顶部导航 -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <!-- 校园护萌神专属Logo -->
+                <div class="w-12 h-12 flex items-center justify-center transition-all duration-300 hover:scale-110">
+                    <i class="fa fa-paw text-4xl text-primary"></i>
+                </div>
+                <h1 class="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-pink-500">校园护萌神</h1>
+            </div>
+            <nav class="hidden md:flex space-x-6">
+                <a href="index.html" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">首页</a>
+                <a href="#workshop" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">手作坊</a>
+                <a href="#volunteer" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">志愿者社区</a>
+                <a href="#pet-archive" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">动物档案</a>
+                <a href="#user" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">用户中心</a>
+            </nav>
+            <!-- 移动端菜单按钮 -->
+            <button class="md:hidden text-primary text-2xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 主体内容 -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- 返回按钮 -->
+        <div class="mb-6">
+            <a href="task_list.html" class="inline-flex items-center text-primary hover:text-primary/80 transition-colors duration-300">
+                <i class="fa fa-arrow-left mr-2"></i>返回任务列表
+            </a>
+        </div>
+
+        <!-- 任务详情卡片 -->
+        <div class="bg-white rounded-2xl card-shadow overflow-hidden mb-8">
+            <!-- 任务主图 -->
+            <div class="w-full h-64 md:h-80 overflow-hidden">
+                <img src="https://picsum.photos/id/1074/1200/600" alt="狗窝搭建计划" class="w-full h-full object-cover">
+            </div>
+            
+            <div class="p-6 md:p-8">
+                <!-- 任务标题和状态 -->
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between mb-6">
+                    <div class="flex-1">
+                        <h1 class="text-3xl font-bold text-gray-800 mb-3">🏠 狗窝搭建计划</h1>
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="inline-block px-4 py-2 rounded-full bg-orange-100 text-orange-600 text-sm font-medium">一次性任务</span>
+                            <span class="inline-block px-4 py-2 rounded-full bg-green-100 text-green-600 text-sm font-medium">招募中</span>
+                            <span class="text-gray-500 text-sm">发布时间：2023-11-16</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 立即报名按钮 -->
+                    <div class="flex-shrink-0 mt-4 md:mt-0">
+                        <button class="px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 btn-hover">
+                            <i class="fa fa-home mr-2"></i>立即报名
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 任务统计信息 -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                    <div class="bg-orange-50 rounded-lg p-4 text-center">
+                        <div class="text-2xl font-bold text-orange-600 mb-1">8</div>
+                        <div class="text-gray-600 text-sm">已参与人数</div>
+                    </div>
+                    <div class="bg-blue-50 rounded-lg p-4 text-center">
+                        <div class="text-2xl font-bold text-blue-600 mb-1">4</div>
+                        <div class="text-gray-600 text-sm">还需人数</div>
+                    </div>
+                    <div class="bg-green-50 rounded-lg p-4 text-center">
+                        <div class="text-2xl font-bold text-green-600 mb-1">1</div>
+                        <div class="text-gray-600 text-sm">预计天数</div>
+                    </div>
+                    <div class="bg-yellow-50 rounded-lg p-4 text-center">
+                        <div class="text-2xl font-bold text-yellow-600 mb-1">5.0</div>
+                        <div class="text-gray-600 text-sm">任务评分</div>
+                    </div>
+                </div>
+
+                <!-- 任务描述 -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">📋 任务描述</h2>
+                    <div class="prose prose-gray max-w-none">
+                        <p class="text-gray-600 leading-relaxed mb-4">
+                            为了给校园内的流浪狗提供一个温暖舒适的家，我们计划为它们搭建一个全新的狗窝。这个项目不仅能改善狗狗们的生活条件，还能让我们体验手工制作的乐趣。
+                        </p>
+                        <p class="text-gray-600 leading-relaxed mb-4">
+                            <strong>🛠️ 搭建内容：</strong>
+                        </p>
+                        <ul class="text-gray-600 space-y-2 mb-4">
+                            <li>• 设计和搭建木质狗窝主体结构</li>
+                            <li>• 安装防雨屋顶和通风系统</li>
+                            <li>• 铺设舒适的垫料和保暖材料</li>
+                            <li>• 制作食盆和水盆支架</li>
+                            <li>• 添加安全围栏和保护设施</li>
+                            <li>• 粉刷装饰，增添温馨感</li>
+                        </ul>
+                        <p class="text-gray-600 leading-relaxed">
+                            <strong>💪 体力要求：</strong>需要一定的体力进行搬运和组装工作，但我们会合理分配任务，确保每个人都能找到适合自己的工作。完成后看到狗狗们住进新家，成就感满满！
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 任务详情信息 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-bold text-gray-800">📍 任务信息</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center text-gray-600">
+                                <i class="fa fa-map-marker text-orange-500 mr-3 w-5"></i>
+                                <span>任务地点：校园北门附近空地</span>
+                            </div>
+                            <div class="flex items-center text-gray-600">
+                                <i class="fa fa-clock text-orange-500 mr-3 w-5"></i>
+                                <span>服务时间：本周末（周六、周日）</span>
+                            </div>
+                            <div class="flex items-center text-gray-600">
+                                <i class="fa fa-calendar text-orange-500 mr-3 w-5"></i>
+                                <span>任务周期：一次性完成</span>
+                            </div>
+                            <div class="flex items-center text-gray-600">
+                                <i class="fa fa-users text-orange-500 mr-3 w-5"></i>
+                                <span>所需人数：12人（当前8人）</span>
+                            </div>
+                            <div class="flex items-center text-gray-600">
+                                <i class="fa fa-wrench text-orange-500 mr-3 w-5"></i>
+                                <span>志愿时长：每天6小时</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-bold text-gray-800">📞 联系信息</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center text-gray-600">
+                                <i class="fa fa-user text-orange-500 mr-3 w-5"></i>
+                                <span>发布者：李同学</span>
+                            </div>
+                            <div class="flex items-center text-gray-600">
+                                <i class="fa fa-phone text-orange-500 mr-3 w-5"></i>
+                                <span>联系电话：139****5678</span>
+                            </div>
+                            <div class="flex items-center text-gray-600">
+                                <i class="fa fa-weixin text-orange-500 mr-3 w-5"></i>
+                                <span>微信：li_doglover</span>
+                            </div>
+                            <div class="flex items-center text-gray-600">
+                                <i class="fa fa-envelope text-orange-500 mr-3 w-5"></i>
+                                <span>邮箱：li@campuspets.com</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 材料清单 -->
+                <div class="bg-orange-50 rounded-xl p-6 mb-8">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">🧰 材料清单</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium text-gray-800 mb-3">已准备材料</h4>
+                            <ul class="text-gray-600 text-sm space-y-2">
+                                <li>• 防腐木材（松木、杉木）</li>
+                                <li>• 防水油毡和屋顶瓦片</li>
+                                <li>• 不锈钢螺丝和五金配件</li>
+                                <li>• 环保油漆和安全涂料</li>
+                                <li>• 保温棉和防水膜</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-800 mb-3">需要志愿者携带</h4>
+                            <ul class="text-gray-600 text-sm space-y-2">
+                                <li>• 基础木工工具（锯子、锤子等）</li>
+                                <li>• 手套和安全帽</li>
+                                <li>• 工作服（建议旧衣服）</li>
+                                <li>• 水杯和简单零食</li>
+                                <li>• 热情和团队合作精神</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 任务要求 -->
+                <div class="bg-blue-50 rounded-xl p-6 mb-8">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">🎯 任务要求</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-medium text-gray-800 mb-2">基本要求</h4>
+                            <ul class="text-gray-600 text-sm space-y-1">
+                                <li>• 身体健康，能够进行体力劳动</li>
+                                <li>• 有团队合作精神</li>
+                                <li>• 遵守安全操作规程</li>
+                                <li>• 愿意学习和尝试新技能</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-800 mb-2">优先条件</h4>
+                            <ul class="text-gray-600 text-sm space-y-1">
+                                <li>• 有木工或手工制作经验</li>
+                                <li>• 工程或建筑相关专业学生</li>
+                                <li>• 喜欢狗狗，有爱心</li>
+                                <li>• 有户外工作经验</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 参与志愿者列表 -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">👥 已参与志愿者</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
+                        <div class="text-center">
+                            <div class="w-12 h-12 rounded-full overflow-hidden mx-auto mb-2">
+                                <img src="https://picsum.photos/id/1012/100/100" alt="志愿者" class="w-full h-full object-cover">
+                            </div>
+                            <div class="text-sm text-gray-600">李同学</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-12 h-12 rounded-full overflow-hidden mx-auto mb-2">
+                                <img src="https://picsum.photos/id/1013/100/100" alt="志愿者" class="w-full h-full object-cover">
+                            </div>
+                            <div class="text-sm text-gray-600">王同学</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-12 h-12 rounded-full overflow-hidden mx-auto mb-2">
+                                <img src="https://picsum.photos/id/1014/100/100" alt="志愿者" class="w-full h-full object-cover">
+                            </div>
+                            <div class="text-sm text-gray-600">张同学</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-12 h-12 rounded-full overflow-hidden mx-auto mb-2">
+                                <img src="https://picsum.photos/id/1015/100/100" alt="志愿者" class="w-full h-full object-cover">
+                            </div>
+                            <div class="text-sm text-gray-600">陈同学</div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <button class="text-orange-600 hover:text-orange-700 text-sm font-medium">
+                            查看全部8名志愿者 →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 评论区 -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">💬 任务讨论</h3>
+                    <div class="space-y-4">
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <div class="flex items-center mb-2">
+                                <div class="w-8 h-8 rounded-full overflow-hidden mr-3">
+                                    <img src="https://picsum.photos/id/1012/100/100" alt="用户头像" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <div class="font-medium text-gray-800">李同学</div>
+                                    <div class="text-sm text-gray-500">2023-11-16 10:00</div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-sm">材料都已经准备好了，期待和大家一起为狗狗们搭建一个温暖的家！</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <div class="flex items-center mb-2">
+                                <div class="w-8 h-8 rounded-full overflow-hidden mr-3">
+                                    <img src="https://picsum.photos/id/1013/100/100" alt="用户头像" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <div class="font-medium text-gray-800">王同学</div>
+                                    <div class="text-sm text-gray-500">2023-11-16 15:30</div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-sm">我有一点木工经验，可以帮助大家！欢迎更多同学加入～</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 相关任务推荐 -->
+                <div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">🔗 相关任务推荐</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-white border border-gray-200 rounded-xl p-4 hover:shadow-lg transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-16 h-16 rounded-lg overflow-hidden mr-3">
+                                    <img src="https://picsum.photos/id/1069/200/200" alt="猫咪喂食" class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-medium text-gray-800">猫咪喂食任务</h4>
+                                    <p class="text-sm text-gray-500">长期任务 · 女生宿舍</p>
+                                    <div class="flex items-center mt-1">
+                                        <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">12人参与</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="w-full px-4 py-2 bg-gradient-to-r from-primary to-pink-500 text-white rounded-lg text-sm font-medium btn-hover">
+                                <i class="fa fa-heart mr-1"></i>立即报名
+                            </button>
+                        </div>
+                        <div class="bg-white border border-gray-200 rounded-xl p-4 hover:shadow-lg transition-shadow">
+                            <div class="flex items-center mb-3">
+                                <div class="w-16 h-16 rounded-lg overflow-hidden mr-3">
+                                    <img src="https://picsum.photos/id/1080/200/200" alt="动物医疗培训" class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-medium text-gray-800">动物医疗基础知识培训</h4>
+                                    <p class="text-sm text-gray-500">培训任务 · 兽医学院</p>
+                                    <div class="flex items-center mt-1">
+                                        <span class="text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded">25人参与</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="w-full px-4 py-2 bg-gradient-to-r from-primary to-pink-500 text-white rounded-lg text-sm font-medium btn-hover">
+                                <i class="fa fa-user-plus mr-1"></i>立即报名
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

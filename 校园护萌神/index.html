@@ -1,0 +1,2524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>校园护萌神 - 关爱校园动物</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <!-- 配置Tailwind -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FF9966',
+            secondary: '#99CC99',
+            accent: '#FFCC99',
+            light: '#F8FFF8',
+            dark: '#336666'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  <!-- 自定义工具类 -->
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .btn-gradient {
+        background-image: linear-gradient(to right, #FF9966, #FF6666);
+      }
+      .card-gradient {
+        background-image: linear-gradient(to bottom right, #99CC99, #66BB99);
+      }
+      .card-shadow {
+        box-shadow: 0 8px 16px rgba(153, 204, 153, 0.2);
+      }
+      .btn-hover {
+        transition: all 0.3s ease;
+      }
+      .btn-hover:hover {
+        transform: scale(1.05);
+      }
+      .carousel-item {
+        display: none;
+      }
+      .carousel-item.active {
+        display: block;
+      }
+      .image-container {
+        position: relative;
+      }
+      .image-edit-overlay {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .image-container:hover .image-edit-overlay {
+        opacity: 1;
+      }
+      .edit-form {
+        display: none;
+        margin-top: 1rem;
+        padding: 1rem;
+        background-color: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .page-section {
+        display: none;
+      }
+      .page-section.active {
+        display: block;
+      }
+      .pet-card {
+        border-radius: 20px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e8f0f2 100%);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border: 3px solid transparent;
+        background-clip: padding-box;
+        position: relative;
+      }
+      .pet-card::before {
+        content: '';
+        position: absolute;
+        inset: -3px;
+        border-radius: 20px;
+        background: linear-gradient(135deg, #FF9966, #99CC99);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: -1;
+      }
+      .pet-card:hover::before {
+        opacity: 1;
+      }
+      .pet-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+      }
+      .pet-card-image {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto;
+        border: 4px solid white;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-secondary/10 via-light to-secondary/5 font-sans text-dark">
+  <!-- 导航栏 -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-lg">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <!-- 校园护萌神专属Logo -->
+        <div class="w-12 h-12 flex items-center justify-center transition-all duration-300 hover:scale-110">
+          <i class="fa fa-paw text-4xl text-primary"></i>
+        </div>
+        <h1 class="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-pink-500">校园护萌神</h1>
+      </div>
+      <nav class="hidden md:flex space-x-6">
+        <a href="#home" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">首页</a>
+        <a href="#workshop" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">手作坊</a>
+        <a href="#volunteer" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">志愿者社区</a>
+        <a href="#pet-archive" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">动物档案</a>
+        <a href="#user" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">用户中心</a>
+      </nav>
+      <!-- 移动端菜单按钮 -->
+      <button class="md:hidden text-primary text-2xl">
+        <i class="fa fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- 主内容区 -->
+  <main>
+    <!-- 首页区域 -->
+    <section id="home" class="page-section active">
+      <!-- 轮播图与新闻栏区域 -->
+      <section class="relative overflow-hidden bg-green-50 py-10">
+        <div class="container mx-auto px-4">
+          <h2 class="text-3xl font-bold text-center mb-8 text-primary">
+            <i class="fa fa-paw mr-2"></i>萌宠日常
+          </h2>
+          <div class="flex flex-col md:flex-row gap-6">
+            <!-- 轮播图区域 -->
+            <div class="w-full md:w-2/3">
+              <div id="carousel" class="relative h-[350px] md:h-[500px] rounded-3xl overflow-hidden shadow-xl border-4 border-white">
+                <!-- 轮播项1 - 对应新闻1 -->
+                <div class="carousel-item active absolute inset-0 image-container">
+                  <img src="https://picsum.photos/id/1025/1200/500" alt="校园小白狗" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                  <div class="absolute inset-0 bg-gradient-to-r from-dark/70 via-dark/40 to-transparent flex flex-col justify-end">
+                    <div class="text-white p-8 max-w-lg">
+                      <div class="text-sm mb-2 opacity-90">2025-11-13</div>
+                      <h2 class="text-3xl md:text-4xl font-bold mb-4">校园里的小白狗：从流浪到团宠</h2>
+                      <p class="text-lg mb-6 opacity-90">记录校园里小白狗的成长故事，从流浪街头到成为全校师生的团宠。</p>
+                      <a href="carousel_detail.html?news=1" class="inline-block px-6 py-3 rounded-full bg-primary text-white font-medium btn-hover shadow-lg">
+                        查看详情 <i class="fa fa-arrow-right ml-2"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <!-- 轮播项2 - 对应新闻2 -->
+                <div class="carousel-item absolute inset-0 image-container">
+                  <img src="https://picsum.photos/id/40/1200/500" alt="校园狗狗" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                  <div class="absolute inset-0 bg-gradient-to-r from-dark/70 via-dark/40 to-transparent flex flex-col justify-end">
+                    <div class="text-white p-8 max-w-lg">
+                      <div class="text-sm mb-2 opacity-90">2025-11-10</div>
+                      <h2 class="text-3xl md:text-4xl font-bold mb-4">校园狗狗运动会：谁是最棒的运动员？</h2>
+                      <p class="text-lg mb-6 opacity-90">校园里举办了一场别开生面的狗狗运动会，各种萌犬一展身手，谁是你心中的冠军？</p>
+                      <a href="carousel_detail.html?news=2" class="inline-block px-6 py-3 rounded-full bg-primary text-white font-medium btn-hover shadow-lg">
+                        查看详情 <i class="fa fa-arrow-right ml-2"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <!-- 轮播项3 - 对应新闻3 -->
+                <div class="carousel-item absolute inset-0 image-container">
+                  <img src="https://picsum.photos/id/1059/1200/500" alt="流浪动物窝" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                  <div class="absolute inset-0 bg-gradient-to-r from-dark/70 via-dark/40 to-transparent flex flex-col justify-end">
+                    <div class="text-white p-8 max-w-lg">
+                      <div class="text-sm mb-2 opacity-90">2025-11-05</div>
+                      <h2 class="text-3xl md:text-4xl font-bold mb-4">暖心时刻：学生们为流浪猫建造温馨小窝</h2>
+                      <p class="text-lg mb-6 opacity-90">我校学生自发组织，为校园里的流浪猫建造了一批温馨小窝，让毛孩子们度过温暖的冬天。</p>
+                      <a href="carousel_detail.html?news=3" class="inline-block px-6 py-3 rounded-full bg-primary text-white font-medium btn-hover shadow-lg">
+                        查看详情 <i class="fa fa-arrow-right ml-2"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <!-- 轮播控制按钮 -->
+                <button class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-primary font-bold text-xl btn-hover shadow-md transition-all">
+                  <span>&lt;</span>
+                </button>
+                <button class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-primary font-bold text-xl btn-hover shadow-md transition-all">
+                  <span>&gt;</span>
+                </button>
+                <!-- 轮播指示器 -->
+                <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-3">
+                  <button class="w-4 h-4 rounded-full bg-primary btn-hover shadow-lg"></button>
+                  <button class="w-4 h-4 rounded-full bg-white/70 btn-hover shadow-md"></button>
+                  <button class="w-4 h-4 rounded-full bg-white/70 btn-hover shadow-md"></button>
+                </div>
+              </div>
+            </div>
+            <!-- 新闻栏区域 -->
+            <div class="w-full md:w-1/3">
+              <div class="bg-white rounded-3xl overflow-hidden shadow-xl border-4 border-primary/20 h-[350px] md:h-[500px] flex flex-col">
+                <div class="bg-green-100 p-5">
+                  <h3 class="text-2xl font-bold text-green-800">
+                      <i class="fa fa-newspaper-o mr-2 text-green-600"></i>最新动态
+                    </h3>
+                </div>
+                <div class="p-5 flex-grow overflow-y-auto">
+                  <!-- 新闻项1 -->
+                  <div class="mb-6 p-4 rounded-2xl bg-green-100/50 hover:bg-green-100 transition-all cursor-pointer shadow-sm">
+                    <div class="relative h-36 rounded-xl overflow-hidden mb-4 shadow-md">
+                      <img src="https://picsum.photos/id/1025/600/400" alt="校园小白狗" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
+                    </div>
+                    <div class="flex items-center text-sm text-gray-500 mb-2">
+                      <i class="fa fa-calendar mr-2"></i>2025-11-13
+                    </div>
+                    <h4 class="text-lg font-bold mb-2">
+                      <a href="carousel_detail.html?news=1" class="text-dark hover:text-primary transition-colors">校园里的小白狗：从流浪到团宠</a>
+                    </h4>
+                    <p class="text-gray-600 text-sm line-clamp-2">记录校园里小白狗的成长故事，从流浪街头到成为全校师生的团宠。</p>
+                  </div>
+                  <!-- 新闻项2 -->
+                  <div class="mb-6 p-4 rounded-2xl bg-green-100/50 hover:bg-green-100 transition-all cursor-pointer shadow-sm">
+                    <div class="relative h-36 rounded-xl overflow-hidden mb-4 shadow-md">
+                      <img src="https://picsum.photos/id/40/600/400" alt="校园狗狗" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
+                    </div>
+                    <div class="flex items-center text-sm text-gray-500 mb-2">
+                      <i class="fa fa-calendar mr-2"></i>2025-11-10
+                    </div>
+                    <h4 class="text-lg font-bold mb-2">
+                      <a href="carousel_detail.html?news=2" class="text-dark hover:text-primary transition-colors">校园狗狗运动会：谁是最棒的运动员？</a>
+                    </h4>
+                    <p class="text-gray-600 text-sm line-clamp-2">校园里举办了一场别开生面的狗狗运动会，各种萌犬一展身手，谁是你心中的冠军？</p>
+                  </div>
+                  <!-- 新闻项3 -->
+                  <div class="mb-6 p-4 rounded-2xl bg-green-100/50 hover:bg-green-100 transition-all cursor-pointer shadow-sm">
+                    <div class="relative h-36 rounded-xl overflow-hidden mb-4 shadow-md">
+                      <img src="https://picsum.photos/id/1059/600/400" alt="流浪动物窝" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
+                    </div>
+                    <div class="flex items-center text-sm text-gray-500 mb-2">
+                      <i class="fa fa-calendar mr-2"></i>2025-11-05
+                    </div>
+                    <h4 class="text-lg font-bold mb-2">
+                      <a href="carousel_detail.html?news=3" class="text-dark hover:text-primary transition-colors">暖心时刻：学生们为流浪猫建造温馨小窝</a>
+                    </h4>
+                    <p class="text-gray-600 text-sm line-clamp-2">我校学生自发组织，为校园里的流浪猫建造了一批温馨小窝，让毛孩子们度过温暖的冬天。</p>
+                  </div>
+                  <!-- 更多新闻链接 -->
+                  <div class="text-center mt-4">
+                    <a href="carousel_detail.html?news=1" class="inline-block px-6 py-2 rounded-full bg-gradient-to-r from-primary to-secondary text-white font-medium btn-hover shadow-md hover:shadow-lg transition-all">
+                      查看更多 <i class="fa fa-chevron-right ml-2"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 众筹募捐专区 -->
+      <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+          <h2 class="text-3xl font-bold text-center mb-12">
+            <i class="fa fa-heart text-primary mr-2"></i>众筹募捐专区
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- 医疗基金 -->
+            <div class="rounded-2xl overflow-hidden card-gradient text-white p-6 card-shadow btn-hover">
+              <div class="bg-white/20 rounded-full w-16 h-16 flex items-center justify-center mb-6">
+                <img src="img/医疗.png"alt="医疗基金" class="w-10 h-10">
+              </div>
+              <h3 class="text-2xl font-bold mb-4">医疗基金</h3>
+              <p class="mb-6 opacity-90">为受伤、生病的校园动物提供医疗救助，确保它们得到及时的治疗和护理。</p>
+              <a href="crowdfunding_detail.html" class="inline-block px-4 py-2 rounded-full bg-white text-primary font-medium btn-hover">
+                了解更多 <i class="fa fa-arrow-right ml-1"></i>
+              </a>
+            </div>
+            <!-- 设备众筹 -->
+            <div class="rounded-2xl overflow-hidden card-gradient text-white p-6 card-shadow btn-hover">
+              <div class="bg-white/20 rounded-full w-16 h-16 flex items-center justify-center mb-6">
+                <img src="img/设备.png" alt="设备众筹" class="w-10 h-10">
+              </div>
+              <h3 class="text-2xl font-bold mb-4">设备众筹</h3>
+              <p class="mb-6 opacity-90">筹集资金购买食物、窝垫、猫砂等必要物资，为校园动物提供更好的生活条件。</p>
+              <a href="crowdfunding_detail.html" class="inline-block px-4 py-2 rounded-full bg-white text-primary font-medium btn-hover">
+                了解更多 <i class="fa fa-arrow-right ml-1"></i>
+              </a>
+            </div>
+            <!-- 透明公示 -->
+            <div class="rounded-2xl overflow-hidden card-gradient text-white p-6 card-shadow btn-hover">
+              <div class="bg-white/20 rounded-full w-16 h-16 flex items-center justify-center mb-6">
+                <img src="img/公示.png" alt="透明公示" class="w-10 h-10">
+              </div>
+              <h3 class="text-2xl font-bold mb-4">透明公示</h3>
+              <p class="mb-6 opacity-90">公开所有捐款使用明细，让每一位爱心人士都能清楚了解资金的去向和使用情况。</p>
+              <a href="crowdfunding_detail.html" class="inline-block px-4 py-2 rounded-full bg-white text-primary font-medium btn-hover">
+                了解更多 <i class="fa fa-arrow-right ml-1"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+      <!-- 校园TNR计划区 -->
+      <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+          <h2 class="text-3xl font-bold text-center mb-12">
+            <i class="fa fa-leaf text-primary mr-2"></i>校园TNR计划区
+          </h2>
+          <div class="bg-secondary/10 rounded-3xl overflow-hidden card-shadow">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div class="p-8">
+                <h3 class="text-2xl font-bold mb-4">TNR是什么？</h3>
+                <p class="mb-6">TNR是Trap-Neuter-Return（捕获-绝育-放回）的缩写，是一种人道管理流浪猫数量的方法，通过对流浪猫进行绝育手术，放归原地，可以有效控制流浪猫的繁殖，同时避免了安乐死的问题。</p>
+                
+                <h3 class="text-2xl font-bold mb-4">我们的成果</h3>
+                <div class="grid grid-cols-3 gap-4 mb-6">
+                  <div class="bg-white rounded-xl p-4 text-center">
+                    <div class="text-4xl font-bold text-primary mb-2">25</div>
+                    <div class="text-sm">已绝育猫</div>
+                  </div>
+                  <div class="bg-white rounded-xl p-4 text-center">
+                    <div class="text-4xl font-bold text-primary mb-2">18</div>
+                    <div class="text-sm">已绝育狗</div>
+                  </div>
+                  <div class="bg-white rounded-xl p-4 text-center">
+                    <div class="text-4xl font-bold text-primary mb-2">12</div>
+                    <div class="text-sm">合作医院</div>
+                  </div>
+                </div>
+                
+                <h3 class="text-2xl font-bold mb-4">如何参与？</h3>
+                <ul class="list-disc list-inside mb-8 space-y-2">
+                  <li>捐赠资金支持绝育手术费用</li>
+                  <li>提供临时寄养场所</li>
+                  <li>帮忙宣传TNR理念</li>
+                </ul>
+                
+                <a href="tnr_detail.html" class="inline-block px-6 py-3 rounded-full btn-gradient text-white font-medium btn-hover w-full text-center">
+                  参与TNR计划 <i class="fa fa-paw ml-2"></i>
+                </a>
+              </div>
+              <div class="relative h-full min-h-[400px]">
+                <img src="https://picsum.photos/id/40/800/600" alt="TNR计划" class="absolute inset-0 w-full h-full object-cover rounded-r-3xl">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- 手作坊区域 -->
+    <section id="workshop" class="page-section py-16">
+      <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center mb-12 text-primary">
+          <i class="fa fa-paw mr-3"></i>宠物手作坊
+        </h2>
+        <p class="text-lg text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+          在这里，我们不仅分享各种宠物用品的制作方法，还提供捐赠物品置换服务，让您用爱心和双手为毛孩子们创造温暖。
+        </p>
+        
+        <div class="flex flex-col gap-12">
+          <!-- 捐赠物品置换板块 -->
+          <div class="bg-white rounded-2xl shadow-xl p-8">
+            <div class="flex items-center mb-6">
+              <div class="inline-block p-3 rounded-full bg-primary/10 mr-4">
+                <i class="fa fa-exchange text-2xl text-primary"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-gray-800">捐赠物品置换</h3>
+            </div>
+            
+            <p class="text-gray-600 mb-8">
+              您可以将家中闲置的宠物用品、旧衣物、玩具等捐赠给我们，我们会根据物品的价值为您兑换相应的积分，积分可以用于兑换我们手作坊制作的各种宠物用品。
+            </p>
+            
+            <div class="space-y-6 mb-8">
+              <div class="flex items-center p-4 bg-secondary/5 rounded-lg">
+                <div class="inline-block p-2 rounded-full bg-primary/10 mr-4">
+                  <i class="fa fa-check text-primary"></i>
+                </div>
+                <span class="text-gray-700">闲置宠物用品（如粮食、零食、玩具等）</span>
+              </div>
+              <div class="flex items-center p-4 bg-secondary/5 rounded-lg">
+                <div class="inline-block p-2 rounded-full bg-primary/10 mr-4">
+                  <i class="fa fa-check text-primary"></i>
+                </div>
+                <span class="text-gray-700">干净的旧衣物、毛巾、被褥等</span>
+              </div>
+              <div class="flex items-center p-4 bg-secondary/5 rounded-lg">
+                <div class="inline-block p-2 rounded-full bg-primary/10 mr-4">
+                  <i class="fa fa-check text-primary"></i>
+                </div>
+                <span class="text-gray-700">各类手工制作材料（如布料、针线、棉花等）</span>
+              </div>
+            </div>
+            
+            <div class="flex justify-between items-center">
+              <div class="text-center">
+                <div class="text-3xl font-bold text-primary mb-1">500+</div>
+                <div class="text-sm text-gray-500">已捐赠物品</div>
+              </div>
+              <div class="text-center">
+                <div class="text-3xl font-bold text-primary mb-1">200+</div>
+                <div class="text-sm text-gray-500">参与置换用户</div>
+              </div>
+              <div class="text-center">
+                <div class="text-3xl font-bold text-primary mb-1">150+</div>
+                <div class="text-sm text-gray-500">兑换物品</div>
+              </div>
+            </div>
+            
+            <div class="mt-8 text-center">
+              <a href="donation_detail.html" class="inline-block px-6 py-3 rounded-full btn-gradient text-white font-medium btn-hover">
+                立即捐赠 <i class="fa fa-heart ml-2"></i>
+              </a>
+            </div>
+          </div>
+          
+          <!-- 旧物再利用制作视频板块 -->
+          <div class="bg-white rounded-2xl shadow-xl p-8">
+            <div class="flex items-center mb-6">
+              <div class="inline-block p-3 rounded-full bg-primary/10 mr-4">
+                <i class="fa fa-video-camera text-2xl text-primary"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-gray-800">旧物再利用制作视频</h3>
+            </div>
+            
+            <p class="text-gray-600 mb-8">
+              我们将教您如何将家中的旧衣物、毛巾、被褥等闲置物品改造成各种实用的宠物用品，如宠物窝、宠物玩具、宠物项圈等。
+            </p>
+            
+            <div class="space-y-6 mb-8">
+              <!-- 视频1 -->
+              <div class="rounded-xl overflow-hidden card-shadow hover:shadow-lg transition-all duration-300">
+                <div class="relative h-48">
+                  <img src="https://picsum.photos/id/26/600/400" alt="旧毛衣改造宠物窝" class="w-full h-full object-cover">
+                  <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center text-primary btn-hover">
+                      <i class="fa fa-play text-xl"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-4">
+                  <h4 class="text-lg font-bold text-gray-800 mb-2">旧毛衣改造温暖宠物窝</h4>
+                  <div class="flex justify-between items-center text-sm">
+                    <span class="text-gray-500"><i class="fa fa-clock-o mr-1"></i>15分钟</span>
+                    <span class="text-gray-500"><i class="fa fa-eye mr-1"></i>2,587次观看</span>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 视频2 -->
+              <div class="rounded-xl overflow-hidden card-shadow hover:shadow-lg transition-all duration-300">
+                <div class="relative h-48">
+                  <img src="https://picsum.photos/id/206/600/400" alt="矿泉水瓶改造宠物玩具" class="w-full h-full object-cover">
+                  <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center text-primary btn-hover">
+                      <i class="fa fa-play text-xl"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-4">
+                  <h4 class="text-lg font-bold text-gray-800 mb-2">矿泉水瓶改造创意宠物玩具</h4>
+                  <div class="flex justify-between items-center text-sm">
+                    <span class="text-gray-500"><i class="fa fa-clock-o mr-1"></i>10分钟</span>
+                    <span class="text-gray-500"><i class="fa fa-eye mr-1"></i>1,892次观看</span>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 视频3 -->
+              <div class="rounded-xl overflow-hidden card-shadow hover:shadow-lg transition-all duration-300">
+                <div class="relative h-48">
+                  <img src="https://picsum.photos/id/1015/600/400" alt="旧丝带改造宠物项圈" class="w-full h-full object-cover">
+                  <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center text-primary btn-hover">
+                      <i class="fa fa-play text-xl"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-4">
+                  <h4 class="text-lg font-bold text-gray-800 mb-2">旧丝带改造时尚宠物项圈</h4>
+                  <div class="flex justify-between items-center text-sm">
+                    <span class="text-gray-500"><i class="fa fa-clock-o mr-1"></i>8分钟</span>
+                    <span class="text-gray-500"><i class="fa fa-eye mr-1"></i>3,215次观看</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="text-center">
+              <a href="video_detail.html" class="inline-block px-6 py-3 rounded-full bg-primary/10 text-primary border border-primary font-medium btn-hover">
+                查看更多视频 <i class="fa fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center mt-12">
+          <a href="workshop_detail.html" class="inline-block px-6 py-3 rounded-full btn-gradient text-white font-medium btn-hover">
+            查看更多 <i class="fa fa-arrow-right ml-2"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 手作坊-捐赠物品置换详情页 -->
+    <section id="donation-details" class="page-section py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="flex items-center mb-8">
+          <a href="#workshop" class="text-primary mr-4">
+            <i class="fa fa-arrow-left text-xl"></i>
+          </a>
+          <h2 class="text-4xl font-bold text-primary">
+            <i class="fa fa-exchange mr-3"></i>捐赠物品置换详情
+          </h2>
+        </div>
+        
+        <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+          <h3 class="text-2xl font-bold text-gray-800 mb-4">关于捐赠物品置换</h3>
+          <p class="text-gray-600 mb-6">
+            我们的捐赠物品置换计划旨在通过回收利用闲置物品，为校园动物保护事业筹集资源。您可以将家中闲置的宠物用品、旧衣物、玩具等捐赠给我们，我们会根据物品的价值为您兑换相应的积分，积分可以用于兑换我们手作坊制作的各种宠物用品。
+          </p>
+          <p class="text-gray-600 mb-6">
+            所有捐赠的物品都会经过严格的检查和消毒处理，确保安全卫生后再进行二次利用或捐赠给有需要的宠物家庭。
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          <div class="bg-white rounded-2xl shadow-xl p-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">接受捐赠的物品类型</h3>
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <div class="inline-block p-2 rounded-full bg-primary/10 mr-4 mt-1">
+                  <i class="fa fa-check text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-gray-800 mb-1">宠物用品类</h4>
+                  <p class="text-gray-600">闲置的宠物粮食、零食、玩具、猫砂、牵引绳、猫爬架等</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="inline-block p-2 rounded-full bg-primary/10 mr-4 mt-1">
+                  <i class="fa fa-check text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-gray-800 mb-1">衣物纺织品类</h4>
+                  <p class="text-gray-600">干净的旧衣物、毛巾、被褥、毛毯等（需清洗消毒）</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="inline-block p-2 rounded-full bg-primary/10 mr-4 mt-1">
+                  <i class="fa fa-check text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-gray-800 mb-1">手工制作材料类</h4>
+                  <p class="text-gray-600">布料、针线、棉花、剪刀、尺子等手工制作工具和材料</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="inline-block p-2 rounded-full bg-primary/10 mr-4 mt-1">
+                  <i class="fa fa-check text-primary"></i>
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-gray-800 mb-1">其他物品</h4>
+                  <p class="text-gray-600">闲置的宠物笼子、窝垫、食盆等宠物生活用品</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-white rounded-2xl shadow-xl p-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">捐赠流程</h3>
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center mr-4 flex-shrink-0">
+                  1
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-gray-800 mb-1">准备捐赠物品</h4>
+                  <p class="text-gray-600">整理家中闲置物品，确保物品干净、完好无损</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center mr-4 flex-shrink-0">
+                  2
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-gray-800 mb-1">提交捐赠申请</h4>
+                  <p class="text-gray-600">填写下方的捐赠申请表，或直接联系我们的工作人员</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center mr-4 flex-shrink-0">
+                  3
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-gray-800 mb-1">物品检查与估价</h4>
+                  <p class="text-gray-600">我们的工作人员会对捐赠物品进行检查和估价</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center mr-4 flex-shrink-0">
+                  4
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-gray-800 mb-1">获取积分</h4>
+                  <p class="text-gray-600">根据物品价值获得相应积分，积分将存入您的账户</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+          <h3 class="text-2xl font-bold text-gray-800 mb-4">积分兑换规则</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-secondary/5 rounded-xl p-4 text-center">
+              <div class="text-3xl font-bold text-primary mb-2">1积分</div>
+              <p class="text-gray-600">约等于1元人民币价值</p>
+            </div>
+            <div class="bg-secondary/5 rounded-xl p-4 text-center">
+              <div class="text-3xl font-bold text-primary mb-2">100积分</div>
+              <p class="text-gray-600">可兑换简单手工宠物玩具</p>
+            </div>
+            <div class="bg-secondary/5 rounded-xl p-4 text-center">
+              <div class="text-3xl font-bold text-primary mb-2">500积分</div>
+              <p class="text-gray-600">可兑换手工宠物窝垫</p>
+            </div>
+          </div>
+          <p class="text-gray-600 mt-6">
+            更多积分兑换选项可在爱心商城查看。积分有效期为1年，过期未使用的积分将自动清零。
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          <div class="bg-white rounded-2xl shadow-xl p-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">捐赠地点</h3>
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <div class="text-primary mr-4 mt-1">
+                  <i class="fa fa-map-marker text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-gray-800 mb-1">主校区捐赠点</h4>
+                  <p class="text-gray-600">学生活动中心101室</p>
+                  <p class="text-gray-500 text-sm">周一至周五 9:00-17:00</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="text-primary mr-4 mt-1">
+                  <i class="fa fa-map-marker text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-gray-800 mb-1">东校区捐赠点</h4>
+                  <p class="text-gray-600">东苑食堂二楼服务台</p>
+                  <p class="text-gray-500 text-sm">周二至周六 10:00-18:00</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-white rounded-2xl shadow-xl p-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">联系方式</h3>
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <div class="text-primary mr-4 mt-1">
+                  <i class="fa fa-phone text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-gray-800 mb-1">联系电话</h4>
+                  <p class="text-gray-600">138-XXXX-XXXX</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="text-primary mr-4 mt-1">
+                  <i class="fa fa-weixin text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-gray-800 mb-1">微信公众号</h4>
+                  <p class="text-gray-600">校园护萌神</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="text-primary mr-4 mt-1">
+                  <i class="fa fa-envelope text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold text-gray-800 mb-1">电子邮箱</h4>
+                  <p class="text-gray-600">campus-pets@example.com</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-2xl shadow-xl p-8">
+          <h3 class="text-2xl font-bold text-gray-800 mb-6">捐赠申请表</h3>
+          <form class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label for="donor-name" class="block text-gray-700 font-medium mb-2">您的姓名</label>
+                <input type="text" id="donor-name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="请输入您的姓名">
+              </div>
+              <div>
+                <label for="donor-contact" class="block text-gray-700 font-medium mb-2">联系方式</label>
+                <input type="text" id="donor-contact" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="请输入您的手机号或微信号">
+              </div>
+            </div>
+            
+            <div>
+              <label for="donation-items" class="block text-gray-700 font-medium mb-2">捐赠物品清单</label>
+              <textarea id="donation-items" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="请详细描述您要捐赠的物品，包括名称、数量、新旧程度等"></textarea>
+            </div>
+            
+            <div>
+              <label for="donation-location" class="block text-gray-700 font-medium mb-2">捐赠地点选择</label>
+              <select id="donation-location" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary">
+                <option value="main-campus">主校区-学生活动中心101室</option>
+                <option value="east-campus">东校区-东苑食堂二楼服务台</option>
+                <option value="other">其他（请在备注中说明）</option>
+              </select>
+            </div>
+            
+            <div>
+              <label for="donation-time" class="block text-gray-700 font-medium mb-2">预计捐赠时间</label>
+              <input type="datetime-local" id="donation-time" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary">
+            </div>
+            
+            <div>
+              <label for="donation-remark" class="block text-gray-700 font-medium mb-2">备注信息</label>
+              <textarea id="donation-remark" rows="2" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="如有特殊要求或其他信息，请在此说明"></textarea>
+            </div>
+            
+            <div class="text-center">
+              <button type="submit" class="inline-block px-8 py-3 rounded-full btn-gradient text-white font-medium btn-hover">
+                提交捐赠申请 <i class="fa fa-paper-plane ml-2"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 手作坊-旧物再利用制作视频详情页 -->
+    <section id="reuse-video-details" class="page-section py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="flex items-center mb-8">
+          <a href="#workshop" class="text-primary mr-4">
+            <i class="fa fa-arrow-left text-xl"></i>
+          </a>
+          <h2 class="text-4xl font-bold text-primary">
+            <i class="fa fa-video-camera mr-3"></i>旧物再利用制作视频
+          </h2>
+        </div>
+        
+        <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+          <div class="aspect-w-16 aspect-h-9 mb-6">
+            <div class="w-full h-96 bg-gray-200 rounded-xl flex items-center justify-center">
+              <div class="text-center">
+                <i class="fa fa-play-circle text-6xl text-primary mb-4"></i>
+                <p class="text-gray-500">点击播放视频</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+            <div>
+              <h3 class="text-2xl font-bold text-gray-800 mb-2">旧衣物变宠物玩具制作教程</h3>
+              <div class="flex items-center space-x-4 text-gray-500">
+                <span><i class="fa fa-calendar mr-1"></i> 2023-11-15</span>
+                <span><i class="fa fa-eye mr-1"></i> 1.2k 次观看</span>
+                <span><i class="fa fa-thumbs-up mr-1"></i> 89</span>
+              </div>
+            </div>
+            <div class="mt-4 md:mt-0">
+              <button class="inline-block px-6 py-2 rounded-full bg-primary/10 text-primary font-medium hover:bg-primary/20 transition-colors">
+                <i class="fa fa-heart mr-2"></i>收藏视频
+              </button>
+            </div>
+          </div>
+          
+          <div class="border-t border-gray-200 pt-6">
+            <h4 class="text-xl font-bold text-gray-800 mb-4">视频简介</h4>
+            <p class="text-gray-600 mb-4">
+              本视频教程将教您如何将家中闲置的旧衣物改造成可爱又实用的宠物玩具。通过简单的手工制作，不仅可以减少浪费，还能为校园里的流浪动物提供温暖的陪伴。
+            </p>
+            <p class="text-gray-600">
+              制作过程简单易学，所需材料也很常见，适合所有手工爱好者参与。让我们一起用双手为流浪动物创造更多的爱与关怀吧！
+            </p>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div class="lg:col-span-2">
+            <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+              <h3 class="text-2xl font-bold text-gray-800 mb-6">制作步骤</h3>
+              
+              <div class="space-y-8">
+                <div class="flex">
+                  <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center mr-6 flex-shrink-0">
+                    1
+                  </div>
+                  <div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">准备材料</h4>
+                    <p class="text-gray-600 mb-4">
+                      收集所需材料：旧衣物（最好是柔软的棉织物）、剪刀、针线、棉花或填充物、纽扣或其他装饰材料。
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div class="bg-gray-100 rounded-lg p-4">
+                        <h5 class="font-medium text-gray-800 mb-2">必备材料</h5>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                          <li>旧衣物2-3件</li>
+                          <li>剪刀</li>
+                          <li>针线</li>
+                          <li>棉花或填充物</li>
+                        </ul>
+                      </div>
+                      <div class="bg-gray-100 rounded-lg p-4">
+                        <h5 class="font-medium text-gray-800 mb-2">可选材料</h5>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                          <li>纽扣</li>
+                          <li>丝带</li>
+                          <li>铃铛</li>
+                          <li>彩色线</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="flex">
+                  <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center mr-6 flex-shrink-0">
+                    2
+                  </div>
+                  <div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">裁剪布料</h4>
+                    <p class="text-gray-600 mb-4">
+                      将旧衣物平铺，根据设计图案裁剪出所需的布料形状。本教程以制作一个简单的骨头形状玩具为例，您可以根据自己的创意设计不同的形状。
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div class="bg-gray-100 rounded-lg p-4">
+                        <h5 class="font-medium text-gray-800 mb-2">裁剪尺寸</h5>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                          <li>骨头形状：长20cm，宽8cm</li>
+                          <li>需要裁剪2片相同形状的布料</li>
+                        </ul>
+                      </div>
+                      <div class="bg-gray-100 rounded-lg p-4">
+                        <h5 class="font-medium text-gray-800 mb-2">裁剪技巧</h5>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                          <li>使用锋利的剪刀</li>
+                          <li>布料要铺平，避免褶皱</li>
+                          <li>可以先用笔画出轮廓再裁剪</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="flex">
+                  <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center mr-6 flex-shrink-0">
+                    3
+                  </div>
+                  <div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">缝制玩具</h4>
+                    <p class="text-gray-600 mb-4">
+                      将裁剪好的两片布料正面相对，用针线沿着边缘缝合，注意要留出一个小口子用于填充棉花。
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div class="bg-gray-100 rounded-lg p-4">
+                        <h5 class="font-medium text-gray-800 mb-2">缝制方法</h5>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                          <li>使用平针缝或回针缝</li>
+                          <li>缝边宽度约0.5cm</li>
+                          <li>留出约3cm的开口</li>
+                        </ul>
+                      </div>
+                      <div class="bg-gray-100 rounded-lg p-4">
+                        <h5 class="font-medium text-gray-800 mb-2">注意事项</h5>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                          <li>针线要牢固</li>
+                          <li>边角处要仔细缝制</li>
+                          <li>不要将开口缝死</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="flex">
+                  <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center mr-6 flex-shrink-0">
+                    4
+                  </div>
+                  <div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">填充棉花</h4>
+                    <p class="text-gray-600 mb-4">
+                      通过预留的开口将棉花填充到玩具内部，填充的松紧程度可以根据个人喜好调整。填充完成后，用针线将开口缝好。
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div class="bg-gray-100 rounded-lg p-4">
+                        <h5 class="font-medium text-gray-800 mb-2">填充技巧</h5>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                          <li>使用小工具（如筷子）帮助填充</li>
+                          <li>边角处也要填充饱满</li>
+                          <li>不要填充过满，避免布料破裂</li>
+                        </ul>
+                      </div>
+                      <div class="bg-gray-100 rounded-lg p-4">
+                        <h5 class="font-medium text-gray-800 mb-2">安全提示</h5>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                          <li>确保棉花干净卫生</li>
+                          <li>填充过程中注意安全</li>
+                          <li>缝口要牢固，防止棉花溢出</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="flex">
+                  <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center mr-6 flex-shrink-0">
+                    5
+                  </div>
+                  <div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">装饰完成</h4>
+                    <p class="text-gray-600 mb-4">
+                      根据个人创意，为制作好的宠物玩具添加装饰，如缝上纽扣做眼睛、用丝带系蝴蝶结等。
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div class="bg-gray-100 rounded-lg p-4">
+                        <h5 class="font-medium text-gray-800 mb-2">装饰方法</h5>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                          <li>缝上纽扣做眼睛</li>
+                          <li>用丝带系蝴蝶结</li>
+                          <li>添加铃铛增加趣味性</li>
+                        </ul>
+                      </div>
+                      <div class="bg-gray-100 rounded-lg p-4">
+                        <h5 class="font-medium text-gray-800 mb-2">创意建议</h5>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                          <li>可以制作不同形状的玩具</li>
+                          <li>使用不同颜色的布料</li>
+                          <li>为玩具起个可爱的名字</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-xl p-8">
+              <h3 class="text-2xl font-bold text-gray-800 mb-6">用户评论</h3>
+              
+              <div class="space-y-6">
+                <div class="border-b border-gray-200 pb-6">
+                  <div class="flex items-start">
+                    <img src="https://via.placeholder.com/50" alt="用户头像" class="w-12 h-12 rounded-full mr-4">
+                    <div class="flex-1">
+                      <div class="flex justify-between items-center mb-2">
+                        <h4 class="text-lg font-bold text-gray-800">小明同学</h4>
+                        <span class="text-gray-500 text-sm">2023-11-16</span>
+                      </div>
+                      <p class="text-gray-600 mb-3">
+                        视频教程非常详细，跟着做了一个骨头形状的玩具，流浪猫很喜欢！感谢分享这么有意义的手工制作方法。
+                      </p>
+                      <div class="flex items-center text-gray-500 text-sm">
+                        <span class="mr-4"><i class="fa fa-thumbs-up mr-1"></i>12</span>
+                        <span><i class="fa fa-reply mr-1"></i>回复</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="border-b border-gray-200 pb-6">
+                  <div class="flex items-start">
+                    <img src="https://via.placeholder.com/50" alt="用户头像" class="w-12 h-12 rounded-full mr-4">
+                    <div class="flex-1">
+                      <div class="flex justify-between items-center mb-2">
+                        <h4 class="text-lg font-bold text-gray-800">爱心人士</h4>
+                        <span class="text-gray-500 text-sm">2023-11-17</span>
+                      </div>
+                      <p class="text-gray-600 mb-3">
+                        用旧T恤做了几个小玩具，没想到这么简单！以后会经常制作，为流浪动物贡献一份力量。
+                      </p>
+                      <div class="flex items-center text-gray-500 text-sm">
+                        <span class="mr-4"><i class="fa fa-thumbs-up mr-1"></i>8</span>
+                        <span><i class="fa fa-reply mr-1"></i>回复</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <div class="flex items-start">
+                    <img src="https://via.placeholder.com/50" alt="用户头像" class="w-12 h-12 rounded-full mr-4">
+                    <div class="flex-1">
+                      <div class="flex justify-between items-center mb-2">
+                        <h4 class="text-lg font-bold text-gray-800">手工爱好者</h4>
+                        <span class="text-gray-500 text-sm">2023-11-18</span>
+                      </div>
+                      <p class="text-gray-600 mb-3">
+                        这个教程太棒了！不仅简单易学，而且非常环保。我已经制作了好几个玩具，打算周末带到校园里分给流浪动物们。
+                      </p>
+                      <div class="flex items-center text-gray-500 text-sm">
+                        <span class="mr-4"><i class="fa fa-thumbs-up mr-1"></i>15</span>
+                        <span><i class="fa fa-reply mr-1"></i>回复</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mt-8">
+                <h4 class="text-xl font-bold text-gray-800 mb-4">发表评论</h4>
+                <form>
+                  <textarea rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary mb-4" placeholder="分享您的制作心得或建议..."></textarea>
+                  <div class="text-right">
+                    <button type="submit" class="inline-block px-6 py-2 rounded-full btn-gradient text-white font-medium btn-hover">
+                      提交评论 <i class="fa fa-comment ml-2"></i>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+              <h3 class="text-2xl font-bold text-gray-800 mb-4">所需材料</h3>
+              
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <span class="text-gray-600">旧衣物</span>
+                  <span class="text-primary font-medium">必备</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-gray-600">剪刀</span>
+                  <span class="text-primary font-medium">必备</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-gray-600">针线</span>
+                  <span class="text-primary font-medium">必备</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-gray-600">棉花/填充物</span>
+                  <span class="text-primary font-medium">必备</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-gray-600">纽扣</span>
+                  <span class="text-gray-500 font-medium">可选</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-gray-600">丝带</span>
+                  <span class="text-gray-500 font-medium">可选</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-gray-600">铃铛</span>
+                  <span class="text-gray-500 font-medium">可选</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+              <h3 class="text-2xl font-bold text-gray-800 mb-4">制作时间</h3>
+              <p class="text-gray-600 mb-2">大约需要：<span class="text-primary font-medium">30-45分钟</span></p>
+              <p class="text-gray-500 text-sm">根据个人手工熟练程度可能有所不同</p>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+              <h3 class="text-2xl font-bold text-gray-800 mb-4">难度等级</h3>
+              <div class="flex items-center">
+                <div class="text-3xl text-primary mr-4">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star-o"></i>
+                  <i class="fa fa-star-o"></i>
+                  <i class="fa fa-star-o"></i>
+                </div>
+                <span class="text-gray-600 font-medium">简单</span>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-xl p-8">
+              <h3 class="text-2xl font-bold text-gray-800 mb-4">相关视频</h3>
+              
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="w-24 h-16 bg-gray-200 rounded-lg mr-4 flex-shrink-0">
+                    <div class="w-full h-full flex items-center justify-center">
+                      <i class="fa fa-play text-white text-xl"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <h4 class="text-sm font-bold text-gray-800 mb-1">旧毛衣改造宠物窝</h4>
+                    <p class="text-gray-500 text-xs">12分钟 · 890次观看</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start">
+                  <div class="w-24 h-16 bg-gray-200 rounded-lg mr-4 flex-shrink-0">
+                    <div class="w-full h-full flex items-center justify-center">
+                      <i class="fa fa-play text-white text-xl"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <h4 class="text-sm font-bold text-gray-800 mb-1">废布料制作猫抓板</h4>
+                    <p class="text-gray-500 text-xs">8分钟 · 1.2k次观看</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start">
+                  <div class="w-24 h-16 bg-gray-200 rounded-lg mr-4 flex-shrink-0">
+                    <div class="w-full h-full flex items-center justify-center">
+                      <i class="fa fa-play text-white text-xl"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <h4 class="text-sm font-bold text-gray-800 mb-1">塑料瓶改造喂食器</h4>
+                    <p class="text-gray-500 text-xs">15分钟 · 1.5k次观看</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 志愿者社区区域 -->
+    <section id="volunteer" class="page-section py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center mb-12 text-primary">
+          <i class="fa fa-users mr-3"></i>志愿者社区
+        </h2>
+        <p class="text-lg text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+          这里是志愿者们交流分享的平台，发布任务、分享经验、兑换爱心物品，让我们一起为校园动物保护贡献力量。
+        </p>
+        
+        <!-- 三个板块：任务发布、经验分享、爱心商城 -->
+        <div class="flex flex-col gap-8">
+          <!-- 第一个板块：任务发布 -->
+          <div class="bg-white rounded-2xl p-8 card-shadow">
+            <div class="flex items-center mb-6">
+              <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                <i class="fa fa-tasks text-2xl text-primary"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-gray-800">任务发布</h3>
+            </div>
+            
+            <div class="space-y-4 mb-6">
+              <!-- 任务1：投喂 -->
+              <div class="bg-secondary/5 rounded-xl p-4 card-shadow hover:bg-secondary/10 transition-all duration-300">
+                <div class="flex justify-between items-start mb-2">
+                  <h4 class="text-lg font-bold text-gray-800">校园动物投喂任务</h4>
+                  <span class="inline-block px-2 py-1 rounded-full bg-green-100 text-green-600 text-xs font-medium">
+                    进行中
+                  </span>
+                </div>
+                <p class="text-gray-600 text-sm mb-2">
+                  负责校园各区域流浪动物的日常喂养工作，提供食物和水。
+                </p>
+                <div class="flex justify-between items-center text-xs text-gray-500">
+                  <div class="flex items-center">
+                    <i class="fa fa-clock-o text-primary mr-1"></i>
+                    <span>每天 8:00-10:00</span>
+                  </div>
+                  <div class="flex items-center">
+                    <i class="fa fa-users text-primary mr-1"></i>
+                    <span>需要 3 人</span>
+                  </div>
+                </div>
+                <div class="mt-3 text-right">
+                  <a href="task_detail.html" class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium btn-hover">
+                    立即报名
+                  </a>
+                </div>
+              </div>
+              
+              <!-- 任务2：送医 -->
+              <div class="bg-secondary/5 rounded-xl p-4 card-shadow hover:bg-secondary/10 transition-all duration-300">
+                <div class="flex justify-between items-start mb-2">
+                  <h4 class="text-lg font-bold text-gray-800">伤病动物送医任务</h4>
+                  <span class="inline-block px-2 py-1 rounded-full bg-blue-100 text-blue-600 text-xs font-medium">
+                    紧急
+                  </span>
+                </div>
+                <p class="text-gray-600 text-sm mb-2">
+                  协助将伤病的流浪动物送往合作医院进行治疗，需要有爱心和责任心。
+                </p>
+                <div class="flex justify-between items-center text-xs text-gray-500">
+                  <div class="flex items-center">
+                    <i class="fa fa-clock-o text-primary mr-1"></i>
+                    <span>10月25日 14:00</span>
+                  </div>
+                  <div class="flex items-center">
+                    <i class="fa fa-users text-primary mr-1"></i>
+                    <span>需要 2 人</span>
+                  </div>
+                </div>
+                <div class="mt-3 text-right">
+                  <a href="task_detail.html" class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium btn-hover">
+                    立即报名
+                  </a>
+                </div>
+              </div>
+              
+              <!-- 任务3：临时寄养 -->
+              <div class="bg-secondary/5 rounded-xl p-4 card-shadow hover:bg-secondary/10 transition-all duration-300">
+                <div class="flex justify-between items-start mb-2">
+                  <h4 class="text-lg font-bold text-gray-800">幼猫临时寄养任务</h4>
+                  <span class="inline-block px-2 py-1 rounded-full bg-yellow-100 text-yellow-600 text-xs font-medium">
+                    招募中
+                  </span>
+                </div>
+                <p class="text-gray-600 text-sm mb-2">
+                  为刚获救的幼猫提供临时家庭寄养，需要有养猫经验，能提供基本的生活照顾。
+                </p>
+                <div class="flex justify-between items-center text-xs text-gray-500">
+                  <div class="flex items-center">
+                    <i class="fa fa-clock-o text-primary mr-1"></i>
+                    <span>10月26日-11月2日</span>
+                  </div>
+                  <div class="flex items-center">
+                    <i class="fa fa-users text-primary mr-1"></i>
+                    <span>需要 1 人</span>
+                  </div>
+                </div>
+                <div class="mt-3 text-right">
+                  <a href="task_detail.html" class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium btn-hover">
+                    立即报名
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <div class="text-center">
+              <a href="task_list.html" class="inline-block px-5 py-2 rounded-full bg-primary/10 text-primary border border-primary text-sm font-medium btn-hover">
+                查看更多任务 <i class="fa fa-arrow-right ml-1"></i>
+              </a>
+            </div>
+          </div>
+          
+          <!-- 第二个板块：经验分享 -->
+          <div class="bg-white rounded-2xl p-8 card-shadow">
+            <div class="flex items-center mb-6">
+              <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                <i class="fa fa-comments text-2xl text-primary"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-gray-800">经验分享</h3>
+            </div>
+            
+            <div class="space-y-5 mb-6">
+              <!-- 分享1：养护知识 -->
+              <div class="bg-secondary/5 rounded-xl p-4 card-shadow hover:bg-secondary/10 transition-all duration-300">
+                <div class="flex items-center mb-2">
+                  <div class="w-8 h-8 rounded-full overflow-hidden mr-3">
+                    <img src="https://picsum.photos/id/1005/100/100" alt="用户头像" class="w-full h-full object-cover">
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-bold text-gray-800">张同学</h4>
+                    <p class="text-gray-500 text-xs">2小时前</p>
+                  </div>
+                </div>
+                <a href="share_detail.html" class="text-lg font-bold text-primary mb-2 hover:underline">流浪猫冬季养护知识分享</a>
+                <p class="text-gray-600 text-sm mb-3">
+                  冬季气温低，流浪猫的生存面临很大挑战。我总结了一些冬季养护的要点：1. 提供温暖的猫窝，最好放置在避风的地方；2. 增加食物的供应量，尤其是高热量的食物；3. 注意观察猫咪的健康状况，及时发现和处理疾病...
+                </p>
+                <div class="flex justify-between items-center text-xs text-gray-500">
+                  <div class="flex items-center">
+                    <button class="flex items-center text-gray-500 hover:text-primary transition-colors">
+                      <i class="fa fa-thumbs-up mr-1"></i>
+                      <span>18</span>
+                    </button>
+                    <button class="flex items-center text-gray-500 hover:text-primary transition-colors ml-4">
+                      <i class="fa fa-comment mr-1"></i>
+                      <span>5</span>
+                    </button>
+                  </div>
+                  <span class="inline-block px-2 py-1 rounded-full bg-primary/5 text-primary text-xs font-medium">
+                    养护知识
+                  </span>
+                </div>
+              </div>
+              
+              <!-- 分享2：救助经历 -->
+              <div class="bg-secondary/5 rounded-xl p-4 card-shadow hover:bg-secondary/10 transition-all duration-300">
+                <div class="flex items-center mb-2">
+                  <div class="w-8 h-8 rounded-full overflow-hidden mr-3">
+                    <img src="https://picsum.photos/id/1012/100/100" alt="用户头像" class="w-full h-full object-cover">
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-bold text-gray-800">李同学</h4>
+                    <p class="text-gray-500 text-xs">昨天</p>
+                  </div>
+                </div>
+                <a href="share_detail.html" class="text-lg font-bold text-primary mb-2 hover:underline">分享一次成功的流浪动物救助经历</a>
+                <p class="text-gray-600 text-sm mb-3">
+                  上周三，我在图书馆后面发现一只受伤的小奶猫，它的后腿好像被什么东西夹过，无法正常行走。我立即联系了救助站的老师，我们一起将小猫送到了医院进行治疗。经过医生的精心治疗，小猫的伤势已经稳定，现在正在康复中...
+                </p>
+                <div class="flex justify-between items-center text-xs text-gray-500">
+                  <div class="flex items-center">
+                    <button class="flex items-center text-gray-500 hover:text-primary transition-colors">
+                      <i class="fa fa-thumbs-up mr-1"></i>
+                      <span>32</span>
+                    </button>
+                    <button class="flex items-center text-gray-500 hover:text-primary transition-colors ml-4">
+                      <i class="fa fa-comment mr-1"></i>
+                      <span>12</span>
+                    </button>
+                  </div>
+                  <span class="inline-block px-2 py-1 rounded-full bg-primary/5 text-primary text-xs font-medium">
+                    救助经历
+                  </span>
+                </div>
+              </div>
+              
+              <!-- 分享3：领养感悟 -->
+              <div class="bg-secondary/5 rounded-xl p-4 card-shadow hover:bg-secondary/10 transition-all duration-300">
+                <div class="flex items-center mb-2">
+                  <div class="w-8 h-8 rounded-full overflow-hidden mr-3">
+                    <img src="https://picsum.photos/id/1025/100/100" alt="用户头像" class="w-full h-full object-cover">
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-bold text-gray-800">王同学</h4>
+                    <p class="text-gray-500 text-xs">3天前</p>
+                  </div>
+                </div>
+                <a href="share_detail.html" class="text-lg font-bold text-primary mb-2 hover:underline">领养流浪猫三个月的感悟</a>
+                <p class="text-gray-600 text-sm mb-3">
+                  三个月前，我领养了一只流浪猫，给它取名叫"球球"。刚开始的时候，球球对我很防备，总是躲着我，也不愿意和我亲近。但是经过我三个月的精心照顾和耐心陪伴，球球现在已经完全信任我了，每天都会主动跳到我腿上让我抚摸它...
+                </p>
+                <div class="flex justify-between items-center text-xs text-gray-500">
+                  <div class="flex items-center">
+                    <button class="flex items-center text-gray-500 hover:text-primary transition-colors">
+                      <i class="fa fa-thumbs-up mr-1"></i>
+                      <span>25</span>
+                    </button>
+                    <button class="flex items-center text-gray-500 hover:text-primary transition-colors ml-4">
+                      <i class="fa fa-comment mr-1"></i>
+                      <span>8</span>
+                    </button>
+                  </div>
+                  <span class="inline-block px-2 py-1 rounded-full bg-primary/5 text-primary text-xs font-medium">
+                    领养感悟
+                  </span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="text-center">
+              <a href="share_detail.html" class="inline-block px-5 py-2 rounded-full bg-primary/10 text-primary border border-primary text-sm font-medium btn-hover">
+                查看更多分享 <i class="fa fa-arrow-right ml-1"></i>
+              </a>
+            </div>
+          </div>
+          
+          <!-- 第三个板块：爱心商城 -->
+          <div class="bg-white rounded-2xl p-8 card-shadow">
+            <div class="flex items-center mb-6">
+              <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                <i class="fa fa-shopping-bag text-2xl text-primary"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-gray-800">爱心商城</h3>
+            </div>
+            
+            <!-- 用户积分显示 -->
+            <div class="bg-primary/5 rounded-xl p-4 mb-6 border border-primary/20">
+              <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                  <i class="fa fa-diamond text-2xl text-yellow-500 mr-3"></i>
+                  <div>
+                    <p class="text-sm text-gray-500">我的积分</p>
+                    <p class="text-2xl font-bold text-gray-800">2,860</p>
+                  </div>
+                </div>
+                <button class="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium btn-hover">
+                  赚取积分
+                </button>
+              </div>
+            </div>
+            
+            <div class="space-y-5 mb-6">
+              <!-- 商品1：动物保险购买 -->
+              <div class="bg-secondary/5 rounded-xl p-4 card-shadow hover:bg-secondary/10 transition-all duration-300">
+                <div class="flex justify-between items-start mb-3">
+                  <div>
+                    <h4 class="text-lg font-bold text-gray-800">动物保险购买</h4>
+                    <p class="text-gray-600 text-sm mt-1">为领养的宠物购买一份保障</p>
+                  </div>
+                  <div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+                    <img src="https://picsum.photos/id/1066/100/100" alt="保险" class="w-full h-full object-cover">
+                  </div>
+                </div>
+                <div class="flex justify-between items-center mb-3">
+                  <div class="flex items-center">
+                    <i class="fa fa-star text-yellow-400 mr-1"></i>
+                    <span class="text-sm text-gray-600">4.8分</span>
+                  </div>
+                  <div class="text-lg font-bold text-primary">800 积分</div>
+                </div>
+                <a href="product_detail.html" class="w-full py-2 rounded-lg bg-primary/10 text-primary text-sm font-medium btn-hover text-center block">
+                  立即兑换
+                </a>
+              </div>
+              
+              <!-- 商品2：驱虫药 -->
+              <div class="bg-secondary/5 rounded-xl p-4 card-shadow hover:bg-secondary/10 transition-all duration-300">
+                <div class="flex justify-between items-start mb-3">
+                  <div>
+                    <h4 class="text-lg font-bold text-gray-800">宠物驱虫药</h4>
+                    <p class="text-gray-600 text-sm mt-1">为领养宠物提供健康保障</p>
+                  </div>
+                  <div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+                    <img src="https://picsum.photos/id/1074/100/100" alt="驱虫药" class="w-full h-full object-cover">
+                  </div>
+                </div>
+                <div class="flex justify-between items-center mb-3">
+                  <div class="flex items-center">
+                    <i class="fa fa-star text-yellow-400 mr-1"></i>
+                    <span class="text-sm text-gray-600">4.6分</span>
+                  </div>
+                  <div class="text-lg font-bold text-primary">500 积分</div>
+                </div>
+                <a href="product_detail.html" class="w-full py-2 rounded-lg bg-primary/10 text-primary text-sm font-medium btn-hover text-center block">
+                  立即兑换
+                </a>
+              </div>
+              
+              <!-- 商品3：康复物资 -->
+              <div class="bg-secondary/5 rounded-xl p-4 card-shadow hover:bg-secondary/10 transition-all duration-300">
+                <div class="flex justify-between items-start mb-3">
+                  <div>
+                    <h4 class="text-lg font-bold text-gray-800">康复护理包</h4>
+                    <p class="text-gray-600 text-sm mt-1">为受伤动物提供专业护理</p>
+                  </div>
+                  <div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+                    <img src="https://picsum.photos/id/1080/100/100" alt="护理包" class="w-full h-full object-cover">
+                  </div>
+                </div>
+                <div class="flex justify-between items-center mb-3">
+                  <div class="flex items-center">
+                    <i class="fa fa-star text-yellow-400 mr-1"></i>
+                    <span class="text-sm text-gray-600">4.9分</span>
+                  </div>
+                  <div class="text-lg font-bold text-primary">1,200 积分</div>
+                </div>
+                <a href="product_detail.html" class="w-full py-2 rounded-lg bg-primary/10 text-primary text-sm font-medium btn-hover text-center block">
+                  立即兑换
+                </a>
+              </div>
+            </div>
+            
+            <div class="text-center">
+              <a href="pet_supplies_sale_detail.html" class="inline-block px-5 py-2 rounded-full bg-primary/10 text-primary border border-primary text-sm font-medium btn-hover">
+                查看更多商品 <i class="fa fa-arrow-right ml-1"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 动物档案区域 -->
+    <section id="pet-archive" class="page-section py-16">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">
+          <i class="fa fa-paw text-primary mr-2"></i>校园萌宠档案
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="pet-cards">
+          <!-- 萌宠1 -->
+          <div class="pet-card p-6 text-center">
+            <div class="mb-4">
+              <img src="https://picsum.photos/id/40/200/200" alt="橘猫" class="pet-card-image">
+            </div>
+            <h3 class="text-xl font-bold mb-2">小橘</h3>
+            <p class="text-gray-600 mb-4">橘猫 / 3岁</p>
+            <div class="flex justify-center space-x-2">
+              <a href="pet_xiaoxiang_intro.html" class="inline-block px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover">
+                了解更多
+              </a>
+            </div>
+          </div>
+          <!-- 萌宠2 -->
+          <div class="pet-card p-6 text-center">
+            <div class="mb-4">
+              <img src="https://picsum.photos/id/1074/200/200" alt="黑猫" class="pet-card-image">
+            </div>
+            <h3 class="text-xl font-bold mb-2">小黑</h3>
+            <p class="text-gray-600 mb-4">黑猫 / 2岁</p>
+            <div class="flex justify-center space-x-2">
+              <a href="pet_xiaohei_intro.html" class="inline-block px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover">
+                了解更多
+              </a>
+            </div>
+          </div>
+          <!-- 萌宠3 -->
+          <div class="pet-card p-6 text-center">
+            <div class="mb-4">
+              <img src="https://picsum.photos/id/237/200/200" alt="白猫" class="pet-card-image">
+            </div>
+            <h3 class="text-xl font-bold mb-2">雪球</h3>
+            <p class="text-gray-600 mb-4">白猫 / 1岁</p>
+            <div class="flex justify-center space-x-2">
+                <a href="pet_xueqiu_intro.html" class="inline-block px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover">
+                  了解更多
+                </a>
+              </div>
+          </div>
+          <!-- 萌宠4 -->
+          <div class="pet-card p-6 text-center">
+            <div class="mb-4">
+              <img src="https://picsum.photos/id/1062/200/200" alt="三花" class="pet-card-image">
+            </div>
+            <h3 class="text-xl font-bold mb-2">花花</h3>
+            <p class="text-gray-600 mb-4">三花 / 4岁</p>
+            <div class="flex justify-center space-x-2">
+                <a href="pet_huahua_intro.html" class="inline-block px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover">
+                  了解更多
+                </a>
+              </div>
+          </div>
+          <!-- 萌宠5 -->
+          <div class="pet-card p-6 text-center">
+            <div class="mb-4">
+              <img src="https://picsum.photos/id/1071/200/200" alt="狸花猫" class="pet-card-image">
+            </div>
+            <h3 class="text-xl font-bold mb-2">虎子</h3>
+            <p class="text-gray-600 mb-4">狸花猫 / 2.5岁</p>
+            <div class="flex justify-center space-x-2">
+                <a href="pet_huzi_intro.html" class="inline-block px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover">
+                  了解更多
+                </a>
+              </div>
+          </div>
+          <!-- 萌宠6 -->
+          <div class="pet-card p-6 text-center">
+            <div class="mb-4">
+              <img src="https://picsum.photos/id/26/200/200" alt="黄白相间" class="pet-card-image">
+            </div>
+            <h3 class="text-xl font-bold mb-2">小黄</h3>
+            <p class="text-gray-600 mb-4">黄白猫 / 1.5岁</p>
+            <div class="flex justify-center space-x-2">
+                <a href="pet_xiaohuang_intro.html" class="inline-block px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover">
+                  了解更多
+                </a>
+              </div>
+          </div>
+          <!-- 萌宠7 -->
+          <div class="pet-card p-6 text-center">
+            <div class="mb-4">
+              <img src="https://picsum.photos/id/206/200/200" alt="奶牛猫" class="pet-card-image">
+            </div>
+            <h3 class="text-xl font-bold mb-2">斑斑</h3>
+            <p class="text-gray-600 mb-4">奶牛猫 / 3.5岁</p>
+            <div class="flex justify-center space-x-2">
+                <a href="pet_banban_intro.html" class="inline-block px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover">
+                  了解更多
+                </a>
+              </div>
+          </div>
+          <!-- 萌宠8 -->
+          <div class="pet-card p-6 text-center">
+            <div class="mb-4">
+              <img src="https://picsum.photos/id/1015/200/200" alt="波斯猫" class="pet-card-image">
+            </div>
+            <h3 class="text-xl font-bold mb-2">咪咪</h3>
+            <p class="text-gray-600 mb-4">波斯猫 / 2岁</p>
+            <div class="flex justify-center space-x-2">
+                <a href="pet_mimi_intro.html" class="inline-block px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover">
+                  了解更多
+                </a>
+              </div>
+          </div>
+        </div>
+        <!-- 更多按钮 -->
+        <div class="text-center mt-12">
+          <button id="load-more-pets" class="inline-block px-6 py-3 rounded-full btn-gradient text-white font-medium btn-hover">
+            查看更多萌宠 <i class="fa fa-arrow-right ml-2"></i>
+          </button>
+        </div>
+        
+        <!-- 发现新成员板块 -->
+        <div class="mt-20">
+          <h2 class="text-3xl font-bold text-center mb-12">
+            <i class="fa fa-plus-circle text-primary mr-2"></i>发现新成员
+          </h2>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- 新成员投稿区域 -->
+            <div class="bg-white rounded-2xl shadow-xl p-8">
+              <div class="text-center mb-6">
+                <div class="inline-block p-4 rounded-full bg-primary/10 mb-4">
+                  <i class="fa fa-camera text-3xl text-primary"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">投稿新成员</h3>
+                <p class="text-gray-600">发现校园里的新萌宠，快来分享吧！</p>
+              </div>
+              <form id="new-pet-form" class="space-y-4">
+                <div>
+                  <label for="pet-name" class="block text-sm font-medium text-gray-700 mb-2">
+                    动物名称
+                  </label>
+                  <input 
+                    type="text" 
+                    id="pet-name" 
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300"
+                    placeholder="请输入动物名称"
+                    required
+                  >
+                </div>
+                <div>
+                  <label for="pet-type" class="block text-sm font-medium text-gray-700 mb-2">
+                    动物种类
+                  </label>
+                  <select 
+                    id="pet-type" 
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300"
+                    required
+                  >
+                    <option value="">请选择动物种类</option>
+                    <option value="cat">猫</option>
+                    <option value="dog">狗</option>
+                    <option value="bird">鸟</option>
+                    <option value="other">其他</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="pet-description" class="block text-sm font-medium text-gray-700 mb-2">
+                    发现描述
+                  </label>
+                  <textarea 
+                    id="pet-description" 
+                    rows="4" 
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300"
+                    placeholder="请描述发现的地点、时间和动物特征"
+                    required
+                  ></textarea>
+                </div>
+                <div>
+                  <label for="pet-image" class="block text-sm font-medium text-gray-700 mb-2">
+                    上传照片
+                  </label>
+                  <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-primary transition-colors duration-300">
+                    <i class="fa fa-cloud-upload-alt text-4xl text-gray-400 mb-2"></i>
+                    <p class="text-gray-600 mb-2">点击或拖拽文件到此处上传</p>
+                    <p class="text-sm text-gray-500">支持 JPG、PNG 格式，最大 5MB</p>
+                    <input type="file" id="pet-image" accept="image/jpeg,image/png" class="hidden" required>
+                    <button type="button" onclick="document.getElementById('pet-image').click()" class="mt-4 inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium btn-hover">
+                      选择文件
+                    </button>
+                  </div>
+                </div>
+                <button 
+                  type="submit" 
+                  class="w-full py-3 rounded-lg btn-gradient text-white font-medium btn-hover transition-all duration-300"
+                >
+                  提交投稿
+                </button>
+              </form>
+            </div>
+            
+            <!-- 新成员展示区域 -->
+            <div class="bg-white rounded-2xl shadow-xl p-8">
+              <div class="text-center mb-6">
+                <div class="inline-block p-4 rounded-full bg-secondary/10 mb-4">
+                  <i class="fa fa-paw text-3xl text-secondary"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">近期新成员</h3>
+                <p class="text-gray-600">出没时间超过一个月将成为常驻成员</p>
+              </div>
+              <div class="space-y-6">
+                <!-- 新成员1 -->
+                <div class="flex items-center space-x-4 p-4 bg-secondary/5 rounded-xl">
+                  <div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+                    <img src="https://picsum.photos/id/1066/100/100" alt="新成员" class="w-full h-full object-cover">
+                  </div>
+                  <div class="flex-1">
+                    <h4 class="text-lg font-bold text-gray-800">三花小猫</h4>
+                    <p class="text-gray-600 text-sm">发现于女生楼 · 出没 23 天</p>
+                  </div>
+                  <div class="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
+                    待观察
+                  </div>
+                </div>
+                
+                <!-- 新成员2 -->
+                <div class="flex items-center space-x-4 p-4 bg-secondary/5 rounded-xl">
+                  <div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+                    <img src="https://picsum.photos/id/1071/100/100" alt="新成员" class="w-full h-full object-cover">
+                  </div>
+                  <div class="flex-1">
+                    <h4 class="text-lg font-bold text-gray-800">小流浪狗</h4>
+                    <p class="text-gray-600 text-sm">发现于食堂附近 · 出没 18 天</p>
+                  </div>
+                  <div class="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
+                    待观察
+                  </div>
+                </div>
+                
+                <!-- 新成员3 -->
+                <div class="flex items-center space-x-4 p-4 bg-secondary/5 rounded-xl">
+                  <div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+                    <img src="https://picsum.photos/id/206/100/100" alt="新成员" class="w-full h-full object-cover">
+                  </div>
+                  <div class="flex-1">
+                    <h4 class="text-lg font-bold text-gray-800">灰鸽子</h4>
+                    <p class="text-gray-600 text-sm">发现于图书馆前 · 出没 35 天</p>
+                  </div>
+                  <div class="px-3 py-1 rounded-full bg-green-100 text-green-600 text-sm font-medium">
+                    即将归档
+                  </div>
+                </div>
+              </div>
+              <div class="text-center mt-8">
+                <a href="#" class="inline-block px-5 py-2 rounded-full bg-secondary/10 text-secondary border border-secondary text-sm font-medium btn-hover">
+                  查看所有新成员 <i class="fa fa-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 用户中心区域 -->
+    <section id="user" class="page-section py-16">
+      <div class="container mx-auto px-4">
+        <!-- 登录表单 (默认显示) -->
+        <div id="login-form">
+          <div class="flex flex-col lg:flex-row gap-8 items-stretch">
+            <!-- 左侧欢迎区域 -->
+            <div class="lg:w-1/2 relative overflow-hidden rounded-3xl shadow-2xl">
+              <div class="absolute inset-0 bg-gradient-to-br from-primary to-secondary opacity-90 z-10"></div>
+              <img src="https://images.unsplash.com/photo-1558944351-e3f2c5d7e67a?q=80&w=1000&auto=format&fit=crop" alt="萌宠背景" class="absolute inset-0 w-full h-full object-cover">
+              <div class="relative z-20 h-full flex flex-col justify-center items-center text-center p-8 lg:p-12 text-white">
+                <div class="w-24 h-24 mb-8 rounded-full bg-white/20 flex items-center justify-center">
+                  <i class="fa fa-paw text-5xl"></i>
+                </div>
+                <h2 class="text-4xl lg:text-5xl font-bold mb-8">欢迎加入</h2>
+                <p class="text-xl lg:text-2xl mb-12 opacity-90 leading-relaxed">成为校园护萌神的一员<br>与我们一起关爱校园里的流浪动物</p>
+                
+                <div class="space-y-4 text-center">
+                  <p class="text-lg opacity-90">传递爱心 · 守护萌宠</p>
+                  <div class="w-16 h-1 bg-white/30 mx-auto rounded-full"></div>
+                </div>
+                
+                <div class="mt-12 pt-8 border-t border-white/30">
+                  <p class="text-lg mb-4">还没有账号？</p>
+                  <a href="register.html" class="inline-flex items-center px-6 py-3 rounded-full bg-white text-primary font-bold hover:bg-gray-100 transition-all duration-300 btn-hover">
+                    立即注册 <i class="fa fa-arrow-right ml-2"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 右侧登录表单区域 -->
+            <div class="lg:w-1/2">
+              <div class="bg-white rounded-2xl shadow-xl p-8 h-full">
+                <div class="text-center mb-8">
+                  <div class="inline-block p-4 rounded-full bg-primary/10 mb-4">
+                    <i class="fa fa-user text-4xl text-primary"></i>
+                  </div>
+                  <h2 class="text-3xl font-bold text-gray-800 mb-2">用户登录</h2>
+                  <p class="text-gray-600">欢迎回来！请登录您的账号</p>
+                </div>
+                
+                <form id="user-login-form">
+                  <div class="mb-6">
+                    <label for="username" class="block text-sm font-medium text-gray-700 mb-2">
+                      用户名
+                    </label>
+                    <div class="relative">
+                      <input 
+                        type="text" 
+                        id="username" 
+                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 form-input"
+                        placeholder="请输入您的用户名"
+                        required
+                      >
+                      <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                        <i class="fa fa-user"></i>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="mb-6">
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+                      密码
+                    </label>
+                    <div class="relative">
+                      <input 
+                        type="password" 
+                        id="password" 
+                        class="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 form-input"
+                        placeholder="请输入您的密码"
+                        required
+                      >
+                      <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                        <i class="fa fa-lock"></i>
+                      </div>
+                      <div class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer" onclick="togglePassword()">
+                        <i class="fa fa-eye" id="password-eye"></i>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="flex justify-between items-center mb-6">
+                    <div class="flex items-center">
+                      <input 
+                        type="checkbox" 
+                        id="remember" 
+                        class="w-4 h-4 text-primary focus:ring-primary border-gray-300 rounded"
+                      >
+                      <label for="remember" class="ml-2 text-sm text-gray-600">
+                        记住我
+                      </label>
+                    </div>
+                    <a href="#" class="text-sm text-primary hover:text-primary/80 transition-colors duration-300">
+                      忘记密码？
+                    </a>
+                  </div>
+                  
+                  <button 
+                    type="submit" 
+                    class="w-full py-3 rounded-lg bg-primary text-white font-medium hover:bg-primary/90 focus:ring-4 focus:ring-primary/30 transition-all duration-300 btn-hover"
+                  >
+                    <span>登录</span>
+                    <i class="fa fa-arrow-right ml-2"></i>
+                  </button>
+                  
+                  <div class="mt-8 pt-6 border-t border-gray-200">
+                    <p class="text-sm text-gray-600 text-center mb-4">
+                      或使用以下方式登录
+                    </p>
+                    <div class="flex justify-center space-x-4">
+                      <a href="#" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-red-500 text-white hover:bg-red-600 transition-colors duration-300 btn-hover">
+                        <i class="fa fa-google"></i>
+                      </a>
+                      <a href="#" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-green-600 text-white hover:bg-green-700 transition-colors duration-300 btn-hover">
+                        <i class="fa fa-weixin"></i>
+                      </a>
+                      <a href="#" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-blue-400 text-white hover:bg-blue-500 transition-colors duration-300 btn-hover">
+                        <i class="fa fa-weibo"></i>
+                      </a>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 用户中心主页 (登录后显示) -->
+        <div id="user-dashboard" class="hidden">
+          <!-- 用户信息卡片 -->
+          <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+            <div class="flex items-center justify-between mb-6">
+              <div class="flex items-center space-x-4">
+                <div class="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center">
+                  <i class="fa fa-user-circle text-4xl text-primary"></i>
+                </div>
+                <div>
+                  <h2 class="text-2xl font-bold text-gray-800">张小明</h2>
+                  <p class="text-gray-600">爱心志愿者 · 累计捐赠 12 次</p>
+                </div>
+              </div>
+              <button id="logout-btn" class="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition-all duration-300">
+                <i class="fa fa-sign-out-alt mr-2"></i>退出登录
+              </button>
+            </div>
+
+            <!-- 用户统计信息 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="bg-primary/5 rounded-xl p-6 text-center">
+                <div class="text-3xl font-bold text-primary mb-2">12</div>
+                <div class="text-gray-600">累计捐赠次数</div>
+              </div>
+              <div class="bg-secondary/5 rounded-xl p-6 text-center">
+                <div class="text-3xl font-bold text-secondary mb-2">86</div>
+                <div class="text-gray-600">志愿者服务时长(小时)</div>
+              </div>
+              <div class="bg-green-50 rounded-xl p-6 text-center">
+                <div class="text-3xl font-bold text-green-600 mb-2">2</div>
+                <div class="text-gray-600">领养申请记录</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 个人捐赠记录模块 -->
+          <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+            <div class="flex items-center justify-between mb-6">
+              <h3 class="text-xl font-bold text-gray-800">
+                <i class="fa fa-heart text-primary mr-2"></i>个人捐赠记录
+              </h3>
+              <a href="#" class="text-primary hover:text-primary/80 transition-colors duration-300">
+                查看全部 <i class="fa fa-arrow-right ml-1"></i>
+              </a>
+            </div>
+            
+            <div class="space-y-4">
+              <!-- 捐赠记录1 -->
+              <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                <div class="flex items-center space-x-4">
+                  <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                    <i class="fa fa-heart text-primary"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-gray-800">爱心捐款</h4>
+                    <p class="text-sm text-gray-600">2024-01-15</p>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div class="font-bold text-primary">¥50.00</div>
+                  <div class="text-xs text-gray-500">已完成</div>
+                </div>
+              </div>
+
+              <!-- 捐赠记录2 -->
+              <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                <div class="flex items-center space-x-4">
+                  <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                    <i class="fa fa-shopping-bag text-primary"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-gray-800">宠物粮食捐赠</h4>
+                    <p class="text-sm text-gray-600">2024-01-10</p>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div class="font-bold text-primary">5kg</div>
+                  <div class="text-xs text-gray-500">已完成</div>
+                </div>
+              </div>
+
+              <!-- 捐赠记录3 -->
+              <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                <div class="flex items-center space-x-4">
+                  <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                    <i class="fa fa-heartbeat text-primary"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-gray-800">医疗用品捐赠</h4>
+                    <p class="text-sm text-gray-600">2024-01-05</p>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div class="font-bold text-primary">¥120.00</div>
+                  <div class="text-xs text-gray-500">已完成</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 领养申请进度模块 -->
+          <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+            <div class="flex items-center justify-between mb-6">
+              <h3 class="text-xl font-bold text-gray-800">
+                <i class="fa fa-paw text-secondary mr-2"></i>领养申请进度
+              </h3>
+              <a href="#" class="text-secondary hover:text-secondary/80 transition-colors duration-300">
+                查看全部 <i class="fa fa-arrow-right ml-1"></i>
+              </a>
+            </div>
+            
+            <div class="space-y-4">
+              <!-- 领养申请1 -->
+              <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                <div class="flex items-center space-x-4">
+                  <div class="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center">
+                    <img src="https://picsum.photos/id/1005/200/200" alt="小橘" class="w-8 h-8 rounded-full">
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-gray-800">小橘 (橘猫)</h4>
+                    <p class="text-sm text-gray-600">申请日期: 2024-01-12</p>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div class="inline-block px-3 py-1 rounded-full bg-green-100 text-green-800 text-xs font-medium">
+                    审核通过
+                  </div>
+                  <div class="text-xs text-gray-500 mt-1">待领养</div>
+                </div>
+              </div>
+
+              <!-- 领养申请2 -->
+              <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                <div class="flex items-center space-x-4">
+                  <div class="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center">
+                    <img src="https://picsum.photos/id/1015/200/200" alt="咪咪" class="w-8 h-8 rounded-full">
+                  </div>
+                  <div>
+                    <h4 class="font-medium text-gray-800">咪咪 (波斯猫)</h4>
+                    <p class="text-sm text-gray-600">申请日期: 2024-01-08</p>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div class="inline-block px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-medium">
+                    审核中
+                  </div>
+                  <div class="text-xs text-gray-500 mt-1">预计3个工作日</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 志愿者工时统计模块 -->
+          <div class="bg-white rounded-2xl shadow-xl p-8">
+            <div class="flex items-center justify-between mb-6">
+              <h3 class="text-xl font-bold text-gray-800">
+                <i class="fa fa-clock text-green-600 mr-2"></i>志愿者工时统计
+              </h3>
+              <a href="#" class="text-green-600 hover:text-green-600/80 transition-colors duration-300">
+                查看全部 <i class="fa fa-arrow-right ml-1"></i>
+              </a>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <!-- 工时统计图表 -->
+              <div class="bg-gray-50 rounded-lg p-6">
+                <h4 class="font-medium text-gray-800 mb-4">本月工时统计</h4>
+                <div class="flex items-end space-x-2 h-48">
+                  <div class="flex-1 bg-primary/30 rounded-t-lg" style="height: 60%"></div>
+                  <div class="flex-1 bg-primary/50 rounded-t-lg" style="height: 85%"></div>
+                  <div class="flex-1 bg-primary/40 rounded-t-lg" style="height: 70%"></div>
+                  <div class="flex-1 bg-primary/60 rounded-t-lg" style="height: 90%"></div>
+                  <div class="flex-1 bg-primary/20 rounded-t-lg" style="height: 40%"></div>
+                </div>
+                <div class="flex justify-between text-xs text-gray-500 mt-2">
+                  <span>第一周</span>
+                  <span>第二周</span>
+                  <span>第三周</span>
+                  <span>第四周</span>
+                  <span>第五周</span>
+                </div>
+              </div>
+
+              <!-- 志愿服务类型统计 -->
+              <div class="bg-gray-50 rounded-lg p-6">
+                <h4 class="font-medium text-gray-800 mb-4">服务类型统计</h4>
+                <div class="space-y-3">
+                  <div>
+                    <div class="flex justify-between text-sm mb-1">
+                      <span class="text-gray-700">动物护理</span>
+                      <span class="font-medium">45小时</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                      <div class="bg-primary h-2 rounded-full" style="width: 52%"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between text-sm mb-1">
+                      <span class="text-gray-700">义卖活动</span>
+                      <span class="font-medium">25小时</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                      <div class="bg-secondary h-2 rounded-full" style="width: 29%"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between text-sm mb-1">
+                      <span class="text-gray-700">社区宣传</span>
+                      <span class="font-medium">16小时</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                      <div class="bg-green-600 h-2 rounded-full" style="width: 19%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 最近志愿服务记录 -->
+            <div class="space-y-3">
+              <h4 class="font-medium text-gray-800 mb-3">最近服务记录</h4>
+              
+              <!-- 服务记录1 -->
+              <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div class="flex items-center space-x-3">
+                  <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                    <i class="fa fa-paw text-primary"></i>
+                  </div>
+                  <div>
+                    <h5 class="font-medium text-gray-800 text-sm">动物护理志愿服务</h5>
+                    <p class="text-xs text-gray-600">2024-01-15 · 4小时</p>
+                  </div>
+                </div>
+                <div class="text-xs text-green-600">已完成</div>
+              </div>
+
+              <!-- 服务记录2 -->
+              <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div class="flex items-center space-x-3">
+                  <div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
+                    <i class="fa fa-shopping-bag text-secondary"></i>
+                  </div>
+                  <div>
+                    <h5 class="font-medium text-gray-800 text-sm">爱心义卖活动</h5>
+                    <p class="text-xs text-gray-600">2024-01-13 · 6小时</p>
+                  </div>
+                </div>
+                <div class="text-xs text-green-600">已完成</div>
+              </div>
+
+              <!-- 服务记录3 -->
+              <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div class="flex items-center space-x-3">
+                  <div class="w-10 h-10 rounded-full bg-green-600/10 flex items-center justify-center">
+                    <i class="fa fa-bullhorn text-green-600"></i>
+                  </div>
+                  <div>
+                    <h5 class="font-medium text-gray-800 text-sm">社区宣传活动</h5>
+                    <p class="text-xs text-gray-600">2024-01-10 · 3小时</p>
+                  </div>
+                </div>
+                <div class="text-xs text-green-600">已完成</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>                  </a>
+                </p>
+              </div>
+            </form>
+            
+           
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 底部信息区 -->
+  <footer class="bg-dark text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div>
+          <div class="flex items-center space-x-2 mb-4">
+            <i class="fa fa-paw text-2xl text-primary"></i>
+            <h3 class="text-xl font-bold">校园护萌神</h3>
+          </div>
+          <p class="text-gray-400 mb-4">我们致力于为校园里的流浪动物提供关爱和保护，让每一个生命都能得到尊重和照顾。</p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-primary btn-hover"><i class="fa fa-weixin text-xl"></i></a>
+            <a href="#" class="text-gray-400 hover:text-primary btn-hover"><i class="fa fa-weibo text-xl"></i></a>
+            <a href="#" class="text-gray-400 hover:text-primary btn-hover"><i class="fa fa-instagram text-xl"></i></a>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold mb-4">联系我们</h3>
+          <ul class="space-y-2 text-gray-400">
+            <li><i class="fa fa-envelope text-primary mr-2"></i> contact@campuspet.com</li>
+            <li><i class="fa fa-phone text-primary mr-2"></i> 123-4567-8910</li>
+            <li><i class="fa fa-map-marker text-primary mr-2"></i> 四川旅游学院</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold mb-4">快速链接</h3>
+          <ul class="space-y-2 text-gray-400">
+            <li><a href="#" class="hover:text-primary btn-hover">关于我们</a></li>
+            <li><a href="#" class="hover:text-primary btn-hover">赞助支持</a></li>
+            <li><a href="#" class="hover:text-primary btn-hover">常见问题</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
+        <p>2025 校园护萌神 版权所有 | 网站备案号：35626270号</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // 页面导航功能
+    document.addEventListener('DOMContentLoaded', function() {
+      // 获取所有导航链接
+      const navLinks = document.querySelectorAll('nav a');
+      // 获取所有页面区域
+      const pageSections = document.querySelectorAll('.page-section');
+      
+      // 页面加载时检查URL参数
+      function checkUrlParams() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const activeSection = urlParams.get('active');
+        
+        if (activeSection) {
+          // 隐藏所有页面区域
+          pageSections.forEach(section => {
+            section.classList.remove('active');
+          });
+          
+          // 移除所有导航链接的活动状态
+          navLinks.forEach(navLink => {
+            navLink.classList.remove('bg-primary', 'text-white');
+            navLink.classList.add('bg-white', 'text-primary', 'border', 'border-primary');
+          });
+          
+          // 显示目标页面区域
+          const targetSection = document.getElementById(activeSection);
+          if (targetSection) {
+            targetSection.classList.add('active');
+          }
+          
+          // 设置对应导航链接为活动状态
+          const targetNavLink = document.querySelector(`nav a[href="#${activeSection}"]`);
+          if (targetNavLink) {
+            targetNavLink.classList.remove('bg-white', 'text-primary', 'border', 'border-primary');
+            targetNavLink.classList.add('bg-primary', 'text-white');
+          }
+          
+          // 页面跳转时回到顶部
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }
+      
+      // 初始检查URL参数
+      checkUrlParams();
+      
+      // 检查URL锚点并滚动到对应区域
+      function checkUrlHash() {
+        const hash = window.location.hash.substring(1);
+        if (hash) {
+          const targetSection = document.getElementById(hash);
+          if (targetSection) {
+            targetSection.scrollIntoView({ behavior: 'smooth' });
+            
+            // 确保登录表单是显示状态
+            const loginForm = document.getElementById('login-form');
+            const userDashboard = document.getElementById('user-dashboard');
+            if (loginForm && userDashboard && hash === 'user') {
+              loginForm.classList.remove('hidden');
+              userDashboard.classList.add('hidden');
+            }
+          }
+        }
+      }
+      
+      // 页面加载时检查锚点
+      checkUrlHash();
+      
+      // 监听URL锚点变化
+      window.addEventListener('hashchange', checkUrlHash);
+      
+      // 为每个导航链接添加点击事件
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          // 获取目标页面ID
+          const targetId = this.getAttribute('href').substring(1);
+          
+          // 隐藏所有页面区域
+          pageSections.forEach(section => {
+            section.classList.remove('active');
+          });
+          
+          // 移除所有导航链接的活动状态
+          navLinks.forEach(navLink => {
+            navLink.classList.remove('bg-primary', 'text-white');
+            navLink.classList.add('bg-white', 'text-primary', 'border', 'border-primary');
+          });
+          
+          // 显示目标页面区域
+          const targetSection = document.getElementById(targetId);
+          if (targetSection) {
+            targetSection.classList.add('active');
+          }
+          
+          // 设置当前导航链接为活动状态
+          this.classList.remove('bg-white', 'text-primary', 'border', 'border-primary');
+          this.classList.add('bg-primary', 'text-white');
+          
+          // 页面跳转时回到顶部
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      });
+      
+      // 轮播图功能
+      const carousel = document.getElementById('carousel');
+      if (carousel) {
+        const items = carousel.querySelectorAll('.carousel-item');
+        const indicators = carousel.querySelectorAll('.absolute.bottom-4 button');
+        const prevBtn = carousel.querySelector('.absolute.left-4');
+        const nextBtn = carousel.querySelector('.absolute.right-4');
+        let currentIndex = 0;
+        
+        function showSlide(index) {
+          items.forEach(item => item.classList.remove('active'));
+          indicators.forEach(indicator => {
+            indicator.classList.remove('bg-white');
+            indicator.classList.add('bg-white/50');
+          });
+          
+          items[index].classList.add('active');
+          indicators[index].classList.add('bg-white');
+          indicators[index].classList.remove('bg-white/50');
+        }
+        
+        function nextSlide() {
+          currentIndex = (currentIndex + 1) % items.length;
+          showSlide(currentIndex);
+        }
+        
+        function prevSlide() {
+          currentIndex = (currentIndex - 1 + items.length) % items.length;
+          showSlide(currentIndex);
+        }
+        
+        // 自动轮播
+        let slideInterval = setInterval(nextSlide, 5000);
+        
+        // 事件监听
+        if (nextBtn) {
+          nextBtn.addEventListener('click', () => {
+            clearInterval(slideInterval);
+            nextSlide();
+            slideInterval = setInterval(nextSlide, 5000);
+          });
+        }
+        
+        if (prevBtn) {
+          prevBtn.addEventListener('click', () => {
+            clearInterval(slideInterval);
+            prevSlide();
+            slideInterval = setInterval(nextSlide, 5000);
+          });
+        }
+        
+        // 动物档案更多按钮功能
+        const loadMoreBtn = document.getElementById('load-more-pets');
+        const petCardsContainer = document.getElementById('pet-cards');
+        
+        // 更多动物数据
+        const morePets = [
+          { id: 9, name: '来福', type: '柴犬', age: '2岁', image: 'https://picsum.photos/id/1077/200/200' },
+          { id: 10, name: '阿黄', type: '中华田园犬', age: '3岁', image: 'https://picsum.photos/id/1075/200/200' },
+          { id: 11, name: '雪球', type: '萨摩耶', age: '1.5岁', image: 'https://picsum.photos/id/237/200/200' },
+          { id: 12, name: '警长', type: '英短蓝猫', age: '2.5岁', image: 'https://picsum.photos/id/1074/200/200' },
+          { id: 13, name: '布丁', type: '布偶猫', age: '1岁', image: 'https://picsum.photos/id/206/200/200' },
+          { id: 14, name: '土豆', type: '加菲猫', age: '3岁', image: 'https://picsum.photos/id/40/200/200' },
+          { id: 15, name: '可乐', type: '哈士奇', age: '2岁', image: 'https://picsum.photos/id/1062/200/200' },
+          { id: 16, name: '奶茶', type: '金毛', age: '3.5岁', image: 'https://picsum.photos/id/1071/200/200' }
+        ];
+        
+        let petsLoaded = 8; // 初始加载的宠物数量
+        
+        if (loadMoreBtn && petCardsContainer) {
+          loadMoreBtn.addEventListener('click', function() {
+            // 每次加载4个宠物
+            const newPetsToLoad = morePets.slice(petsLoaded - 8, petsLoaded - 8 + 4);
+            
+            // 创建新的宠物卡片
+            newPetsToLoad.forEach(pet => {
+              const petCard = document.createElement('div');
+              petCard.className = 'pet-card p-6 text-center';
+              petCard.innerHTML = `
+                <div class="mb-4">
+                  <img src="${pet.image}" alt="${pet.name}" class="pet-card-image">
+                </div>
+                <h3 class="text-xl font-bold mb-2">${pet.name}</h3>
+                <p class="text-gray-600 mb-4">${pet.type} / ${pet.age}</p>
+                <div class="flex justify-center space-x-2">
+                  <a href="#" class="inline-block px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover">
+                    了解更多
+                  </a>
+                </div>
+              `;
+              petCardsContainer.appendChild(petCard);
+            });
+            
+            petsLoaded += 4;
+            
+            // 如果没有更多宠物可加载，隐藏按钮
+            if (petsLoaded >= 8 + morePets.length) {
+              loadMoreBtn.style.display = 'none';
+            }
+          });
+        }
+        
+        indicators.forEach((indicator, index) => {
+          indicator.addEventListener('click', () => {
+            clearInterval(slideInterval);
+            currentIndex = index;
+            showSlide(currentIndex);
+            slideInterval = setInterval(nextSlide, 5000);
+          });
+        });
+      }
+      
+      // 密码显示/隐藏功能
+      const passwordInput = document.getElementById('password');
+      // 密码显示/隐藏切换功能
+      function togglePassword() {
+        const passwordInput = document.getElementById('password');
+        const eyeIcon = document.getElementById('password-eye');
+        
+        if (passwordInput && eyeIcon) {
+          if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            eyeIcon.classList.remove('fa-eye');
+            eyeIcon.classList.add('fa-eye-slash');
+          } else {
+            passwordInput.type = 'password';
+            eyeIcon.classList.remove('fa-eye-slash');
+            eyeIcon.classList.add('fa-eye');
+          }
+        }
+      }
+      
+      // 登录表单提交功能
+      const loginForm = document.getElementById('user-login-form');
+      const loginFormContainer = document.getElementById('login-form');
+      const userDashboard = document.getElementById('user-dashboard');
+      const logoutBtn = document.getElementById('logout-btn');
+      
+      if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          // 获取用户名和密码
+          const username = document.getElementById('username').value;
+          const password = document.getElementById('password').value;
+          
+          // 简单的表单验证
+          if (!username || !password) {
+            alert('请输入用户名和密码！');
+            return;
+          }
+          
+          // 模拟登录成功
+          alert('登录成功！欢迎回来，' + username + '！');
+          
+          // 隐藏登录表单，显示用户中心主页
+          if (loginFormContainer && userDashboard) {
+            loginFormContainer.classList.add('hidden');
+            userDashboard.classList.remove('hidden');
+          }
+          
+          // 清空表单
+          loginForm.reset();
+          
+          // 将密码输入框改回密码类型
+          const passwordInput = document.getElementById('password');
+          if (passwordInput) {
+            passwordInput.type = 'password';
+          }
+        });
+      }
+      
+      // 登出功能
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', function() {
+          // 确认登出
+          if (confirm('确定要退出登录吗？')) {
+            // 隐藏用户中心主页，显示登录表单
+            if (loginFormContainer && userDashboard) {
+              userDashboard.classList.add('hidden');
+              loginFormContainer.classList.remove('hidden');
+            }
+          }
+        });
+      }
+      
+      // 新成员投稿表单处理
+      const newPetForm = document.getElementById('new-pet-form');
+      if (newPetForm) {
+        newPetForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          // 获取表单数据
+          const petName = document.getElementById('pet-name').value;
+          const petType = document.getElementById('pet-type').value;
+          const petDescription = document.getElementById('pet-description').value;
+          const petImage = document.getElementById('pet-image').files[0];
+          
+          // 简单的表单验证
+          if (!petName || !petType || !petDescription || !petImage) {
+            alert('请填写所有必填项并上传照片');
+            return;
+          }
+          
+          // 检查文件大小（最大5MB）
+          if (petImage.size > 5 * 1024 * 1024) {
+            alert('照片大小不能超过5MB');
+            return;
+          }
+          
+          // 模拟表单提交成功
+          alert(`感谢您的投稿！\\n\\n动物名称：${petName}\\n动物种类：${petType === 'cat' ? '猫' : petType === 'dog' ? '狗' : petType === 'bird' ? '鸟' : '其他'}\\n\\n您的投稿已提交，我们将尽快审核。如果该动物在校园持续出没一个月以上，将会被正式归档为校园萌宠档案的常驻成员。`);
+          
+          // 重置表单
+          newPetForm.reset();
+        });
+      }
+    });
+  </script>
+</body>
+</html>

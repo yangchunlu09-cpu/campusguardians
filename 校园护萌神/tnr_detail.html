@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校园TNR计划区 - 校园护萌神</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- ECharts -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <!-- 自定义样式 -->
+    <style>
+        /* 自定义颜色变量 */
+        :root {
+            --primary: #99CC99;
+            --secondary: #FFB6C1;
+            --light: #F5F3FF;
+            --dark: #1F2937;
+        }
+        
+        /* 基础样式 */
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        
+        /* 渐变背景 */
+        .bg-gradient-to-br {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        
+        /* 卡片阴影 */
+        .card-shadow {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 卡片悬停效果 */
+        .btn-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(153, 204, 153, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        /* 按钮渐变 */
+        .btn-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        
+        /* 卡片渐变 */
+        .card-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        
+        /* 页面背景 */
+        body {
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(245, 243, 255, 0.8));
+            background-attachment: fixed;
+        }
+        
+        /* 标题样式 */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--primary);
+        }
+        
+        /* 按钮样式 */
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border-radius: 25px;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #88bb88;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-secondary/10 via-light to-secondary/5 font-sans text-dark">
+    <!-- 导航栏 -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <!-- 校园护萌神专属Logo -->
+                <div class="w-12 h-12 flex items-center justify-center transition-all duration-300 hover:scale-110">
+                    <i class="fa fa-paw text-4xl text-primary"></i>
+                </div>
+                <h1 class="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-pink-500">校园护萌神</h1>
+            </div>
+            <nav class="hidden md:flex space-x-6">
+          <a href="#home" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">首页</a>
+          <a href="#workshop" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">手作坊</a>
+          <a href="#volunteer" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">志愿者社区</a>
+          <a href="#pet-archive" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">动物档案</a>
+          <a href="#user" class="px-4 py-2 rounded-full bg-primary text-white font-medium btn-hover transition-all duration-300">用户中心</a>
+        </nav>
+            <!-- 移动端菜单按钮 -->
+            <button class="md:hidden text-primary text-2xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="py-12">
+        <div class="container mx-auto px-4">
+            <!-- 返回按钮 -->
+            <div class="mb-8">
+                <a href="index.html?active=home#tnr" class="inline-flex items-center text-gray-600 hover:text-primary transition-colors">
+                    <i class="fa fa-arrow-left mr-2"></i>返回首页
+                </a>
+            </div>
+            
+            <!-- 校园TNR计划区详情内容 -->
+            <section class="bg-white rounded-2xl shadow-xl p-8 mb-12">
+                <h2 class="text-3xl font-bold text-center mb-8 text-primary">
+                    <i class="fa fa-paw mr-3"></i>校园TNR计划区
+                </h2>
+                
+                <!-- TNR介绍 -->
+                <div class="mb-12">
+                    <h3 class="text-2xl font-bold mb-6 text-center">
+                        <i class="fa fa-info-circle mr-3"></i>TNR是什么？
+                    </h3>
+                    <div class="bg-primary/5 rounded-xl p-6 shadow-md">
+                        <p class="text-gray-600 mb-4">
+                            TNR是"捕捉（Trap）、绝育（Neuter）、放归（Return）"的缩写，是一种人道管理和减少流浪动物数量的方法。
+                        </p>
+                        <p class="text-gray-600 mb-4">
+                            通过TNR，可以有效控制校园流浪动物的繁殖，减少流浪动物的数量，同时提高它们的生活质量，降低疾病传播的风险。
+                        </p>
+                        <p class="text-gray-600 mb-4">
+                            TNR不仅是一种人道的做法，也是一种长期有效的流浪动物管理策略。它避免了传统的扑杀方法带来的伦理问题，同时能够从根本上解决流浪动物数量过多的问题。
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- TNR流程图 -->
+                <div class="mb-12">
+                    <h3 class="text-2xl font-bold mb-6 text-center">
+                        <i class="fa fa-sitemap mr-3"></i>TNR流程图
+                    </h3>
+                    <div class="bg-white rounded-xl p-6 shadow-md">
+                        <div class="flex flex-wrap justify-around items-center">
+                            <div class="text-center p-4">
+                                <div class="inline-block p-6 rounded-full bg-primary/10 mb-3">
+                                    <i class="fa fa-hand-paper-o text-4xl text-primary"></i>
+                                </div>
+                                <h4 class="font-bold text-lg">捕捉</h4>
+                                <p class="text-gray-500">使用人道的捕捉工具捕捉流浪动物</p>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fa fa-arrow-right text-2xl text-primary"></i>
+                            </div>
+                            <div class="text-center p-4">
+                                <div class="inline-block p-6 rounded-full bg-primary/10 mb-3">
+                                    <i class="fa fa-stethoscope text-4xl text-primary"></i>
+                                </div>
+                                <h4 class="font-bold text-lg">绝育</h4>
+                                <p class="text-gray-500">由专业兽医进行绝育手术</p>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fa fa-arrow-right text-2xl text-primary"></i>
+                            </div>
+                            <div class="text-center p-4">
+                                <div class="inline-block p-6 rounded-full bg-primary/10 mb-3">
+                                    <i class="fa fa-heartbeat text-4xl text-primary"></i>
+                                </div>
+                                <h4 class="font-bold text-lg">康复</h4>
+                                <p class="text-gray-500">术后护理和康复期观察</p>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fa fa-arrow-right text-2xl text-primary"></i>
+                            </div>
+                            <div class="text-center p-4">
+                                <div class="inline-block p-6 rounded-full bg-primary/10 mb-3">
+                                    <i class="fa fa-home text-4xl text-primary"></i>
+                                </div>
+                                <h4 class="font-bold text-lg">放归</h4>
+                                <p class="text-gray-500">放回到原来的生活环境</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 成果数据 -->
+                <div class="mb-12">
+                    <h3 class="text-2xl font-bold mb-6 text-center">
+                        <i class="fa fa-bar-chart mr-3"></i>TNR成果数据
+                    </h3>
+                    
+                    <!-- 数据仪表盘 -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
+                        <div class="bg-white rounded-xl p-6 shadow-md">
+                            <h4 class="text-xl font-bold mb-6 text-center">
+                                <i class="fa fa-tachometer mr-3"></i>绝育计划完成度
+                            </h4>
+                            <div id="achievementChart" class="w-full h-80"></div>
+                        </div>
+                        <div class="bg-white rounded-xl p-6 shadow-md">
+                            <h4 class="text-xl font-bold mb-6 text-center">
+                                <i class="fa fa-star mr-3"></i>项目综合指标
+                            </h4>
+                            <div id="radarChart" class="w-full h-80"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- 数据可视化图表 -->
+                    <div class="space-y-12">
+                        <!-- 绝育动物数量对比图表 -->
+                        <div class="bg-white rounded-xl p-6 shadow-md">
+                            <h4 class="text-xl font-bold mb-6 text-center">
+                                <i class="fa fa-pie-chart mr-3"></i>绝育动物数量对比
+                            </h4>
+                            <div id="sterilizationChart" class="w-full h-80"></div>
+                        </div>
+                        
+                        <!-- 历年流浪动物数量趋势图表 -->
+                        <div class="bg-white rounded-xl p-6 shadow-md">
+                            <h4 class="text-xl font-bold mb-6 text-center">
+                                <i class="fa fa-line-chart mr-3"></i>历年流浪动物数量趋势
+                            </h4>
+                            <div id="trendChart" class="w-full h-80"></div>
+                        </div>
+                        
+                        <!-- 志愿者参与情况图表 -->
+                        <div class="bg-white rounded-xl p-6 shadow-md">
+                            <h4 class="text-xl font-bold mb-6 text-center">
+                                <i class="fa fa-users mr-3"></i>志愿者参与情况
+                            </h4>
+                            <div id="volunteerChart" class="w-full h-80"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 参与方式 -->
+                <div class="mb-12">
+                    <h3 class="text-2xl font-bold mb-6 text-center">
+                        <i class="fa fa-users mr-3"></i>如何参与TNR计划？
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-white rounded-xl p-6 shadow-md border-l-4 border-primary">
+                            <div class="inline-block p-3 rounded-full bg-primary/10 mb-3">
+                                <i class="fa fa-search text-2xl text-primary"></i>
+                            </div>
+                            <h4 class="text-lg font-bold mb-3">观察记录</h4>
+                            <p class="text-gray-600">
+                                观察校园内的流浪动物，记录它们的位置、数量和状态，帮助我们了解校园流浪动物的分布情况。
+                            </p>
+                        </div>
+                        <div class="bg-white rounded-xl p-6 shadow-md border-l-4 border-primary">
+                            <div class="inline-block p-3 rounded-full bg-primary/10 mb-3">
+                                <i class="fa fa-handshake-o text-2xl text-primary"></i>
+                            </div>
+                            <h4 class="text-lg font-bold mb-3">志愿参与</h4>
+                            <p class="text-gray-600">
+                                作为志愿者参与TNR活动，帮助捕捉、照顾和放归流浪动物，为校园流浪动物的保护贡献自己的力量。
+                            </p>
+                        </div>
+                        <div class="bg-white rounded-xl p-6 shadow-md border-l-4 border-primary">
+                            <div class="inline-block p-3 rounded-full bg-primary/10 mb-3">
+                                <i class="fa fa-heart-o text-2xl text-primary"></i>
+                            </div>
+                            <h4 class="text-lg font-bold mb-3">捐赠支持</h4>
+                            <p class="text-gray-600">
+                                捐赠资金或物资，支持TNR计划的开展，帮助我们为更多的流浪动物提供绝育手术和医疗救助。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- TNR的好处 -->
+                <div class="mb-12">
+                    <h3 class="text-2xl font-bold mb-6 text-center">
+                        <i class="fa fa-thumbs-up mr-3"></i>TNR的好处
+                    </h3>
+                    <div class="bg-primary/5 rounded-xl p-6 shadow-md">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-lg font-bold mb-3">对流浪动物的好处</h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle text-primary mr-2 mt-1"></i>
+                                        <span>减少繁殖压力，提高生活质量</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle text-primary mr-2 mt-1"></i>
+                                        <span>降低某些疾病的发病率</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle text-primary mr-2 mt-1"></i>
+                                        <span>减少打架和争夺领地的行为</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle text-primary mr-2 mt-1"></i>
+                                        <span>延长寿命，提高生活品质</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold mb-3">对校园的好处</h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle text-primary mr-2 mt-1"></i>
+                                        <span>控制流浪动物数量，减少扰民问题</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle text-primary mr-2 mt-1"></i>
+                                        <span>降低疾病传播的风险</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle text-primary mr-2 mt-1"></i>
+                                        <span>促进人与动物和谐共处</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle text-primary mr-2 mt-1"></i>
+                                        <span>提升校园的人文关怀形象</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 常见问题 -->
+                <div class="mb-12">
+                    <h3 class="text-2xl font-bold mb-6 text-center">
+                        <i class="fa fa-question-circle mr-3"></i>常见问题
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="bg-white rounded-xl p-4 shadow-md">
+                            <h4 class="text-lg font-bold mb-2">
+                                <i class="fa fa-question-circle text-primary mr-2"></i>
+                                TNR会不会伤害动物？
+                            </h4>
+                            <p class="text-gray-600">
+                                不会。TNR使用人道的捕捉工具，由专业的兽医进行绝育手术，术后会给予适当的护理和观察，确保动物的健康和安全。
+                            </p>
+                        </div>
+                        <div class="bg-white rounded-xl p-4 shadow-md">
+                            <h4 class="text-lg font-bold mb-2">
+                                <i class="fa fa-question-circle text-primary mr-2"></i>
+                                TNR需要多少费用？
+                            </h4>
+                            <p class="text-gray-600">
+                                TNR的费用包括捕捉工具的费用、绝育手术的费用、术后护理的费用等。我们会通过众筹募捐等方式筹集资金，确保TNR计划的顺利开展。
+                            </p>
+                        </div>
+                        <div class="bg-white rounded-xl p-4 shadow-md">
+                            <h4 class="text-lg font-bold mb-2">
+                                <i class="fa fa-question-circle text-primary mr-2"></i>
+                                如何确定一只猫是否已经做过绝育？
+                            </h4>
+                            <p class="text-gray-600">
+                                通常，做过绝育手术的猫咪会在左耳有一个小缺口，这是国际通用的TNR标识。如果不确定，可以联系我们的志愿者进行检查。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 立即参与 -->
+            <section class="bg-white rounded-2xl shadow-xl p-8">
+                <h3 class="text-2xl font-bold text-center mb-8">
+                    <i class="fa fa-rocket mr-3"></i>立即参与TNR计划
+                </h3>
+                <div class="text-center">
+                    <div class="mb-6">
+                        <p class="text-gray-600 text-lg">
+                            加入我们的TNR计划，一起为校园流浪动物创造更好的生活环境！
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <button class="px-8 py-3 rounded-full btn-gradient text-white font-medium btn-hover transition-all duration-300 shadow-lg">
+                            <i class="fa fa-user-plus mr-2"></i>成为志愿者
+                        </button>
+                        <button class="px-8 py-3 rounded-full btn-gradient text-white font-medium btn-hover transition-all duration-300 shadow-lg">
+                            <i class="fa fa-heart mr-2"></i>捐赠支持
+                        </button>
+                        <button class="px-8 py-3 rounded-full btn-gradient text-white font-medium btn-hover transition-all duration-300 shadow-lg">
+                            <i class="fa fa-phone mr-2"></i>联系我们
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">校园护萌神</h3>
+                    <p class="text-gray-400">
+                        致力于校园流浪动物的保护和关爱，让每一个生命都能得到尊重和温暖。
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">快速链接</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#home" class="text-gray-400 hover:text-white transition-colors">首页</a></li>
+                        <li><a href="index.html#workshop" class="text-gray-400 hover:text-white transition-colors">手作坊</a></li>
+                        <li><a href="index.html#volunteer" class="text-gray-400 hover:text-white transition-colors">志愿者社区</a></li>
+                        <li><a href="index.html#pet-archive" class="text-gray-400 hover:text-white transition-colors">动物档案</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">联系我们</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fa fa-envelope mr-2"></i>
+                            <span class="text-gray-400">contact@campuspet.org</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-phone mr-2"></i>
+                            <span class="text-gray-400">123-456-7890</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-map-marker mr-2"></i>
+                            <span class="text-gray-400">XX大学动物保护协会</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">关注我们</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-wechat text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-weibo text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-instagram text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-qq text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-center text-gray-500">
+                <p>2025 校园护萌神 版权所有 | 网站备案号：35626270号</p>
+            </div>
+        </div>
+    </footer>
+    <!-- 图表初始化脚本 -->
+    <script>
+        // 初始化图表
+        window.onload = function() {
+            // 成果数据水平条形图
+            var achievementChart = echarts.init(document.getElementById('achievementChart'));
+            var achievementOption = {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'value',
+                    max: 100,
+                    axisLabel: {
+                        formatter: '{value}%'
+                    }
+                },
+                yAxis: {
+                    type: 'category',
+                    data: ['猫咪绝育', '狗狗绝育', '志愿者招募']
+                },
+                series: [
+                    {
+                        name: '完成度',
+                        type: 'bar',
+                        data: [85, 90, 75],
+                        itemStyle: {
+                            color: function(params) {
+                                var colorList = ['#99CC99', '#FFB6C1', '#6699CC'];
+                                return colorList[params.dataIndex];
+                            }
+                        },
+                        label: {
+                            show: true,
+                            position: 'right',
+                            formatter: '{c}%'
+                        }
+                    }
+                ]
+            };
+            achievementChart.setOption(achievementOption);
+            
+            // 项目综合指标雷达图
+            var radarChart = echarts.init(document.getElementById('radarChart'));
+            var radarOption = {
+                tooltip: {},
+                legend: {
+                    data: ['实际完成', '目标计划'],
+                    bottom: 0
+                },
+                radar: {
+                    radius: '75%',
+                    indicator: [
+                        { name: '绝育猫咪', max: 150 },
+                        { name: '绝育狗狗', max: 50 },
+                        { name: '志愿者人数', max: 50 },
+                        { name: '持续时间', max: 10 },
+                        { name: '社区参与度', max: 100 }
+                    ],
+                    name: {
+                        textStyle: {
+                            fontSize: 10
+                        }
+                    }
+                },
+                series: [
+                    {
+                        name: '项目指标',
+                        type: 'radar',
+                        data: [
+                            {
+                                value: [120, 32, 25, 5, 85],
+                                name: '实际完成',
+                                itemStyle: { color: '#99CC99' }
+                            },
+                            {
+                                value: [150, 40, 30, 8, 100],
+                                name: '目标计划',
+                                itemStyle: { color: '#FFB6C1' }
+                            }
+                        ]
+                    }
+                ]
+            };
+            radarChart.setOption(radarOption);
+            
+            // 绝育动物数量对比图表
+            var sterilizationChart = echarts.init(document.getElementById('sterilizationChart'));
+            var sterilizationOption = {
+                tooltip: {
+                    trigger: 'item'
+                },
+                legend: {
+                    top: '5%',
+                    left: 'center'
+                },
+                series: [
+                    {
+                        name: '绝育动物数量',
+                        type: 'pie',
+                        radius: ['40%', '70%'],
+                        avoidLabelOverlap: false,
+                        itemStyle: {
+                            borderRadius: 10,
+                            borderColor: '#fff',
+                            borderWidth: 2
+                        },
+                        label: {
+                            show: false,
+                            position: 'center'
+                        },
+                        emphasis: {
+                            label: {
+                                show: true,
+                                fontSize: 20,
+                                fontWeight: 'bold'
+                            }
+                        },
+                        labelLine: {
+                            show: false
+                        },
+                        data: [
+                            { value: 120, name: '已绝育猫咪' },
+                            { value: 32, name: '已绝育狗狗' }
+                        ],
+                        color: ['#99CC99', '#FFB6C1']
+                    }
+                ]
+            };
+            sterilizationChart.setOption(sterilizationOption);
+            
+            // 历年流浪动物数量趋势图表
+            var trendChart = echarts.init(document.getElementById('trendChart'));
+            var trendOption = {
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data: ['流浪猫数量', '流浪狗数量', '总计']
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['2019', '2020', '2021', '2022', '2023', '2024']
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name: '流浪猫数量',
+                        type: 'line',
+                        stack: 'Total',
+                        data: [180, 165, 140, 125, 110, 95],
+                        smooth: true,
+                        color: '#99CC99'
+                    },
+                    {
+                        name: '流浪狗数量',
+                        type: 'line',
+                        stack: 'Total',
+                        data: [45, 42, 38, 35, 32, 30],
+                        smooth: true,
+                        color: '#FFB6C1'
+                    },
+                    {
+                        name: '总计',
+                        type: 'line',
+                        stack: 'Total',
+                        data: [225, 207, 178, 160, 142, 125],
+                        smooth: true,
+                        color: '#6699CC'
+                    }
+                ]
+            };
+            trendChart.setOption(trendOption);
+            
+            // 志愿者参与情况图表
+            var volunteerChart = echarts.init(document.getElementById('volunteerChart'));
+            var volunteerOption = {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'category',
+                    data: ['2020', '2021', '2022', '2023', '2024']
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name: '志愿者人数',
+                        type: 'bar',
+                        data: [12, 15, 18, 22, 25],
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                            { offset: 0, color: '#99CC99' },
+                            { offset: 1, color: '#FFB6C1' }
+                        ])
+                    }
+                ]
+            };
+            volunteerChart.setOption(volunteerOption);
+            
+            // 响应式调整
+            window.addEventListener('resize', function() {
+                achievementChart.resize();
+                radarChart.resize();
+                sterilizationChart.resize();
+                trendChart.resize();
+                volunteerChart.resize();
+            });
+        };
+    </script>
+</body>
+</html>
